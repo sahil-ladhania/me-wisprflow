@@ -126,6 +126,35 @@
   background: var(--ink);
 }
 
+/* Scrubbed by scroll (the real page): the ride writes --road-x and --stone-dx, so the timed
+   road and stone animations step aside. */
+.scrub .dash {
+  animation: none;
+}
+
+.scrub .stone {
+  animation: none;
+  transform: translateX(var(--stone-dx, 0px));
+  transition: none;
+  will-change: transform;
+}
+
+.scrub.riding .bike > svg {
+  animation: var(--animate-roll);
+}
+
+.braking .bike > svg {
+  animation: var(--animate-brake);
+}
+
+.igniting .bike > svg {
+  animation: var(--animate-shudder);
+}
+
+.igniting .bike [data-headlamp] {
+  animation: var(--animate-flick);
+}
+
 /* A night lane: road dashes fade to 20%; only the headlamp is lit. */
 .night .dash {
   opacity: 0.2;
@@ -143,19 +172,25 @@
     height: 40px;
   }
 
+  /* 136px rather than the spec's 160px, so the rider's head clears the lane's 24px top fade. */
   .bike {
     bottom: 22px;
-    width: 160px;
+    width: 136px;
   }
 
   .stone {
     bottom: 44px;
-    left: calc(var(--anchor) + 170px);
+    left: calc(var(--anchor) + 146px);
   }
 
   .count {
     top: 10px;
     right: var(--space-4);
+  }
+
+  /* No room for twelve ticks beside the bike; the counter label carries the progress. */
+  .ticks {
+    display: none;
   }
 }
 

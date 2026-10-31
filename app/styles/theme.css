@@ -32,6 +32,41 @@
   --animate-idle: rd-idle 84ms steps(2) infinite;
   --animate-bob: rd-bob var(--dur-ride) var(--ease-throttle);
   --animate-stone-in: rd-stone-in var(--dur-ride) var(--ease-brake);
+
+  /* From the motion spec (design-system/motion.md), for the scroll-driven lane. */
+  --animate-roll: rd-roll 520ms ease-in-out infinite;
+  --animate-brake: rd-brake 160ms var(--ease-brake);
+  --animate-shudder: rd-shudder 300ms linear;
+  --animate-flick: rd-flick 240ms linear;
+}
+
+/* Riding: a slow 1px vertical rhythm from the road. */
+@keyframes rd-roll {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1px); }
+}
+
+/* Stopping: the front fork dips 3px and recovers. */
+@keyframes rd-brake {
+  0%, 100% { transform: none; }
+  45% { transform: translateY(3px) rotate(0.6deg); }
+}
+
+/* Ignition: the bike shudders 2px for 300ms. */
+@keyframes rd-shudder {
+  0%, 100% { transform: none; }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, 1px); }
+  80% { transform: translate(1px, 0); }
+}
+
+/* Ignition: the headlamp flicks on (0 → 1 → 0.4 → 1). */
+@keyframes rd-flick {
+  0% { opacity: 0; }
+  35% { opacity: 1; }
+  60% { opacity: 0.4; }
+  100% { opacity: 1; }
 }
 
 /* Live waveform bars (only while sound plays or the mic listens). */

@@ -4,11 +4,15 @@ import { BikeSilhouette } from "./BikeSilhouette";
 import { Milestone, type MilestoneKind } from "./Milestone";
 import styles from "./BikeLane.module.css";
 
-export type LaneState = "parked" | "idle" | "riding";
+export type LaneState = "parked" | "idle" | "riding" | "braking";
 
 type BikeLaneProps = {
-  /** parked: engine off · idle: engine on at a stop · riding: between stops. */
+  /** parked: engine off · idle: engine on at a stop · riding: between stops · braking: arriving. */
   state?: LaneState;
+  /** The moment of ignition: headlamp flick and a 2px shudder. */
+  igniting?: boolean;
+  /** Driven by scroll: --road-x moves the dashes, --stone-dx the stone. */
+  scrub?: boolean;
   /** The milestone just ahead of the front wheel. */
   stone?: { cap: string; year: string; kind?: MilestoneKind };
   /** Changing it re-rolls the stone in from the right while riding. */
@@ -26,10 +30,19 @@ type BikeLaneProps = {
 };
 
 /** The strip at the bottom of the viewport where the bike rides and stops at each milestone. */
-export function BikeLane({ state = "parked", stone, stoneKey, count, headlamp, night, bike, className, style }: BikeLaneProps) {
+export function BikeLane({ state = "parked", igniting, scrub, stone, stoneKey, count, headlamp, night, bike, className, style }: BikeLaneProps) {
   return (
     <div
-      className={cx(styles.lane, state === "idle" && styles.idle, state === "riding" && styles.riding, night && styles.night, className)}
+      className={cx(
+        styles.lane,
+        state === "idle" && styles.idle,
+        state === "riding" && styles.riding,
+        state === "braking" && styles.braking,
+        igniting && styles.igniting,
+        scrub && styles.scrub,
+        night && styles.night,
+        className,
+      )}
       data-theme={night ? "night" : undefined}
       style={style}
       aria-hidden="true"
@@ -38,7 +51,7 @@ export function BikeLane({ state = "parked", stone, stoneKey, count, headlamp, n
         <div className={styles.dash} />
       </div>
       {stone ? (
-        <div key={stoneKey} className={styles.stone}>
+        <div key={stoneKey} className={styles.stone} data-stone="">
           <Milestone cap={stone.cap} year={stone.year} kind={stone.kind} size="sm" inLane />
         </div>
       ) : null}

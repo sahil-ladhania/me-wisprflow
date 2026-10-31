@@ -33,7 +33,7 @@ export function BikeSilhouette({ headlamp, ...rest }: BikeSilhouetteProps) {
       <path d="M112 68c6-16 44-18 54-6l-6 10-48 2z" fill="currentColor" strokeWidth="2" />
       <path d="M70 70l42-2-2 8-36 2z" fill="currentColor" strokeWidth="2" />
       <circle cx="181" cy="55" r="8" fill="currentColor" strokeWidth="2" />
-      {headlamp ? <circle cx="183" cy="55" r="4.5" fill="var(--headlamp)" stroke="none" /> : null}
+      {headlamp ? <circle data-headlamp="" cx="183" cy="55" r="4.5" fill="var(--headlamp)" stroke="none" /> : null}
       <path d="M164 41l11 6-13 6" strokeWidth="4" />
       <circle cx="119" cy="16" r="11" fill="currentColor" stroke="none" />
       <path d="M114 31 100 64" strokeWidth="16" />
