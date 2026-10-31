@@ -1,0 +1,84 @@
+/* Signboard, ported from design-system/components/bundle.css (.rd-sign). */
+
+.sign {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: var(--space-4);
+  min-width: 260px;
+  padding: var(--space-4) var(--space-6) var(--space-4) var(--space-5);
+  border-radius: var(--radius-soft);
+  background: var(--signboard);
+  color: var(--on-signboard);
+  text-decoration: none;
+}
+
+.sign::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 2px solid var(--on-signboard);
+  border-radius: calc(var(--radius-soft) - 3px);
+  pointer-events: none;
+}
+
+.arrow {
+  grid-row: span 2;
+  width: 40px;
+  height: 40px;
+  transition: translate var(--dur-settle) var(--ease-brake);
+}
+
+.dest {
+  font-family: var(--font-road);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.sub {
+  margin-top: 4px;
+  font-family: var(--font-road);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.92;
+}
+
+.withKm {
+  padding-right: 76px;
+}
+
+.km {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-family: var(--font-road);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+a.sign:hover {
+  color: var(--on-signboard);
+}
+
+a.sign:hover .arrow {
+  translate: 4px 0;
+}
+
+@media (max-width: 599px) {
+  .sign {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .dest {
+    font-size: 24px;
+  }
+}

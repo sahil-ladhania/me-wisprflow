@@ -2,8 +2,24 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { BigStat, StatRow } from "@/components/ds/BigStat";
+import { Correction, CorrectionText, Mark } from "@/components/ds/Correction";
+import { DrawObserver } from "@/components/ds/DrawObserver";
+import { ExperimentCard } from "@/components/ds/ExperimentCard";
 import { Icon, iconNames } from "@/components/ds/Icon";
+import { IndexCard, IndexRow, IndexRows } from "@/components/ds/IndexCard";
+import { MarginNote } from "@/components/ds/MarginNote";
+import { Milestone } from "@/components/ds/Milestone";
 import { MilestoneMark } from "@/components/ds/MilestoneMark";
+import { NightStop } from "@/components/ds/NightStop";
+import { ScannedDocument, ScanLine, ScanProof, ScanRule } from "@/components/ds/ScannedDocument";
+import { Signboard } from "@/components/ds/Signboard";
+import { StopHeader } from "@/components/ds/StopHeader";
+import { TapedPhoto } from "@/components/ds/TapedPhoto";
+import { VoiceNote } from "@/components/ds/VoiceNote";
+import { Waveform } from "@/components/ds/Waveform";
+import { peaks } from "@/lib/design-system/peaks";
+import { IgnitionDemo, InkDemo, LaneDemo } from "./demos";
 import { marks, placeholders, textures } from "@/lib/design-system/assets";
 import {
   colors,
@@ -73,6 +89,19 @@ const motionDemos: { name: string; className: string; note: string }[] = [
 ];
 
 const bars = [10, 18, 26, 14, 22, 30, 16, 24, 12, 20, 28, 14];
+
+/** One component specimen: name, what it's for, then the thing itself. */
+function Specimen({ name, note, children }: { name: string; note: string; children: ReactNode }) {
+  return (
+    <div className="grid gap-5 border-t border-rule py-7 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-7">
+      <div className="flex flex-col gap-2">
+        <h3 className="type-headline">{name}</h3>
+        <p className="type-caption text-pencil">{note}</p>
+      </div>
+      <div className="min-w-0">{children}</div>
+    </div>
+  );
+}
 
 function Section({ id, kicker, title, note, children }: { id: string; kicker: string; title: string; note?: string; children: ReactNode }) {
   return (
@@ -446,6 +475,147 @@ export default function DesignSystemPage() {
             </figcaption>
           </figure>
         </div>
+      </Section>
+
+      <Section
+        id="components"
+        kicker="09 · Components"
+        title="What the ride is built from"
+        note="Every component the stops use, live. Missing photos, scans, voice notes and experiments show as labelled placeholders on their own."
+      >
+        <DrawObserver />
+
+        <Specimen name="Milestone" note="The year marker. Past years haldi, 2026 ink, what's ahead signboard green. Large in a stop header, small in the lane.">
+          <div className="flex flex-wrap items-end gap-6">
+            <Milestone cap="CLASS 9" year="2016" />
+            <Milestone cap="COLLEGE" year="2021" place="BLR" />
+            <Milestone cap="NOW" year="2026" place="BLR" kind="now" />
+            <Milestone cap="WISPR FLOW" year="NEXT" place="INDIA" kind="next" />
+            <Milestone cap="AUG" year="2025" size="sm" />
+            <Milestone cap="MOUNTAINS" year="CAFÉ" size="sm" kind="next" />
+          </div>
+        </Specimen>
+
+        <Specimen name="StopHeader" note="Opens every stop but the Night one: milestone, kicker, the claim, the aside that undercuts it.">
+          <StopHeader
+            milestone={{ cap: "CLASS 9", year: "2016" }}
+            kicker="Stop 01 · 2016 · Class 9"
+            title="The dance guy entered the cooking contest."
+            lede="About 95% of the contestants were girls. I won first prize. With a very basic dish."
+            voice="voice note · placeholder"
+            headingLevel={3}
+          />
+        </Specimen>
+
+        <Specimen name="TapedPhoto" note="Real photos only, taped and tilted. Without a photo it prints a labelled placeholder.">
+          <div className="flex flex-wrap items-start gap-8 px-5 pt-4">
+            <TapedPhoto alt="Me dancing on the school stage" caption="cultural head. everyone knew me." tilt={-2.5} />
+            <TapedPhoto alt="The black bike" caption="second love." tilt={1.8} ratio="4 / 3" tape="top" width="min(100%, 360px)" />
+          </div>
+        </Specimen>
+
+        <Specimen name="ScannedDocument" note="A scan of a real object as proof, tilted 1.5° at most, one red-pen mark.">
+          <div className="flex flex-wrap items-start gap-8">
+            <ScannedDocument label="Scan 01 · Cooking competition certificate" alt="The first-prize certificate" note="still have it." tilt={-1} />
+            <ScannedDocument label="Scan · how a recreated scan reads" alt="" tilt={1}>
+              <ScanLine width="60%" />
+              <ScanRule />
+              <ScanLine width="92%" />
+              <div className="my-4">
+                <ScanProof>[the one line that matters, circled]</ScanProof>
+              </div>
+              <ScanLine width="70%" />
+            </ScannedDocument>
+          </div>
+        </Specimen>
+
+        <Specimen name="Correction · Mark" note="Wrong turns struck in red pen, the truth written over them. Strikes draw once as they scroll into view. One highlighter swipe per stop.">
+          <div className="flex flex-col gap-5">
+            <CorrectionText className="type-body max-w-measure">
+              I chose science because <Correction was="I wanted to crack IIT" is="my girlfriend did" />.
+            </CorrectionText>
+            <p className="type-body max-w-measure">
+              lulu: 3,500+ on the waitlist. Status: <Correction inline was="building" is="paused" />. <Mark>Knowing when to stop is a growth skill too.</Mark>
+            </p>
+          </div>
+        </Specimen>
+
+        <Specimen name="MarginNote" note="A handwritten aside with an arrow, beside the thing it points at. Ink or pencil, never red.">
+          <div className="flex flex-wrap items-start gap-8 pt-5">
+            <MarginNote>37% women. on a dating app.</MarginNote>
+            <MarginNote pencil flip tilt={2}>
+              my PG owner offered to fund it
+            </MarginNote>
+          </div>
+        </Specimen>
+
+        <Specimen name="BigStat · StatRow" note="The number does the bragging; the label stays plain. Up to three in a row, two columns on phones.">
+          <StatRow>
+            <BigStat value="3,500" unit="+" label="on lulu’s waitlist" source="grown through my own LinkedIn content" />
+            <BigStat value="37" unit="%" label="women" pen="on a dating app." />
+            <BigStat value="~200" label="users I spoke to myself" />
+          </StatRow>
+        </Specimen>
+
+        <Specimen name="Signboard" note="Green, only for what lies ahead. Arrow up is the next stop; arrow right is beyond the road.">
+          <div className="flex flex-wrap gap-6">
+            <Signboard dest="Wispr Flow" sub="India · Growth" km="NEXT" arrow="up" />
+            <Signboard dest="Mountains" sub="A small café · someday" />
+          </div>
+        </Specimen>
+
+        <Specimen name="IndexCard" note="Not in the design system's list; built from its tokens for the journal cards the stops need.">
+          <IndexCard kicker="Card 06 · The cafe that almost happened" tilt={1}>
+            <IndexRows>
+              <IndexRow label="Backer">My PG owner</IndexRow>
+              <IndexRow label="Split">50/50 profit</IndexRow>
+              <IndexRow label="Mine to run">Design, menu, team, operations</IndexRow>
+              <IndexRow label="Status" kill>
+                <Correction inline was="Go" is="cancelled" />
+              </IndexRow>
+            </IndexRows>
+          </IndexCard>
+        </Specimen>
+
+        <Specimen name="ExperimentCard" note="Three of them at the Wispr Flow stop. Each needs a metric and a kill condition; until Sahil writes them, they say so.">
+          <div className="flex flex-col gap-7 pt-4">
+            <ExperimentCard id="EXP 01" />
+          </div>
+        </Specimen>
+
+        <Specimen name="Waveform" note="The system's real icon: wherever voice exists. Still when parked; red and moving while the mic listens.">
+          <div className="flex flex-col gap-5">
+            <Waveform peaks={peaks(44, 5)} played={18} className="max-w-[360px]" />
+            <Waveform peaks={peaks(22, 11)} live className="max-w-[160px]" />
+          </div>
+        </Specimen>
+
+        <Specimen name="VoiceNote" note="10–25 seconds, never autoplays, always with a transcript. One plays at a time. Without a recording it shows as a placeholder.">
+          <div className="flex flex-col gap-7">
+            <VoiceNote id="specimen-cafe" about="the cafe that almost happened" />
+            <div data-theme="night" className="bg-paper p-6">
+              <VoiceNote id="specimen-night" about="June 2025" quiet />
+            </div>
+          </div>
+        </Specimen>
+
+        <Specimen name="IgnitionControl" note="Say “let’s ride”, or tap. The speech recogniser arrives with the ride; this demo fakes its timing.">
+          <IgnitionDemo />
+        </Specimen>
+
+        <Specimen name="BikeLane" note="Pinned to the bottom of the screen on the real page. The bike never moves sideways; the road and the stones do.">
+          <LaneDemo />
+        </Specimen>
+
+        <Specimen name="InkReveal" note="Each stop blooms in from where the bike stopped. Smoke only into and out of the Night stop.">
+          <InkDemo />
+        </Specimen>
+
+        <Specimen name="NightStop" note="June 2025 only. One straight line, the headlamp as the only light. No wit, no red pen, no stats.">
+          <NightStop date="June 2025" line="June 2025 was the lowest point of my life." lineAs="p">
+            <VoiceNote id="specimen-night-stop" about="June 2025" quiet />
+          </NightStop>
+        </Specimen>
       </Section>
 
       <p className="pt-7">

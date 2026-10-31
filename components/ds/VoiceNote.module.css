@@ -1,0 +1,133 @@
+/* VoiceNote, ported from design-system/components/bundle.css (.rd-voice). The pill shape means "you can hear this". */
+
+.voice {
+  width: min(100%, 460px);
+  margin: 0;
+}
+
+.capsule {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-5) var(--space-2) var(--space-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  box-shadow: var(--shadow-contact);
+}
+
+.play {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+  transition: transform var(--dur-tap) var(--ease-brake);
+}
+
+.play:active {
+  transform: scale(0.94);
+}
+
+.time {
+  flex: none;
+  min-width: 64px;
+  text-align: right;
+}
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin: var(--space-2) var(--space-5) 0;
+}
+
+.where {
+  color: var(--pencil);
+  font-family: var(--font-hand);
+  font-size: 18px;
+}
+
+.transcript summary {
+  min-height: 24px;
+  color: var(--ink);
+  font-family: var(--font-road);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-decoration: underline;
+  text-decoration-color: var(--wave-rest);
+  text-transform: uppercase;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+  cursor: pointer;
+  list-style: none;
+}
+
+.transcript summary::-webkit-details-marker {
+  display: none;
+}
+
+.transcript[open] summary {
+  color: var(--pencil);
+}
+
+.text {
+  margin: var(--space-3) var(--space-5) 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-soft);
+  background: var(--card);
+  color: var(--ink);
+  font-family: var(--font-story);
+  font-size: 15px;
+  line-height: 1.45;
+  text-align: left;
+}
+
+/* The Night stop: no fill, no shadow, outlined play. */
+.quiet .capsule {
+  background: transparent;
+  box-shadow: none;
+}
+
+.quiet .play {
+  border: 1px solid var(--wave-rest);
+  background: transparent;
+  color: var(--ink);
+}
+
+/* Not recorded yet: dashed, unplayable, clearly labelled. */
+.placeholder .capsule {
+  border-style: dashed;
+  border-color: var(--wave-rest);
+  box-shadow: none;
+}
+
+.placeholder .play {
+  border: 1.5px solid var(--wave-rest);
+  background: transparent;
+  color: var(--pencil);
+  cursor: not-allowed;
+}
+
+@media (max-width: 599px) {
+  .capsule {
+    padding-right: var(--space-4);
+  }
+
+  .time {
+    min-width: 52px;
+  }
+
+  .foot {
+    flex-wrap: wrap;
+    margin-inline: var(--space-3);
+  }
+}

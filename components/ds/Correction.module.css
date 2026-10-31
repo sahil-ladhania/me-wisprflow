@@ -1,0 +1,122 @@
+/* Correction and the highlighter, ported from design-system/components/bundle.css (.rd-fix, .rd-mark). */
+
+/* A paragraph holding corrections gets room above its lines for the handwriting. */
+.fixes {
+  line-height: 2.3;
+}
+
+.fix {
+  position: relative;
+  display: inline-block;
+  text-indent: 0;
+  white-space: nowrap;
+}
+
+.fix del {
+  position: relative;
+  display: inline-block;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.fix del::after {
+  content: "";
+  position: absolute;
+  top: 34%;
+  left: -4%;
+  width: 108%;
+  height: 0.42em;
+  background: var(--red-pen);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9 C 34 5, 62 11, 98 7 S 164 4, 197 6' stroke='black' stroke-width='5.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
+    center / 100% 100% no-repeat;
+  transform: rotate(-1.2deg);
+  transform-origin: left center;
+}
+
+.fix ins {
+  position: absolute;
+  bottom: 62%;
+  left: 2%;
+  color: var(--red-pen);
+  font-family: var(--font-hand);
+  font-size: 1.3em;
+  font-style: normal;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transform: rotate(-3deg);
+  transform-origin: left bottom;
+}
+
+.fix ins::before {
+  content: "^";
+  position: absolute;
+  top: 0.9em;
+  left: -0.55em;
+  font-size: 0.8em;
+}
+
+.inline ins {
+  position: static;
+  display: inline-block;
+  margin-left: 0.3em;
+  font-size: 1.22em;
+  transform: rotate(-2deg);
+}
+
+.inline ins::before {
+  content: none;
+}
+
+/* Drawing on scroll. DrawObserver arms the page (strikes start undrawn) and marks each correction
+   as it comes into view. Without JavaScript, or with reduced motion, strikes are simply there. */
+:global(html[data-pen="armed"]) .fix:not([data-drawn]) del::after {
+  clip-path: inset(0 100% 0 0);
+}
+
+:global(html[data-pen="armed"]) .fix:not([data-drawn]) ins {
+  opacity: 0;
+}
+
+.fix[data-drawn] del::after {
+  animation: var(--animate-strike);
+}
+
+.fix[data-drawn] ins {
+  animation: var(--animate-pen-in);
+}
+
+@media (max-width: 599px) {
+  .fixes {
+    line-height: 1.7;
+  }
+
+  .fix {
+    display: inline;
+    white-space: normal;
+  }
+
+  .fix ins {
+    position: static;
+    display: inline-block;
+    margin-left: 0.3em;
+    font-size: 1.22em;
+    transform: rotate(-2deg);
+  }
+
+  .fix ins::before {
+    content: none;
+  }
+}
+
+/* The haldi highlighter: one phrase per stop, the line a skimmer must not miss. */
+.mark {
+  margin: 0 -0.12em;
+  padding: 0 0.12em;
+  background-color: transparent;
+  background-image: linear-gradient(transparent 52%, var(--highlight) 52%, var(--highlight) 90%, transparent 90%);
+  color: inherit;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}

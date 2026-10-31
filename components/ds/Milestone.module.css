@@ -1,0 +1,127 @@
+/* Milestone, ported from design-system/components/bundle.css (.rd-milestone). */
+
+.root {
+  --w: 92px;
+  --h: 136px;
+  --r: var(--radius-stone);
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  width: var(--w);
+  height: var(--h);
+  overflow: hidden;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--r) var(--r) var(--radius-hair) var(--radius-hair);
+  background: var(--card);
+  box-shadow: var(--shadow-ground);
+  font-family: var(--font-road);
+  text-transform: uppercase;
+}
+
+.cap {
+  box-sizing: border-box;
+  display: grid;
+  place-items: end center;
+  width: 100%;
+  height: 44%;
+  padding: 0 6px 6px;
+  border-bottom: 1.5px solid var(--ink);
+  background: var(--haldi);
+  color: var(--on-haldi);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.year {
+  margin-top: 10px;
+  color: var(--ink);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.place {
+  margin-top: 4px;
+  color: var(--pencil);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+.root[data-kind="now"] .cap {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.root[data-kind="next"] .cap {
+  background: var(--signboard);
+  color: var(--on-signboard);
+}
+
+.sm {
+  --w: 54px;
+  --h: 80px;
+  --r: 22px;
+}
+
+.sm .cap {
+  padding: 0 3px 4px;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+}
+
+.sm .year {
+  margin-top: 6px;
+  font-size: 20px;
+}
+
+.sm .place {
+  display: none;
+}
+
+@media (max-width: 599px) {
+  /* In a StopHeader the stone drops to the small size on phones. */
+  .responsive {
+    --w: 54px;
+    --h: 80px;
+    --r: 22px;
+  }
+
+  .responsive .cap {
+    padding: 0 3px 4px;
+    font-size: 9px;
+  }
+
+  .responsive .year {
+    margin-top: 6px;
+    font-size: 20px;
+  }
+
+  .responsive .place {
+    display: none;
+  }
+
+  /* In the lane on phones the stone is smaller still, and only the year shows. */
+  .lane {
+    --w: 40px;
+    --h: 58px;
+    --r: 16px;
+  }
+
+  .lane .cap {
+    font-size: 0;
+  }
+
+  .lane .year {
+    margin-top: 4px;
+    font-size: 15px;
+  }
+}

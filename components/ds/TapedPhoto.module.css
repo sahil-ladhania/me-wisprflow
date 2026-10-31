@@ -1,0 +1,138 @@
+/* TapedPhoto and tape, ported from design-system/components/bundle.css (.rd-photo, .rd-tape). */
+
+.root {
+  --tilt: -2deg;
+  position: relative;
+  display: inline-block;
+  width: min(100%, 320px);
+  margin: 0;
+  transform: rotate(var(--tilt));
+  transition: transform var(--dur-settle) var(--ease-brake);
+}
+
+.print {
+  padding: 12px;
+  background: var(--card);
+  box-shadow: var(--shadow-contact);
+  transition: box-shadow var(--dur-settle) var(--ease-brake);
+}
+
+.root:hover {
+  transform: rotate(calc(var(--tilt) * 0.4)) translateY(-2px);
+}
+
+.root:hover .print {
+  box-shadow: var(--shadow-lift);
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--ratio, 4 / 5);
+  overflow: hidden;
+  background: var(--scan);
+}
+
+.img {
+  object-fit: cover;
+}
+
+/* A photo not yet chosen: hatched, labelled, never shipped. */
+.slot {
+  box-sizing: border-box;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 6px;
+  width: 100%;
+  aspect-ratio: var(--ratio, 4 / 5);
+  padding: var(--space-4);
+  background: repeating-linear-gradient(135deg, var(--scan) 0 10px, transparent 10px 20px), var(--paper);
+  color: var(--pencil);
+  text-align: center;
+}
+
+.slotLabel {
+  font-family: var(--font-road);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.slotNote {
+  max-width: 24ch;
+  color: var(--ink);
+  font-family: var(--font-story);
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.caption {
+  margin: var(--space-3) var(--space-1) 0;
+  color: var(--ink);
+  font-family: var(--font-hand);
+  font-size: 21px;
+  line-height: 1.25;
+  transform: rotate(calc(var(--tilt) * -0.5));
+}
+
+.tape {
+  position: absolute;
+  z-index: 2;
+  width: 92px;
+  height: 26px;
+  border-radius: var(--radius-hair);
+  background: var(--tape);
+  clip-path: polygon(3% 0, 97% 4%, 100% 22%, 97% 45%, 100% 70%, 97% 100%, 2% 96%, 0 75%, 3% 50%, 0 26%);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.tl {
+  top: -11px;
+  left: -24px;
+  transform: rotate(-38deg);
+}
+
+.tr {
+  top: -10px;
+  right: -26px;
+  transform: rotate(34deg);
+}
+
+.top {
+  top: -13px;
+  left: calc(50% - 46px);
+  transform: rotate(-3deg);
+}
+
+.br {
+  right: -24px;
+  bottom: -10px;
+  transform: rotate(-36deg);
+}
+
+@media (max-width: 599px) {
+  /* Full width minus 24px, tilt halved. */
+  .root {
+    width: calc(100% - 24px);
+    transform: rotate(calc(var(--tilt) * 0.5));
+  }
+
+  .print {
+    padding: 10px;
+  }
+
+  .caption {
+    font-size: 19px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root,
+  .root:hover {
+    transform: rotate(var(--tilt));
+    transition: none;
+  }
+}

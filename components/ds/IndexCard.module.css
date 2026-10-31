@@ -1,0 +1,61 @@
+/* IndexCard: not one of the design system's components, built from its tokens for the journal cards
+   the stops need (the café terms, "said vs did", the cold email). Same paper as ExperimentCard. */
+
+.card {
+  box-sizing: border-box;
+  width: min(100%, 440px);
+  margin: 0;
+  padding: var(--space-5);
+  background: var(--card);
+  box-shadow: var(--shadow-contact);
+  transform: rotate(var(--tilt, 0deg));
+}
+
+.rows {
+  margin: var(--space-4) 0 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--rule);
+}
+
+.row:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.label {
+  padding-top: 3px;
+  color: var(--pencil);
+  font-family: var(--font-road);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.kill .label {
+  color: var(--red-pen);
+}
+
+.value {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-story);
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+@media (max-width: 599px) {
+  .card {
+    padding: var(--space-4);
+  }
+
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+}

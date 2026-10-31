@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
   turbopack: {
     rules: {
       "*.css": {
+        // Tailwind for global CSS only. Renaming a CSS Module to *.css would strip its .module.css
+        // suffix and every component's classes would come out empty.
+        condition: { not: { path: /\.module\.css$/ } },
         loaders: ["@tailwindcss/turbopack"],
         as: "*.css",
       },

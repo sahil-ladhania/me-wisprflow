@@ -1,0 +1,150 @@
+/* ScannedDocument, ported from design-system/components/bundle.css (.rd-scan). */
+
+.root {
+  --tilt: 1deg;
+  position: relative;
+  width: min(100%, 440px);
+  margin: 0;
+}
+
+.sheet {
+  position: relative;
+  padding: var(--space-5);
+  border-radius: var(--radius-hair);
+  background: var(--scan);
+  box-shadow:
+    var(--shadow-contact),
+    inset 0 0 0 1px var(--rule),
+    inset 0 0 28px color-mix(in srgb, var(--ink) 7%, transparent);
+  transform: rotate(var(--tilt));
+}
+
+/* A faint scanner texture, so a scan reads as a copy, not the page. */
+.sheet::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(0deg, color-mix(in srgb, var(--ink) 2.5%, transparent) 0 1px, transparent 1px 3px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--ratio, 4 / 3);
+  overflow: hidden;
+}
+
+.img {
+  object-fit: cover;
+  object-position: top;
+}
+
+.slot {
+  box-sizing: border-box;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 6px;
+  width: 100%;
+  aspect-ratio: var(--ratio, 4 / 3);
+  padding: var(--space-4);
+  border: 1.5px dashed var(--wave-rest);
+  background: var(--card);
+  color: var(--pencil);
+  text-align: center;
+}
+
+.slotLabel {
+  font-family: var(--font-road);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.slotNote {
+  max-width: 26ch;
+  color: var(--ink);
+  font-family: var(--font-story);
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.label {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.row {
+  display: flex;
+  gap: var(--space-2);
+  color: var(--ink);
+  font-family: var(--font-story);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.row b {
+  min-width: 64px;
+  color: var(--pencil);
+  font-weight: 500;
+}
+
+.rule {
+  height: 1px;
+  margin: var(--space-3) 0;
+  background: var(--rule);
+}
+
+.line {
+  height: 9px;
+  margin: 9px 0;
+  border-radius: var(--radius-hair);
+  background: color-mix(in srgb, var(--ink) 14%, transparent);
+}
+
+.proof {
+  position: relative;
+  display: inline-block;
+  padding: 2px 4px;
+  color: var(--ink);
+  font-family: var(--font-story);
+  font-size: 16px;
+}
+
+.circle {
+  position: absolute;
+  inset: -12px -18px -10px -14px;
+  width: calc(100% + 32px);
+  height: calc(100% + 22px);
+  overflow: visible;
+  color: var(--red-pen);
+  pointer-events: none;
+}
+
+.note {
+  display: block;
+  width: fit-content;
+  margin: var(--space-3) var(--space-2) 0 auto;
+  color: var(--red-pen);
+  font-family: var(--font-hand);
+  font-size: 21px;
+  line-height: 1.1;
+  transform: rotate(-3deg);
+}
+
+@media (max-width: 599px) {
+  .sheet {
+    padding: var(--space-4);
+  }
+
+  .note {
+    margin-left: 0;
+    transform: rotate(-2deg);
+  }
+}

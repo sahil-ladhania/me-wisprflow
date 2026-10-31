@@ -1,0 +1,40 @@
+/* Waveform, ported from design-system/components/bundle.css (.rd-wave). The system's signature mark. */
+
+.wave {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+  height: 32px;
+}
+
+.bar {
+  display: block;
+  flex: 1 1 0;
+  min-width: 2px;
+  max-width: 4px;
+  border-radius: 2px;
+  background: var(--wave-rest);
+  transition: background-color var(--dur-tap) linear;
+}
+
+.played {
+  background: var(--ink);
+}
+
+/* Moves only while sound plays or the mic listens. */
+.live .bar {
+  background: var(--red-pen);
+  transform-origin: center;
+  animation: var(--animate-live);
+}
+
+.live .bar:nth-child(3n) {
+  animation-duration: 640ms;
+}
+
+.live .bar:nth-child(4n + 1) {
+  animation-duration: 1100ms;
+  animation-delay: -300ms;
+}

@@ -1,0 +1,85 @@
+/* BigStat, ported from design-system/components/bundle.css (.rd-stat, .rd-stats). */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-6) var(--space-7);
+}
+
+.stat {
+  min-width: 0;
+  margin: 0;
+  padding-top: var(--space-3);
+  border-top: 1.5px solid var(--ink);
+  container-type: inline-size;
+}
+
+.num {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-road);
+  font-size: min(132px, 33cqi);
+  font-weight: 700;
+  line-height: 0.82;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.unit {
+  margin-left: 2px;
+  font-size: 0.5em;
+  font-weight: 600;
+  vertical-align: 0.62em;
+}
+
+.label {
+  max-width: 22ch;
+  margin: var(--space-3) 0 0;
+  color: var(--ink);
+  font-family: var(--font-story);
+  font-size: 19px;
+  line-height: 1.35;
+}
+
+.source {
+  max-width: 30ch;
+  margin: var(--space-1) 0 0;
+  color: var(--pencil);
+  font-family: var(--font-story);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.pen {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--ink);
+  font-family: var(--font-hand);
+  font-size: 21px;
+  line-height: 1.15;
+  transform: rotate(-2deg);
+}
+
+.compact .num {
+  font-size: min(88px, 30cqi);
+}
+
+@media (max-width: 599px) {
+  .stats {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5) var(--space-4);
+  }
+
+  .num {
+    font-size: min(80px, 33cqi);
+  }
+
+  .compact .num {
+    font-size: min(64px, 30cqi);
+  }
+
+  .label {
+    font-size: 16px;
+  }
+}

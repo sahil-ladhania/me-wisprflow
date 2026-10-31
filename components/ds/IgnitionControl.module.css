@@ -1,0 +1,215 @@
+/* IgnitionControl, ported from design-system/components/bundle.css (.rd-ignition).
+   The tap fallback is its own button here, so a visitor is never trapped behind the mic. */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 76px;
+  padding: var(--space-2) var(--space-6) var(--space-2) var(--space-2);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-settle) var(--ease-brake),
+    color var(--dur-settle) var(--ease-brake),
+    box-shadow var(--dur-settle) var(--ease-brake);
+}
+
+.key:active {
+  transform: translateY(1px);
+}
+
+.mic {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* The slow breathing ring while the engine is off. */
+.mic::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border: 1.5px solid var(--wave-rest);
+  border-radius: inherit;
+  animation: var(--animate-breathe);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.say {
+  font-family: var(--font-story);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.say q {
+  font-style: italic;
+  quotes: "“" "”";
+}
+
+.heard {
+  display: none;
+  color: var(--red-pen);
+  font-family: var(--font-hand);
+  font-size: 28px;
+  line-height: 1;
+}
+
+.key .wave {
+  display: none;
+  flex: none;
+  width: 120px;
+  height: 30px;
+}
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-5);
+  margin-left: var(--space-5);
+}
+
+.status {
+  margin: 0;
+  color: var(--pencil);
+  font-family: var(--font-road);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.status::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: var(--space-2);
+  border-radius: 50%;
+  background: var(--wave-rest);
+  vertical-align: 1px;
+}
+
+.tap {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--pencil);
+  font-family: var(--font-road);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-decoration: underline;
+  text-decoration-color: var(--wave-rest);
+  text-transform: uppercase;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.tap:hover {
+  color: var(--ink);
+}
+
+/* listening: the only large red-pen fill in the system */
+.root[data-state="listening"] .key {
+  box-shadow: var(--shadow-lift);
+}
+
+.root[data-state="listening"] .mic {
+  background: var(--red-pen);
+  color: var(--on-red-pen);
+}
+
+.root[data-state="listening"] .mic::after {
+  border-color: var(--red-pen);
+  animation-duration: 1.1s;
+}
+
+.root[data-state="listening"] .key .wave {
+  display: flex;
+}
+
+.root[data-state="listening"] .status::before {
+  background: var(--red-pen);
+}
+
+/* heard: hold it a moment so the visitor sees they were heard */
+.root[data-state="heard"] .say {
+  display: none;
+}
+
+.root[data-state="heard"] .heard {
+  display: block;
+}
+
+.root[data-state="heard"] .mic::after,
+.root[data-state="on"] .mic::after {
+  animation: none;
+  opacity: 0;
+}
+
+/* engine on: the key inverts, the mic disc lights like the headlamp */
+.root[data-state="on"] .key {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.root[data-state="on"] .mic {
+  background: var(--headlamp);
+  color: #17140f;
+}
+
+.root[data-state="on"] .status::before {
+  background: var(--signboard);
+}
+
+@media (max-width: 599px) {
+  .root {
+    align-items: stretch;
+  }
+
+  .key {
+    width: 100%;
+    min-height: 68px;
+    padding-right: var(--space-4);
+  }
+
+  .mic {
+    width: 52px;
+    height: 52px;
+  }
+
+  .say {
+    font-size: 22px;
+  }
+
+  .foot {
+    margin-left: var(--space-2);
+  }
+}

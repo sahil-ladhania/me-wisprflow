@@ -1,0 +1,71 @@
+/* NightStop, ported from design-system/components/bundle.css (.rd-night). Sits in data-theme="night". */
+
+.night {
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: var(--space-6);
+  min-height: 420px;
+  padding: var(--space-9) var(--space-5);
+  overflow: hidden;
+  background: var(--paper);
+  color: var(--ink);
+  text-align: center;
+}
+
+/* The bike's headlamp, low in the frame: the only light on screen. */
+.night::after {
+  content: "";
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 70%;
+  height: 80%;
+  background: radial-gradient(ellipse at 20% 85%, color-mix(in srgb, var(--headlamp) 18%, transparent), transparent 62%);
+  pointer-events: none;
+}
+
+.date {
+  margin: 0;
+  color: var(--pencil);
+  font-family: var(--font-road);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.line {
+  position: relative;
+  z-index: 1;
+  max-width: 24ch;
+  margin: 0;
+  font-family: var(--font-story);
+  font-size: 34px;
+  font-weight: 300;
+  line-height: 1.32;
+  letter-spacing: -0.005em;
+  font-variation-settings: "opsz" 48;
+  text-wrap: balance;
+}
+
+.after {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-6);
+}
+
+@media (max-width: 599px) {
+  .night {
+    min-height: 360px;
+    padding: var(--space-8) var(--space-4);
+  }
+
+  .line {
+    font-size: 25px;
+  }
+}

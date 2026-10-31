@@ -1,0 +1,97 @@
+/* InkReveal, ported from design-system/components/bundle.css (.rd-ink). The arriving content blooms
+   out of the point where the bike stopped (--x, --y), through the irregular ink-bloom blot. */
+
+@property --ink-size {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+.ink {
+  --x: 180px;
+  --y: 220px;
+  --reach: 2400px;
+  position: relative;
+}
+
+/* Only masked once JavaScript has armed it, so the content is never hidden without it. */
+.armed .page,
+.armed .bloom {
+  --ink-size: 0px;
+  mask-image: var(--texture-ink-bloom);
+  mask-repeat: no-repeat;
+  mask-size: var(--ink-size) var(--ink-size);
+  mask-position: calc(var(--x) - var(--ink-size) / 2) calc(var(--y) - var(--ink-size) / 2);
+}
+
+.armed .page {
+  transition: --ink-size var(--dur-ink) var(--ease-ink) 120ms;
+}
+
+.bloom {
+  display: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* The wet ink front leads by ~15% and fades as the page soaks. */
+.armed .bloom {
+  display: block;
+  background: var(--ink);
+  opacity: 0.9;
+  transition:
+    --ink-size var(--dur-ink) var(--ease-ink),
+    opacity 500ms linear 450ms;
+}
+
+.armed.open .page {
+  --ink-size: var(--reach);
+}
+
+.armed.open .bloom {
+  --ink-size: calc(var(--reach) * 0.86);
+  opacity: 0;
+}
+
+/* Once the ink has soaked in, drop the mask so nothing is ever clipped. */
+.done .page {
+  mask: none;
+}
+
+.done .bloom {
+  display: none;
+}
+
+/* Smoke, into and out of the Night stop only. */
+.smoke.armed .bloom {
+  background: var(--pencil);
+  opacity: 0.3;
+  filter: blur(12px);
+}
+
+.smoke.armed.open .bloom {
+  opacity: 0;
+}
+
+@media (max-width: 599px) {
+  .smoke.armed .bloom {
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .armed .page {
+    mask: none;
+    opacity: 0;
+    transition: opacity 200ms linear;
+  }
+
+  .armed.open .page {
+    opacity: 1;
+  }
+
+  .armed .bloom {
+    display: none;
+  }
+}
