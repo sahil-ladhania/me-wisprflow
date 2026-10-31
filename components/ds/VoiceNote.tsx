@@ -126,7 +126,9 @@ export function VoiceNote({ id, src, duration, transcript, where, peaks, seed = 
       <div className={styles.foot}>
         <span className={styles.where}>{isPlaceholder ? `placeholder · ${about ?? "voice note"} · 10–25 sec` : where}</span>
         <details className={styles.transcript} onToggle={(event) => setShowText(event.currentTarget.open)}>
-          <summary>Read it instead</summary>
+          <summary>
+            Read it instead{about ? <span className="sr-only">: {about}</span> : null}
+          </summary>
         </details>
       </div>
       {showText ? (

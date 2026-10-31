@@ -8,9 +8,9 @@
    on :root and builds utilities from them: font-story, rounded-stone, ease-brake, p-5, max-w-measure.
    Spacing keys 1–10 are the design system's space-1…space-10, so p-5 is 24px here, not Tailwind's 20px. */
 @theme static {
-  --font-story: var(--font-newsreader, "Newsreader"), "Iowan Old Style", Georgia, serif;
+  --font-story: var(--font-story-rupee, "Newsreader"), var(--font-newsreader, "Newsreader"), "Iowan Old Style", Georgia, serif;
   --font-road: var(--font-road-rupee, "Barlow Condensed"), var(--font-barlow-condensed, "Barlow Condensed"), "Arial Narrow", sans-serif-condensed, sans-serif;
-  --font-hand: var(--font-kalam, "Kalam"), "Bradley Hand", "Segoe Print", cursive;
+  --font-hand: var(--font-hand-rupee, "Kalam"), var(--font-kalam, "Kalam"), "Bradley Hand", "Segoe Print", cursive;
 
   --radius-none: 0;
   --radius-hair: 2px;

@@ -14,7 +14,8 @@ function Lakh({ range }: { range: string }) {
   return (
     <>
       {range}
-      <small className="ml-1 text-[0.5em] font-semibold">lakh</small>
+      {/* A real space, set small, so it reads and copies as "₹20–25 lakh". */}
+      <small className="text-[0.5em] font-semibold">{" lakh"}</small>
     </>
   );
 }

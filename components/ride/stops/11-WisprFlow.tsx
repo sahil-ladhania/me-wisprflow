@@ -86,13 +86,13 @@ export function WisprFlow() {
         <div className="mt-8 flex flex-col gap-8">
           {/* Dealt, slightly offset, never a three-card row. */}
           <div className="max-w-[560px] lg:-rotate-[0.8deg]">
-            <ExperimentCard id="Growth experiment 01" {...experiments[0]} />
+            <ExperimentCard id="Growth experiment 01" headingLevel={4} {...experiments[0]} />
           </div>
           <div className="max-w-[560px] lg:ml-[14%] lg:rotate-[0.6deg]">
-            <ExperimentCard id="Growth experiment 02" {...experiments[1]} />
+            <ExperimentCard id="Growth experiment 02" headingLevel={4} {...experiments[1]} />
           </div>
           <div className="max-w-[560px] lg:ml-[6%] lg:-rotate-[0.4deg]">
-            <ExperimentCard id="Growth experiment 03" {...experiments[2]} />
+            <ExperimentCard id="Growth experiment 03" headingLevel={4} {...experiments[2]} />
           </div>
         </div>
       </div>

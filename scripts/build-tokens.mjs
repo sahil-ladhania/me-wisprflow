@@ -19,10 +19,14 @@ const BREAKPOINT = "37.5rem";
 // The first family in each token stack is the Google font, so it is swapped for that variable.
 const NEXT_FONT_VARS = { story: "--font-newsreader", road: "--font-barlow-condensed", hand: "--font-kalam" };
 
-// Barlow Condensed has no ₹. A face limited to U+20B9 goes in front of it, so it is used for ₹ and
-// skipped for everything else (see roadRupee in app/fonts.ts; app/layout.tsx sets the variable).
-// The fallback keeps the stack valid if the variable is ever missing.
-const GLYPH_FACES = { road: ['var(--font-road-rupee, "Barlow Condensed")'] };
+// Each voice gets its ₹ from a face limited to U+20B9, in front of the main one: used for ₹ and
+// skipped for everything else (see the rupee faces in app/fonts.ts; app/layout.tsx sets the variables).
+// The fallbacks keep each stack valid if a variable is ever missing.
+const GLYPH_FACES = {
+  story: ['var(--font-story-rupee, "Newsreader")'],
+  road: ['var(--font-road-rupee, "Barlow Condensed")'],
+  hand: ['var(--font-hand-rupee, "Kalam")'],
+};
 
 // Shadows that change in the night theme get hand-made utilities (see below), so they stay out of @theme.
 const SHADOW_UTILITIES = ["shadow-contact", "shadow-lift", "shadow-ground"];

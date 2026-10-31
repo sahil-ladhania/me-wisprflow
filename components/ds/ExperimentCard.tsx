@@ -15,13 +15,16 @@ type ExperimentCardProps = {
   move?: string;
   measure?: string;
   kill?: string;
+  /** The title's heading level, one below the section it sits in. */
+  headingLevel?: 3 | 4;
   className?: string;
 };
 
 const TODO = "[to be written]";
 
 /** An index card for one week-one growth experiment. Always three, each with a metric and a kill condition. */
-export function ExperimentCard({ id, when, stamp, title, insight, move, measure, kill, className }: ExperimentCardProps) {
+export function ExperimentCard({ id, when, stamp, title, insight, move, measure, kill, headingLevel = 3, className }: ExperimentCardProps) {
+  const Heading = headingLevel === 3 ? "h3" : "h4";
   const rows = [
     { label: "Insight", value: insight },
     { label: "The move", value: move },
@@ -36,7 +39,7 @@ export function ExperimentCard({ id, when, stamp, title, insight, move, measure,
         <span className={styles.id}>{id}</span>
         {when ? <span className="type-meta text-pencil">{when}</span> : null}
       </div>
-      <h3 className={cx(styles.title, !title && styles.todo)}>{title ?? "[The bet, in one line. Sahil writes this.]"}</h3>
+      <Heading className={cx(styles.title, !title && styles.todo)}>{title ?? "[The bet, in one line. Sahil writes this.]"}</Heading>
       <dl className={styles.grid}>
         {rows.map((row) => (
           <div key={row.label} className={row.kill ? styles.kill : undefined}>

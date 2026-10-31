@@ -141,6 +141,11 @@
   box-shadow: var(--shadow-lift);
 }
 
+/* Modules beat the base layer, so the focus ring has to ride along with the lift. */
+.root[data-state="listening"] .key:focus-visible {
+  box-shadow: var(--focus-ring), var(--shadow-lift);
+}
+
 .root[data-state="listening"] .mic {
   background: var(--red-pen);
   color: var(--on-red-pen);

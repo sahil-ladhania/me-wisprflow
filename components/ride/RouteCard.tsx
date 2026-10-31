@@ -13,7 +13,7 @@ export function RouteCard() {
                 href={`#${stop.anchor}`}
                 className="flex min-h-11 items-baseline gap-4 py-2 text-ink no-underline hover:text-red-pen pointer-fine:min-h-0 pointer-fine:py-[7px]"
               >
-                <span className="type-meta w-14 shrink-0 text-pencil">{stop.short}</span>
+                <span className="type-meta w-14 shrink-0 text-pencil">{stop.short}</span>{" "}
                 <span className="font-story text-[17px] leading-snug">{stop.name}</span>
               </a>
             </li>

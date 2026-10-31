@@ -13,13 +13,22 @@ type CorrectionProps = {
 
 /**
  * A red-pen strike-through: the mistake stays on the page, the truth is written over it.
- * For real wrong turns only; at most two per stop. Screen readers hear both (del and ins).
+ * For real wrong turns only; at most two per stop. Screen readers hear both, with spoken cues,
+ * since most of them stay silent about del and ins.
  */
 export function Correction({ was, is, inline }: CorrectionProps) {
   return (
     <span className={cx(styles.fix, inline && styles.inline)} data-pen-mark="">
-      <del>{was}</del>
-      {is ? <ins>{is}</ins> : null}
+      <del>
+        <span className="sr-only">crossed out: </span>
+        {was}
+      </del>
+      {is ? (
+        <ins>
+          <span className="sr-only">, corrected to: </span>
+          {is}
+        </ins>
+      ) : null}
     </span>
   );
 }

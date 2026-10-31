@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { CSSProperties } from "react";
 import { color } from "@/lib/design-system/tokens";
 import { siteDescription, siteTitle, siteUrl } from "@/lib/site";
-import { barlowCondensed, kalam, newsreader, roadRupeeFamily } from "./fonts";
+import { barlowCondensed, kalam, newsreader, rupeeFamilies } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -34,9 +34,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="en-IN"
       className={`${newsreader.variable} ${barlowCondensed.variable} ${kalam.variable}`}
-      style={{ "--font-road-rupee": roadRupeeFamily } as CSSProperties}
+      style={rupeeFamilies as CSSProperties}
     >
       <body>{children}</body>
     </html>
