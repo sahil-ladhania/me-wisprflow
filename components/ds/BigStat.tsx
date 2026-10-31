@@ -13,13 +13,15 @@ type BigStatProps = {
   source?: ReactNode;
   /** The witty aside, handwritten. */
   pen?: ReactNode;
+  /** A number that didn't happen, struck in red pen ("Dad's deal: 90%"). */
+  struck?: boolean;
   className?: string;
 };
 
 /** A number that carries a claim. Never on the Night stop. */
-export function BigStat({ value, unit, label, source, pen, className }: BigStatProps) {
+export function BigStat({ value, unit, label, source, pen, struck, className }: BigStatProps) {
   return (
-    <figure className={cx(styles.stat, className)}>
+    <figure className={cx(styles.stat, struck && styles.struck, className)}>
       <p className={styles.num}>
         {value}
         {unit ? <small className={styles.unit}>{unit}</small> : null}

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { cx } from "@/lib/cx";
-import { titleId, type RideStop } from "@/lib/ride/stops";
+import { lastStop, titleId, type RideStop } from "@/lib/ride/stops";
 
 type StopProps = {
   stop: RideStop;
@@ -21,16 +21,12 @@ export function Stop({ stop, className, children }: StopProps) {
       aria-labelledby={titleId(stop)}
       className={cx(
         "relative box-border min-h-(--stop-min) pt-[clamp(56px,7vw,96px)]",
-        "pb-[calc(var(--lane-h-mobile)+var(--space-7))] sm:pb-[calc(var(--lane-h)+var(--space-10))]",
+        // The lane takes its own space after the last stop, so only the stops before it leave room for it.
+        stop.index === lastStop ? "pb-8" : "pb-[calc(var(--lane-h-mobile)+var(--space-7))] sm:pb-[calc(var(--lane-h)+var(--space-10))]",
         className,
       )}
     >
       <div className="mx-auto max-w-page px-4 xl:px-8">{children}</div>
     </section>
   );
-}
-
-/** Shell marker while a stop's full content is still being built. */
-export function StopPending() {
-  return <p className="type-meta mt-7 text-pencil">Being built: the rest of this stop arrives in the next pass.</p>;
 }

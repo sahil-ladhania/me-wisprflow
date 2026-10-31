@@ -61,8 +61,32 @@
   transform: rotate(-2deg);
 }
 
+/* Supporting numbers are smaller, so three fit in a story column. */
+.compact {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
 .compact .num {
   font-size: min(88px, 30cqi);
+}
+
+/* A number that didn't happen: pencil, with one red-pen stroke across it. */
+.struck .num {
+  position: relative;
+  display: inline-block;
+  color: var(--pencil);
+}
+
+.struck .num::after {
+  content: "";
+  position: absolute;
+  top: 38%;
+  left: -4%;
+  width: 108%;
+  height: 0.16em;
+  background: var(--red-pen);
+  mask: var(--texture-pen-strike) center / 100% 100% no-repeat;
+  transform: rotate(-2deg);
 }
 
 @media (max-width: 599px) {

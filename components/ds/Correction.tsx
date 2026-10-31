@@ -5,8 +5,8 @@ import styles from "./Correction.module.css";
 type CorrectionProps = {
   /** What I said, struck through and left readable. */
   was: ReactNode;
-  /** What was true, written over it by hand. Five words or fewer. */
-  is: ReactNode;
+  /** What was true, written over it by hand. Five words or fewer. Leave it out for a strike alone. */
+  is?: ReactNode;
   /** Write the fix after the strike instead of above it (always the case on phones). */
   inline?: boolean;
 };
@@ -19,7 +19,7 @@ export function Correction({ was, is, inline }: CorrectionProps) {
   return (
     <span className={cx(styles.fix, inline && styles.inline)} data-pen-mark="">
       <del>{was}</del>
-      <ins>{is}</ins>
+      {is ? <ins>{is}</ins> : null}
     </span>
   );
 }
