@@ -7,7 +7,7 @@ export type TapePosition = "tl" | "tr" | "top" | "br";
 
 /** A strip of masking tape. Shared by photos; one on top, or two diagonal corners. Never four. */
 export function Tape({ position }: { position: TapePosition }) {
-  return <span className={cx(styles.tape, styles[position])} aria-hidden="true" />;
+  return <span className={cx(styles.tape, styles[position])} data-tape="" aria-hidden="true" />;
 }
 
 type TapedPhotoProps = {

@@ -13,6 +13,8 @@ type BikeLaneProps = {
   igniting?: boolean;
   /** Driven by scroll: --road-x moves the dashes, --stone-dx the stone. */
   scrub?: boolean;
+  /** Phones, while reading a long stop: the lane shrinks to lane-h-mini and the bike steps aside. */
+  mini?: boolean;
   /** The milestone just ahead of the front wheel. */
   stone?: { cap: string; year: string; kind?: MilestoneKind };
   /** Changing it re-rolls the stone in from the right while riding. */
@@ -30,7 +32,7 @@ type BikeLaneProps = {
 };
 
 /** The strip at the bottom of the viewport where the bike rides and stops at each milestone. */
-export function BikeLane({ state = "parked", igniting, scrub, stone, stoneKey, count, headlamp, night, bike, className, style }: BikeLaneProps) {
+export function BikeLane({ state = "parked", igniting, scrub, mini, stone, stoneKey, count, headlamp, night, bike, className, style }: BikeLaneProps) {
   return (
     <div
       className={cx(
@@ -40,6 +42,8 @@ export function BikeLane({ state = "parked", igniting, scrub, stone, stoneKey, c
         state === "braking" && styles.braking,
         igniting && styles.igniting,
         scrub && styles.scrub,
+        mini && styles.mini,
+        headlamp && styles.lit,
         night && styles.night,
         className,
       )}
@@ -55,7 +59,9 @@ export function BikeLane({ state = "parked", igniting, scrub, stone, stoneKey, c
           <Milestone cap={stone.cap} year={stone.year} kind={stone.kind} size="sm" inLane />
         </div>
       ) : null}
-      <div className={styles.bike}>{bike ?? <BikeSilhouette headlamp={headlamp} />}</div>
+      <div className={styles.bike} data-bike="">
+        {bike ?? <BikeSilhouette headlamp={headlamp} />}
+      </div>
       {count ? (
         <div className={styles.count}>
           <span className="type-kicker">{count.label}</span>

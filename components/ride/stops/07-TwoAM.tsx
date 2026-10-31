@@ -2,7 +2,7 @@ import { Mark } from "@/components/ds/Correction";
 import { IndexCard } from "@/components/ds/IndexCard";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { stops, titleId } from "@/lib/ride/stops";
-import { Columns } from "../Columns";
+import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
 
 const stop = stops[7];
@@ -23,7 +23,8 @@ export function TwoAM() {
       <Columns
         aside={
           <>
-            <dl className="w-full max-w-[440px] border-t-[1.5px] border-ink">
+            <Land turn={0} className="w-full max-w-[440px]">
+            <dl className="border-t-[1.5px] border-ink">
               <div className="border-b border-rule py-4">
                 <dt className="type-kicker">Zomato hires from</dt>
                 <dd className="type-headline mt-2">Top engineering colleges</dd>
@@ -33,7 +34,8 @@ export function TwoAM() {
                 <dd className="type-headline mt-2">A BBA student teaching myself Python</dd>
               </div>
             </dl>
-            <div className="lg:self-end">
+            </Land>
+            <Land order={1} className="lg:self-end">
               <IndexCard kicker="Pattern problems · where it started" tilt={-1.5}>
                 <div aria-hidden="true" className="mt-4 font-road text-[28px] leading-none font-semibold tracking-[0.32em]">
                   {pattern.map((row) => (
@@ -42,7 +44,7 @@ export function TwoAM() {
                 </div>
                 <p className="type-scribble mt-4 text-pencil">hard. also, peace.</p>
               </IndexCard>
-            </div>
+            </Land>
           </>
         }
       >

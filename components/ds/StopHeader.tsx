@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { cx } from "@/lib/cx";
 import { Milestone, type MilestoneProps } from "./Milestone";
 import styles from "./StopHeader.module.css";
@@ -18,13 +18,18 @@ type StopHeaderProps = {
   className?: string;
 };
 
-/** The opening of every stop except the Night stop: milestone, kicker, claim, aside. */
+/**
+ * The opening of every stop except the Night stop: milestone, kicker, claim, aside.
+ * On arrival (motion.css) the milestone settles first, then the words appear.
+ */
 export function StopHeader({ milestone, kicker, title, titleId, lede, voice, headingLevel = 2, className }: StopHeaderProps) {
   const Heading = headingLevel === 2 ? "h2" : "h3";
   return (
     <header className={cx(styles.root, className)}>
-      <Milestone {...milestone} responsive />
-      <div>
+      <div data-arrive="settle" className="flex">
+        <Milestone {...milestone} responsive />
+      </div>
+      <div data-arrive="" style={{ "--arrive": "100ms" } as CSSProperties}>
         <p className={styles.kicker}>
           <span className="type-kicker">{kicker}</span>
           {voice ? <span className={styles.voice}>{voice}</span> : null}

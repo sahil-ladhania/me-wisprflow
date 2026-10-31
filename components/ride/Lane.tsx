@@ -2,11 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { BikeLane, type LaneState } from "@/components/ds/BikeLane";
-import { approach, laneStone, MAX_SPEED, READING_LINE, ROAD_PER_STOP, targetPosition } from "@/lib/ride/scroll";
+import { approach, HOLD, laneStone, READING_LINE, readingProgress, rideSpeed, ROAD_PER_STOP, targetPosition } from "@/lib/ride/scroll";
 import { arrivalAnnouncement, counterLabel, lastStop, stops } from "@/lib/ride/stops";
 import { useRide } from "./RideProvider";
 
-type View = { stop: number; stone: number; moving: boolean };
+type View = { stop: number; stone: number; moving: boolean; mini: boolean };
+
+/** On phones, a stop this many screens tall or more counts as long (the lane shrinks while it's read). */
+const LONG_STOP = 1.4;
 
 /** How long the fork dip lasts when the bike stops. */
 const BRAKE_MS = 200;
@@ -19,13 +22,14 @@ const BRAKE_MS = 200;
 export function Lane() {
   const { engine, igniting } = useRide();
   const wrap = useRef<HTMLDivElement>(null);
-  const [view, setView] = useState<View>({ stop: 0, stone: 1, moving: false });
+  const [view, setView] = useState<View>({ stop: 0, stone: 1, moving: false, mini: false });
   const [braking, setBraking] = useState(false);
 
   useEffect(() => {
     const lane = wrap.current;
     if (!lane) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const phone = window.matchMedia("(max-width: 599px)");
     const sections = Array.from(document.querySelectorAll<HTMLElement>("[data-stop]"));
 
     let tops: number[] = [];
@@ -35,23 +39,29 @@ export function Lane() {
     let shown: number | null = null;
     let frame = 0;
     let last = 0;
-    let current: View = { stop: 0, stone: 1, moving: false };
+    let current: View = { stop: 0, stone: 1, moving: false, mini: false };
 
     const step = (now: number) => {
       frame = 0;
-      const goal = targetPosition(tops, window.scrollY + window.innerHeight * READING_LINE);
+      const line = window.scrollY + window.innerHeight * READING_LINE;
+      const goal = targetPosition(tops, line);
       const before = shown;
       if (shown === null || reduce) shown = reduce ? Math.round(goal) : goal;
-      else shown = approach(shown, goal, (Math.min(100, now - last) / 1000) * MAX_SPEED);
+      else shown = approach(shown, goal, (Math.min(100, now - last) / 1000) * rideSpeed(goal - shown));
       last = now;
+
+      // On phones, shrink the lane while the reader is inside a long stop, before the bike rides on.
+      const { index, read } = readingProgress(tops, line);
+      const span = (tops[index + 1] ?? document.documentElement.scrollHeight) - tops[index];
+      const mini = phone.matches && read > 0.08 && read < HOLD && span > window.innerHeight * LONG_STOP;
 
       lane.style.setProperty("--road-x", `${(-shown * ROAD_PER_STOP).toFixed(1)}px`);
       const { stop: stone, offset } = laneStone(shown, lastStop);
       const dx = offset >= 0 ? offset * (width - rest + 8) : offset * (rest + stoneWidth + 24);
       lane.style.setProperty("--stone-dx", `${dx.toFixed(1)}px`);
 
-      const next: View = { stop: Math.round(shown), stone, moving: before !== null && Math.abs(shown - before) > 1e-4 };
-      if (next.stop !== current.stop || next.stone !== current.stone || next.moving !== current.moving) {
+      const next: View = { stop: Math.round(shown), stone, moving: before !== null && Math.abs(shown - before) > 1e-4, mini };
+      if (next.stop !== current.stop || next.stone !== current.stone || next.moving !== current.moving || next.mini !== current.mini) {
         current = next;
         setView(next);
       }
@@ -103,7 +113,9 @@ export function Lane() {
   }, [braking]);
 
   const night = Boolean(stops[view.stop]?.night);
-  let state: LaneState = engine === "on" ? "idle" : "parked";
+  // In the garage the bike pulls off the road onto its stand: engine off, headlamp off.
+  const parkedInGarage = view.stop === lastStop && !view.moving;
+  let state: LaneState = engine === "on" && !parkedInGarage ? "idle" : "parked";
   if (view.moving) state = "riding";
   else if (braking) state = "braking";
 
@@ -111,12 +123,13 @@ export function Lane() {
     <div ref={wrap} className="sticky bottom-0 z-20">
       <BikeLane
         scrub
+        mini={view.mini}
         state={state}
         igniting={igniting}
         stone={stops[view.stone].milestone}
         stoneKey={view.stone}
         count={{ label: counterLabel(view.stop, engine === "on"), current: view.stop, total: lastStop }}
-        headlamp={engine === "on"}
+        headlamp={engine === "on" && !parkedInGarage}
         night={night}
       />
       <p className="sr-only" aria-live="polite">

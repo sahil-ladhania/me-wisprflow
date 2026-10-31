@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { Correction } from "@/components/ds/Correction";
 import { Signboard } from "@/components/ds/Signboard";
 import { stops, titleId } from "@/lib/ride/stops";
@@ -15,7 +16,7 @@ const link = "font-story text-[19px] text-ink underline decoration-wave-rest dec
 export function Garage() {
   return (
     <Stop stop={stop} className="border-t-[1.5px] border-ink">
-      <div className="flex flex-col gap-5">
+      <div data-arrive="" className="flex flex-col gap-5">
         <p className="type-kicker">{stop.kicker}</p>
         <h2 id={titleId(stop)} className="type-stop-title max-w-[18ch] text-balance">
           Every line of this site was dictated through Wispr Flow.
@@ -23,7 +24,11 @@ export function Garage() {
         <p className="type-lede max-w-measure">Mishearings included. They stay in, struck the same way as my mistakes.</p>
       </div>
 
-      <div className="mt-8 grid items-start gap-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-9">
+      <div
+        data-arrive=""
+        style={{ "--arrive": "200ms" } as CSSProperties}
+        className="mt-8 grid items-start gap-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-9"
+      >
         <div className="min-w-0">
           <p className="type-kicker">Dictation log · the bloopers</p>
           <ol className="mt-3 border-t border-rule" aria-label="Dictation bloopers">
@@ -58,7 +63,7 @@ export function Garage() {
         </div>
       </div>
 
-      <div className="mt-9 flex flex-col items-start gap-5">
+      <div data-arrive="land" style={{ "--arrive": "400ms", "--land-turn": "0deg" } as CSSProperties} className="mt-9 flex flex-col items-start gap-5">
         <p className="type-body max-w-measure">
           One day I want to open a small, cozy cafe in the mountains and cook for people. Not for money. Just because I love it.
         </p>

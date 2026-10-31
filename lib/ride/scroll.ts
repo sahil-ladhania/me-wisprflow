@@ -10,6 +10,9 @@ export const READING_LINE = 0.45;
 /** Road speed cap, in stops per second: a fast flick never makes the bike teleport. */
 export const MAX_SPEED = 1.25;
 
+/** When the bike is far behind (a route-card jump), it closes this share of the gap per second. */
+export const CATCH_UP = 2;
+
 /** Road dash travel per stop, in px (one dur-ride of rd-road). */
 export const ROAD_PER_STOP = 640;
 
@@ -26,6 +29,23 @@ export function targetPosition(tops: readonly number[], line: number): number {
   const span = tops[index + 1] - tops[index];
   const read = span > 0 ? (line - tops[index]) / span : 0;
   return index + easeThrottle(clamp01((read - HOLD) / (1 - HOLD)));
+}
+
+/** Which stop the reading line is in, and how far through it (0–1, not eased). */
+export function readingProgress(tops: readonly number[], line: number): { index: number; read: number } {
+  let index = 0;
+  for (let k = 0; k < tops.length; k++) if (tops[k] <= line) index = k;
+  if (index >= tops.length - 1) return { index, read: 0 };
+  const span = tops[index + 1] - tops[index];
+  return { index, read: span > 0 ? clamp01((line - tops[index]) / span) : 0 };
+}
+
+/**
+ * Stops per second for a given gap: the cruising cap for normal scrolling, faster in proportion
+ * when far behind, so a long jump settles in about two seconds without teleporting.
+ */
+export function rideSpeed(gap: number): number {
+  return Math.max(MAX_SPEED, Math.abs(gap) * CATCH_UP);
 }
 
 /** Moves towards the target, never faster than maxStep. */

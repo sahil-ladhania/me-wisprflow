@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { cx } from "@/lib/cx";
 import styles from "./NightStop.module.css";
 
@@ -19,11 +19,18 @@ type NightStopProps = {
 export function NightStop({ date, line, lineId, lineAs: Line = "h2", children, className }: NightStopProps) {
   return (
     <div data-theme="night" className={cx(styles.night, className)}>
-      <p className={styles.date}>{date}</p>
-      <Line id={lineId} className={styles.line}>
+      {/* On arrival (motion.css): the date, then the line, then the rest, slowly. */}
+      <p data-arrive="" className={styles.date}>
+        {date}
+      </p>
+      <Line id={lineId} data-arrive="" style={{ "--arrive": "250ms" } as CSSProperties} className={styles.line}>
         {line}
       </Line>
-      {children ? <div className={styles.after}>{children}</div> : null}
+      {children ? (
+        <div data-arrive="" style={{ "--arrive": "600ms" } as CSSProperties} className={styles.after}>
+          {children}
+        </div>
+      ) : null}
     </div>
   );
 }

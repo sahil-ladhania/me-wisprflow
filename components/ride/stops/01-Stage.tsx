@@ -4,7 +4,7 @@ import { ScannedDocument } from "@/components/ds/ScannedDocument";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { TapedPhoto } from "@/components/ds/TapedPhoto";
 import { stops, titleId } from "@/lib/ride/stops";
-import { Columns } from "../Columns";
+import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
 
 const stop = stops[1];
@@ -23,10 +23,12 @@ export function Stage() {
       <Columns
         aside={
           <>
-            <TapedPhoto alt="Me dancing on the school stage" caption="cultural head. everyone knew me." tilt={-2.5} />
-            <div className="lg:self-end">
+            <Land>
+              <TapedPhoto alt="Me dancing on the school stage" caption="cultural head. everyone knew me." tilt={-2.5} />
+            </Land>
+            <Land order={1} turn={-4} className="lg:self-end">
               <ScannedDocument label="Scan 01 · Cooking competition certificate" alt="The first-prize certificate" note="still have it." tilt={1.2} />
-            </div>
+            </Land>
           </>
         }
       >

@@ -6,7 +6,7 @@ import { ScannedDocument } from "@/components/ds/ScannedDocument";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { VoiceNote } from "@/components/ds/VoiceNote";
 import { stops, titleId } from "@/lib/ride/stops";
-import { Columns } from "../Columns";
+import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
 
 const stop = stops[10];
@@ -37,8 +37,12 @@ export function Rebuild() {
       <Columns
         aside={
           <>
-            <ScannedDocument label="Scan 02 · The lulu waitlist" alt="Screenshot of the lulu waitlist dashboard" tilt={-1} />
-            <VoiceNote id="voice-lulu" about="lulu, and why voice" />
+            <Land>
+              <ScannedDocument label="Scan 02 · The lulu waitlist" alt="Screenshot of the lulu waitlist dashboard" tilt={-1} />
+            </Land>
+            <Land order={1} turn={0} className="w-full">
+              <VoiceNote id="voice-lulu" about="lulu, and why voice" />
+            </Land>
           </>
         }
       >
@@ -68,6 +72,7 @@ export function Rebuild() {
       <Columns
         className="mt-9"
         aside={
+          <Land>
           <IndexCard kicker="Card 10 · What ~200 calls taught me" tilt={-1}>
             <div className="mt-4">
               <p className="type-kicker">What people said</p>
@@ -79,6 +84,7 @@ export function Rebuild() {
             </div>
             <p className="type-scribble mt-4 text-pencil">words are cheap. swipes aren’t.</p>
           </IndexCard>
+          </Land>
         }
       >
         <h3 className="type-headline">After about six months, the signals weren’t real.</h3>

@@ -1,7 +1,7 @@
 import { BigStat, StatRow } from "@/components/ds/BigStat";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { stops, titleId } from "@/lib/ride/stops";
-import { Columns } from "../Columns";
+import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
 
 const stop = stops[4];
@@ -19,10 +19,12 @@ export function BestTwoYears() {
       />
       <Columns
         aside={
-          <StatRow className="w-full">
-            <BigStat value="9" label="years, same best friend" />
-            <BigStat value="3" label="of us. The trio." />
-          </StatRow>
+          <Land turn={0} className="w-full">
+            <StatRow>
+              <BigStat value="9" label="years, same best friend" />
+              <BigStat value="3" label="of us. The trio." />
+            </StatRow>
+          </Land>
         }
       >
         <p className="type-body">We were a trio. I kept dancing and performing.</p>

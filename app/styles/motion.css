@@ -1,0 +1,124 @@
+/*
+ * The Ride: motion between stops (design-system/motion.md).
+ * Everything here waits for components/ride/ArrivalWatcher. It first sets html[data-motion="arming"]
+ * (stops not yet reached are hidden, with no transition, so nothing fades out on load), then
+ * "armed" two frames later (transitions on). Without JavaScript, or with reduced motion, nothing
+ * is ever hidden and nothing moves.
+ */
+
+/* ---------- Arrivals ----------
+   The bike arrives, then the milestone settles, then the text appears, then the objects land like
+   paper and the tape goes on last. Each element carries its delay in --arrive (80–120 ms apart);
+   the whole arrival finishes under 900 ms. */
+
+html[data-motion="armed"] [data-arrive] {
+  transition:
+    opacity var(--dur-settle) var(--ease-brake) var(--arrive, 0ms),
+    transform var(--dur-settle) var(--ease-brake) var(--arrive, 0ms);
+}
+
+html[data-motion] [data-stop]:not([data-arrived]) [data-arrive] {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+/* The milestone settles down onto the road. */
+html[data-motion] [data-stop]:not([data-arrived]) [data-arrive="settle"] {
+  transform: translateY(-10px);
+}
+
+/* A photo, scan or card drops 12px and turns from its tilt ±4° to its final tilt. */
+html[data-motion] [data-stop]:not([data-arrived]) [data-arrive="land"] {
+  transform: translateY(-12px) rotate(var(--land-turn, 4deg));
+}
+
+/* Tape goes on 60 ms after its object lands. */
+html[data-motion="armed"] [data-tape] {
+  transition: opacity 160ms linear calc(var(--arrive, 0ms) + var(--dur-settle) + 60ms);
+}
+
+html[data-motion] [data-stop]:not([data-arrived]) [data-tape] {
+  opacity: 0;
+}
+
+/* ---------- Ink and smoke ----------
+   As a stop arrives, a wet ink front blooms out of the point where the bike stopped (--ink-x/-y,
+   set by ArrivalWatcher), through the irregular ink-bloom blot, and fades as the page soaks.
+   Drawn as a ring (two blots, the inner one cut out) so it never hides the content under it. */
+
+@property --ink-size {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+[data-ink] {
+  display: none;
+}
+
+html[data-motion="armed"] [data-stop]:not([data-arrived="instant"]) [data-ink] {
+  --ink-size: 0px;
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  /* A wet edge, not a wave: the ring passes over text being read, so it stays light and thin. */
+  background: #17140f;
+  opacity: 0.55;
+  pointer-events: none;
+  mask-image: var(--texture-ink-bloom), var(--texture-ink-bloom);
+  mask-repeat: no-repeat;
+  mask-size:
+    var(--ink-size) var(--ink-size),
+    calc(var(--ink-size) * 0.9) calc(var(--ink-size) * 0.9);
+  mask-position:
+    calc(var(--ink-x, 200px) - var(--ink-size) / 2) calc(var(--ink-y, 80vh) - var(--ink-size) / 2),
+    calc(var(--ink-x, 200px) - var(--ink-size) * 0.45) calc(var(--ink-y, 80vh) - var(--ink-size) * 0.45);
+  mask-composite: exclude;
+  transition:
+    --ink-size var(--dur-ink) var(--ease-ink),
+    opacity 500ms linear 300ms;
+}
+
+html[data-motion="armed"] [data-stop][data-arrived=""] [data-ink] {
+  --ink-size: var(--ink-reach, 2400px);
+  opacity: 0;
+}
+
+/* Smoke: into and out of the Night stop only. Slower, pencil, blurred. */
+html[data-motion="armed"] [data-stop][data-smoke]:not([data-arrived="instant"]) [data-ink] {
+  background: var(--pencil);
+  opacity: 0.3;
+  filter: blur(12px);
+  transition:
+    --ink-size 1200ms var(--ease-ink),
+    opacity 700ms linear 600ms;
+}
+
+html[data-motion="armed"] [data-stop][data-smoke][data-arrived=""] [data-ink] {
+  opacity: 0;
+}
+
+@media (max-width: 599px) {
+  html[data-motion="armed"] [data-stop][data-smoke] [data-ink] {
+    filter: none;
+  }
+}
+
+/* ---------- Soft snap ----------
+   Each stop is a gentle snap point on desktop with a mouse or trackpad; never on phones. */
+@media (min-width: 37.5rem) and (pointer: fine) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+
+  [data-stop] {
+    scroll-snap-align: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ink] {
+    display: none !important;
+  }
+}

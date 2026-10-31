@@ -3,7 +3,7 @@ import { Mark } from "@/components/ds/Correction";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { TapedPhoto } from "@/components/ds/TapedPhoto";
 import { stops, titleId } from "@/lib/ride/stops";
-import { Columns } from "../Columns";
+import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
 
 const stop = stops[3];
@@ -25,7 +25,9 @@ export function TheBike() {
       />
       <Columns
         aside={
-          <TapedPhoto alt="The black bike" caption="second love." tilt={1.6} ratio="4 / 3" tape="top" width="min(100%, 480px)" />
+          <Land turn={-4} className="w-full">
+            <TapedPhoto alt="The black bike" caption="second love." tilt={1.6} ratio="4 / 3" tape="top" width="min(100%, 480px)" />
+          </Land>
         }
       >
         <StatRow>

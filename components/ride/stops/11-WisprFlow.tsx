@@ -6,7 +6,7 @@ import { Signboard } from "@/components/ds/Signboard";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { stops, titleId } from "@/lib/ride/stops";
 import { ColdRead } from "../ColdRead";
-import { Columns } from "../Columns";
+import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
 
 const stop = stops[11];
@@ -31,19 +31,21 @@ export function WisprFlow() {
           title="I barely type anymore."
           lede="I use Wispr Flow every day. After Zomato, it’s the second product that gave me that feeling."
         />
-        <div>
+        <Land order={-1} turn={0}>
           <Signboard dest="Wispr Flow" sub="India · Growth · Any role" km="NEXT" arrow="up" />
-        </div>
+        </Land>
       </div>
 
       <Columns
         aside={
           <>
-            <IndexCard kicker="Tanay, replying to my comment" tilt={0.8}>
-              <blockquote className="type-headline mt-3 italic">“That’s a good goal to have, dude.”</blockquote>
-              <p className="type-scribble mt-3 text-pencil">still working on it.</p>
-            </IndexCard>
-            <div className="w-full max-w-[440px] border-t-[1.5px] border-ink pt-4">
+            <Land>
+              <IndexCard kicker="Tanay, replying to my comment" tilt={0.8}>
+                <blockquote className="type-headline mt-3 italic">“That’s a good goal to have, dude.”</blockquote>
+                <p className="type-scribble mt-3 text-pencil">still working on it.</p>
+              </IndexCard>
+            </Land>
+            <Land order={1} turn={0} className="w-full max-w-[440px] border-t-[1.5px] border-ink pt-4">
               <p className="type-kicker">The short version</p>
               <ul className="mt-2">
                 {shortVersion.map((line) => (
@@ -52,7 +54,7 @@ export function WisprFlow() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </Land>
           </>
         }
       >

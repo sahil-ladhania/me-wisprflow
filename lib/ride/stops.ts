@@ -15,6 +15,8 @@ export type RideStop = {
   milestone: { cap: string; year: string; kind?: MilestoneKind };
   /** The June 2025 stop: night theme, engine off, no jokes. */
   night?: boolean;
+  /** Arrives through smoke instead of ink: into and out of the Night stop. */
+  smoke?: boolean;
 };
 
 export const stops: readonly RideStop[] = [
@@ -27,8 +29,8 @@ export const stops: readonly RideStop[] = [
   { index: 6, anchor: "college", name: "₹20,000 of pasta", short: "BBA", kicker: "Stop 06 · Christ University · 2021–24", milestone: { cap: "CHRIST", year: "2021" } },
   { index: 7, anchor: "2am", name: "2am, Zomato and code", short: "2021", kicker: "Stop 07 · 2021 · 2:00 am", milestone: { cap: "2 AM", year: "2021" } },
   { index: 8, anchor: "not-average", name: "Not average", short: "2024", kicker: "Stop 08 · After college · Not average", milestone: { cap: "AFTER BBA", year: "2024" } },
-  { index: 9, anchor: "june-2025", name: "Engine off", short: "JUN 25", kicker: "Stop 09 · June 2025", milestone: { cap: "JUNE", year: "2025" }, night: true },
-  { index: 10, anchor: "the-rebuild", name: "The rebuild", short: "AUG 25", kicker: "Stop 10 · August 2025 → · The rebuild", milestone: { cap: "AUG", year: "2025" } },
+  { index: 9, anchor: "june-2025", name: "Engine off", short: "JUN 25", kicker: "Stop 09 · June 2025", milestone: { cap: "JUNE", year: "2025" }, night: true, smoke: true },
+  { index: 10, anchor: "the-rebuild", name: "The rebuild", short: "AUG 25", kicker: "Stop 10 · August 2025 → · The rebuild", milestone: { cap: "AUG", year: "2025" }, smoke: true },
   { index: 11, anchor: "wispr-flow", name: "Wispr Flow India", short: "NEXT", kicker: "Stop 11 · Next · Wispr Flow India", milestone: { cap: "WISPR FLOW", year: "NEXT", kind: "next" } },
   { index: 12, anchor: "garage", name: "The garage", short: "END", kicker: "Road’s end · The garage", milestone: { cap: "GARAGE", year: "2026", kind: "now" } },
 ];

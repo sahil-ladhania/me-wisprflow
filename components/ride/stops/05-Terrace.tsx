@@ -2,7 +2,7 @@ import { Correction, Mark } from "@/components/ds/Correction";
 import { IndexCard } from "@/components/ds/IndexCard";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { stops, titleId } from "@/lib/ride/stops";
-import { Columns } from "../Columns";
+import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
 
 const stop = stops[5];
@@ -27,19 +27,21 @@ export function Terrace() {
       <Columns
         aside={
           <>
-            <IndexCard kicker="Culinary school" tilt={-1}>
-              <p className={price}>
-                <Correction inline was={<Lakh range="₹20–25" />} />
-              </p>
-            </IndexCard>
-            <div className="lg:self-end">
+            <Land>
+              <IndexCard kicker="Culinary school" tilt={-1}>
+                <p className={price}>
+                  <Correction inline was={<Lakh range="₹20–25" />} />
+                </p>
+              </IndexCard>
+            </Land>
+            <Land order={1} turn={-4} className="lg:self-end">
               <IndexCard kicker="Management degree" tilt={0.8}>
                 <p className={price}>
                   <Lakh range="₹10–12" />
                 </p>
                 <p className="type-pen mt-2 -rotate-2">the one I chose</p>
               </IndexCard>
-            </div>
+            </Land>
           </>
         }
       >

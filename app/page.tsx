@@ -1,4 +1,5 @@
 import { DrawObserver } from "@/components/ds/DrawObserver";
+import { ArrivalWatcher } from "@/components/ride/ArrivalWatcher";
 import { Lane } from "@/components/ride/Lane";
 import { RideProvider } from "@/components/ride/RideProvider";
 import { Hero } from "@/components/ride/stops/00-Hero";
@@ -36,6 +37,7 @@ export default function Home() {
         {/* Last in the flow, so position: sticky keeps it at the bottom of the screen all the way down. */}
         <Lane />
       </main>
+      <ArrivalWatcher />
       <DrawObserver />
     </RideProvider>
   );

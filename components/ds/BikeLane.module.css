@@ -155,9 +155,29 @@
   animation: var(--animate-flick);
 }
 
-/* A night lane: road dashes fade to 20%; only the headlamp is lit. */
+/* A night lane: road dashes fade to 20%; only the headlamp is lit. The bike stays Enfield black
+   (never the night theme's light ink) with a thin warm rim, so it doesn't disappear into the dark. */
 .night .dash {
   opacity: 0.2;
+}
+
+.night .bike {
+  color: #17140f;
+  filter: drop-shadow(0 0 1px color-mix(in srgb, var(--headlamp) 70%, transparent))
+    drop-shadow(0 -1px 0 color-mix(in srgb, var(--headlamp) 35%, transparent));
+}
+
+/* The headlamp's soft cone, the only light on the Night stop. */
+.night.lit .bike::before {
+  content: "";
+  position: absolute;
+  top: 16%;
+  left: 76%;
+  width: 180%;
+  height: 60%;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--headlamp) 18%, transparent), transparent 85%);
+  clip-path: polygon(0 44%, 100% 0, 100% 100%, 0 56%);
+  pointer-events: none;
 }
 
 @media (max-width: 599px) {
@@ -191,6 +211,32 @@
   /* No room for twelve ticks beside the bike; the counter label carries the progress. */
   .ticks {
     display: none;
+  }
+
+  /* Reading a long stop: the lane shrinks to lane-h-mini, the bike and stone step aside,
+     and the road and the counter remain. It grows back on the way to the next stop. */
+  .lane {
+    transition: height var(--dur-settle) var(--ease-brake);
+  }
+
+  .mini {
+    height: calc(var(--lane-h-mini) + env(safe-area-inset-bottom));
+    min-height: 0;
+  }
+
+  .bike,
+  .stone {
+    transition: opacity var(--dur-settle) var(--ease-brake);
+  }
+
+  .mini .bike,
+  .mini .stone {
+    opacity: 0;
+  }
+
+  .mini .road {
+    bottom: 4px;
+    height: 24px;
   }
 }
 

@@ -5,7 +5,7 @@ import { StopHeader } from "@/components/ds/StopHeader";
 import { TapedPhoto } from "@/components/ds/TapedPhoto";
 import { VoiceNote } from "@/components/ds/VoiceNote";
 import { stops, titleId } from "@/lib/ride/stops";
-import { Columns } from "../Columns";
+import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
 
 const stop = stops[6];
@@ -25,8 +25,10 @@ export function Pasta() {
       <Columns
         aside={
           <>
-            <TapedPhoto alt="The pasta stall at the college fest" caption="₹20,000 in 4–5 hours." tilt={-1.8} />
-            <div className="lg:self-end">
+            <Land>
+              <TapedPhoto alt="The pasta stall at the college fest" caption="₹20,000 in 4–5 hours." tilt={-1.8} />
+            </Land>
+            <Land order={1} turn={-4} className="lg:self-end">
               <IndexCard kicker="Card 06 · The cafe that almost happened" tilt={1}>
                 <IndexRows>
                   <IndexRow label="Backer">My PG owner</IndexRow>
@@ -38,7 +40,7 @@ export function Pasta() {
                   </IndexRow>
                 </IndexRows>
               </IndexCard>
-            </div>
+            </Land>
           </>
         }
       >

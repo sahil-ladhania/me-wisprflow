@@ -2,7 +2,7 @@ import { Correction } from "@/components/ds/Correction";
 import { IndexCard } from "@/components/ds/IndexCard";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { stops, titleId } from "@/lib/ride/stops";
-import { Columns } from "../Columns";
+import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
 
 const stop = stops[2];
@@ -26,6 +26,7 @@ export function WrongReason() {
       />
       <Columns
         aside={
+          <Land>
           <IndexCard kicker="Card 02 · How my class picked" tilt={-1.2}>
             <ul className="mt-4 border-t border-rule">
               {reasons.map((reason) => (
@@ -40,6 +41,7 @@ export function WrongReason() {
             </ul>
             <p className="type-scribble mt-4 text-pencil">me: none of the above.</p>
           </IndexCard>
+          </Land>
         }
       >
         <p className="type-body">

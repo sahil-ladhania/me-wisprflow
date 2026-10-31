@@ -2,7 +2,7 @@ import { Correction, CorrectionText } from "@/components/ds/Correction";
 import { IndexCard } from "@/components/ds/IndexCard";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { stops, titleId } from "@/lib/ride/stops";
-import { Columns } from "../Columns";
+import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
 
 const stop = stops[8];
@@ -21,6 +21,7 @@ export function NotAverage() {
       <Columns
         aside={
           <>
+            <Land>
             <IndexCard kicker="To: Zomato’s founder · the gist" tilt={-0.8}>
               <p className="mt-4 font-story text-[20px] leading-normal">
                 I’m a curious kid like you. I don’t have an engineering degree. I taught myself. I want to work with your team.
@@ -30,11 +31,12 @@ export function NotAverage() {
                 <p className="mt-2 font-story text-[19px] leading-snug">An engineering interview invite. And a question: what role do you want?</p>
               </div>
             </IndexCard>
-            <div className="w-full max-w-[440px] border-t-[1.5px] border-ink pt-4 lg:self-end">
+            </Land>
+            <Land order={1} turn={0} className="w-full max-w-[440px] border-t-[1.5px] border-ink pt-4 lg:self-end">
               <p className="type-kicker">What I believe</p>
               <p className="type-headline mt-3">Either I need it all, or I don’t need it at all.</p>
               <p className="type-body mt-3">I’m scared of being average. I’m willing to become the person who deserves the best.</p>
-            </div>
+            </Land>
           </>
         }
       >

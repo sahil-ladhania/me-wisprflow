@@ -18,6 +18,7 @@ export function Stop({ stop, className, children }: StopProps) {
       id={stop.anchor}
       data-stop={stop.index}
       data-theme={stop.night ? "night" : undefined}
+      data-smoke={stop.smoke ? "" : undefined}
       aria-labelledby={titleId(stop)}
       className={cx(
         "relative box-border min-h-(--stop-min) pt-[clamp(56px,7vw,96px)]",
@@ -26,6 +27,8 @@ export function Stop({ stop, className, children }: StopProps) {
         className,
       )}
     >
+      {/* The ink (or smoke) front that blooms from the bike as the stop arrives; see app/styles/motion.css. */}
+      <span data-ink="" aria-hidden="true" />
       <div className="mx-auto max-w-page px-4 xl:px-8">{children}</div>
     </section>
   );
