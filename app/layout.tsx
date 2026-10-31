@@ -1,16 +1,30 @@
 import type { Metadata, Viewport } from "next";
 import type { CSSProperties } from "react";
 import { color } from "@/lib/design-system/tokens";
+import { siteDescription, siteTitle, siteUrl } from "@/lib/site";
 import { barlowCondensed, kalam, newsreader, roadRupeeFamily } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Sahil Ladhania · The Ride",
+    default: siteTitle,
     template: "%s · The Ride",
   },
-  description:
-    "A ride through ten years, 2016 to 2026, on a black bike. Sahil Ladhania’s entry for the Wispr Flow India growth challenge.",
+  description: siteDescription,
+  openGraph: {
+    type: "website",
+    siteName: "The Ride",
+    title: siteTitle,
+    description: siteDescription,
+    url: "/",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+  },
 };
 
 export const viewport: Viewport = {

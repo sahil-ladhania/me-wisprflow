@@ -1,11 +1,15 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { Correction } from "@/components/ds/Correction";
+import { Icon } from "@/components/ds/Icon";
 import { Signboard } from "@/components/ds/Signboard";
+import { bloopers, bloopersComplete, contact } from "@/lib/ride/media";
 import { stops, titleId } from "@/lib/ride/stops";
 import { Stop } from "../Stop";
 
 const stop = stops[12];
+
+const row = "grid grid-cols-[48px_minmax(0,1fr)] gap-3 border-b border-rule py-3";
 
 const link = "font-story text-[19px] text-ink underline decoration-wave-rest decoration-1 underline-offset-4 hover:decoration-ink";
 
@@ -32,16 +36,20 @@ export function Garage() {
         <div className="min-w-0">
           <p className="type-kicker">Dictation log · the bloopers</p>
           <ol className="mt-3 border-t border-rule" aria-label="Dictation bloopers">
-            <li className="grid grid-cols-[48px_minmax(0,1fr)] gap-3 border-b border-rule py-3">
-              <span className="type-meta pt-1 text-pencil">01</span>
-              <span className="type-body">
-                <Correction inline was="rolling field" is="Royal Enfield" />
-              </span>
-            </li>
-            <li className="grid grid-cols-[48px_minmax(0,1fr)] gap-3 border-b border-rule py-3">
-              <span className="type-meta pt-1 text-pencil">02</span>
-              <span className="type-body italic text-pencil">[Placeholder: the next real mishearing, struck the same way.]</span>
-            </li>
+            {bloopers.map((blooper, i) => (
+              <li key={blooper.heard} className={row}>
+                <span className="type-meta pt-1 text-pencil">{String(i + 1).padStart(2, "0")}</span>
+                <span className="type-body">
+                  <Correction inline was={blooper.heard} is={blooper.said} />
+                </span>
+              </li>
+            ))}
+            {bloopersComplete ? null : (
+              <li className={row}>
+                <span className="type-meta pt-1 text-pencil">{String(bloopers.length + 1).padStart(2, "0")}</span>
+                <span className="type-body italic text-pencil">[Placeholder: the next real mishearing, struck the same way.]</span>
+              </li>
+            )}
           </ol>
         </div>
 
@@ -49,10 +57,27 @@ export function Garage() {
           <p className="type-body">I don’t talk much. But when I speak, I speak well. This whole site is me, speaking.</p>
           <ul className="flex flex-col gap-3">
             <li>
-              <span className="font-story text-[19px] text-ink">LinkedIn</span> <span className="type-meta text-pencil">[placeholder: profile link]</span>
+              {contact.linkedin ? (
+                <a href={contact.linkedin} className={`${link} inline-flex items-center gap-2`} target="_blank" rel="noreferrer">
+                  LinkedIn
+                  <Icon name="link-out" size={18} />
+                </a>
+              ) : (
+                <>
+                  <span className="font-story text-[19px] text-ink">LinkedIn</span> <span className="type-meta text-pencil">[placeholder: profile link]</span>
+                </>
+              )}
             </li>
             <li>
-              <span className="font-story text-[19px] text-ink">Email</span> <span className="type-meta text-pencil">[placeholder: address]</span>
+              {contact.email ? (
+                <a href={`mailto:${contact.email}`} className={link}>
+                  {contact.email}
+                </a>
+              ) : (
+                <>
+                  <span className="font-story text-[19px] text-ink">Email</span> <span className="type-meta text-pencil">[placeholder: address]</span>
+                </>
+              )}
             </li>
             <li>
               <Link href="/design-system" className={link}>

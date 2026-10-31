@@ -2,8 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { BikeLane, type LaneState } from "@/components/ds/BikeLane";
+import { Icon } from "@/components/ds/Icon";
+import { toggleVoiceNote } from "@/components/ds/VoiceNote";
+import { voice } from "@/lib/ride/media";
 import { approach, HOLD, laneStone, READING_LINE, readingProgress, rideSpeed, ROAD_PER_STOP, targetPosition } from "@/lib/ride/scroll";
-import { arrivalAnnouncement, counterLabel, lastStop, stops } from "@/lib/ride/stops";
+import { arrivalAnnouncement, counterLabel, lastStop, stops, voiceId } from "@/lib/ride/stops";
 import { useRide } from "./RideProvider";
 
 type View = { stop: number; stone: number; moving: boolean; mini: boolean };
@@ -113,6 +116,9 @@ export function Lane() {
   }, [braking]);
 
   const night = Boolean(stops[view.stop]?.night);
+  // A stop with a recorded voice note can be heard straight from the lane.
+  const voiceKey = stops[view.stop]?.voice;
+  const hearable = !view.moving && !view.mini && voiceKey && voice[voiceKey].src ? voiceKey : null;
   // In the garage the bike pulls off the road onto its stand: engine off, headlamp off.
   const parkedInGarage = view.stop === lastStop && !view.moving;
   let state: LaneState = engine === "on" && !parkedInGarage ? "idle" : "parked";
@@ -132,6 +138,16 @@ export function Lane() {
         headlamp={engine === "on" && !parkedInGarage}
         night={night}
       />
+      {hearable ? (
+        <button
+          type="button"
+          onClick={() => toggleVoiceNote(voiceId(hearable))}
+          className="type-kicker absolute left-1/2 top-2 z-30 inline-flex min-h-11 -translate-x-1/2 items-center gap-2 rounded-pill border border-ink bg-card px-4 text-ink sm:left-8 sm:top-3 sm:translate-x-0"
+        >
+          <Icon name="play" size={18} />
+          Hear this stop
+        </button>
+      ) : null}
       <p className="sr-only" aria-live="polite">
         {view.moving ? "" : arrivalAnnouncement(view.stop)}
       </p>

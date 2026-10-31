@@ -5,7 +5,8 @@ import { IndexCard } from "@/components/ds/IndexCard";
 import { ScannedDocument } from "@/components/ds/ScannedDocument";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { VoiceNote } from "@/components/ds/VoiceNote";
-import { stops, titleId } from "@/lib/ride/stops";
+import { scans, voice } from "@/lib/ride/media";
+import { stops, titleId, voiceId } from "@/lib/ride/stops";
 import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
 
@@ -38,10 +39,10 @@ export function Rebuild() {
         aside={
           <>
             <Land>
-              <ScannedDocument label="Scan 02 · The lulu waitlist" alt="Screenshot of the lulu waitlist dashboard" tilt={-1} />
+              <ScannedDocument src={scans.waitlist} label="Scan 02 · The lulu waitlist" alt="Screenshot of the lulu waitlist dashboard" tilt={-1} />
             </Land>
             <Land order={1} turn={0} className="w-full">
-              <VoiceNote id="voice-lulu" about="lulu, and why voice" />
+              <VoiceNote id={voiceId("lulu")} about="lulu, and why voice" {...voice.lulu} />
             </Land>
           </>
         }

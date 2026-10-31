@@ -4,6 +4,7 @@ import { ExperimentCard } from "@/components/ds/ExperimentCard";
 import { IndexCard } from "@/components/ds/IndexCard";
 import { Signboard } from "@/components/ds/Signboard";
 import { StopHeader } from "@/components/ds/StopHeader";
+import { experiments } from "@/lib/ride/media";
 import { stops, titleId } from "@/lib/ride/stops";
 import { ColdRead } from "../ColdRead";
 import { Columns, Land } from "../Columns";
@@ -81,16 +82,17 @@ export function WisprFlow() {
       <div className="mt-9">
         <p className="type-kicker">What I’d run first · India</p>
         <h3 className="type-headline mt-2">Three growth experiments for Wispr Flow India.</h3>
-        <p className="type-meta mt-2 text-pencil">Placeholders. I’m writing these myself.</p>
+        {experiments.some((e) => !e.title) ? <p className="type-meta mt-2 text-pencil">Placeholders. I’m writing these myself.</p> : null}
         <div className="mt-8 flex flex-col gap-8">
+          {/* Dealt, slightly offset, never a three-card row. */}
           <div className="max-w-[560px] lg:-rotate-[0.8deg]">
-            <ExperimentCard id="Growth experiment 01" />
+            <ExperimentCard id="Growth experiment 01" {...experiments[0]} />
           </div>
           <div className="max-w-[560px] lg:ml-[14%] lg:rotate-[0.6deg]">
-            <ExperimentCard id="Growth experiment 02" />
+            <ExperimentCard id="Growth experiment 02" {...experiments[1]} />
           </div>
           <div className="max-w-[560px] lg:ml-[6%] lg:-rotate-[0.4deg]">
-            <ExperimentCard id="Growth experiment 03" />
+            <ExperimentCard id="Growth experiment 03" {...experiments[2]} />
           </div>
         </div>
       </div>

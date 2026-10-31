@@ -3,6 +3,7 @@ import { Mark } from "@/components/ds/Correction";
 import { ScannedDocument } from "@/components/ds/ScannedDocument";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { TapedPhoto } from "@/components/ds/TapedPhoto";
+import { photos, scans } from "@/lib/ride/media";
 import { stops, titleId } from "@/lib/ride/stops";
 import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
@@ -24,10 +25,16 @@ export function Stage() {
         aside={
           <>
             <Land>
-              <TapedPhoto alt="Me dancing on the school stage" caption="cultural head. everyone knew me." tilt={-2.5} />
+              <TapedPhoto src={photos.dance} alt="Me dancing on the school stage" caption="cultural head. everyone knew me." tilt={-2.5} />
             </Land>
             <Land order={1} turn={-4} className="lg:self-end">
-              <ScannedDocument label="Scan 01 · Cooking competition certificate" alt="The first-prize certificate" note="still have it." tilt={1.2} />
+              <ScannedDocument
+                src={scans.certificate}
+                label="Scan 01 · Cooking competition certificate"
+                alt="The first-prize certificate"
+                note="still have it."
+                tilt={1.2}
+              />
             </Land>
           </>
         }

@@ -2,6 +2,7 @@ import { BigStat, StatRow } from "@/components/ds/BigStat";
 import { Mark } from "@/components/ds/Correction";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { TapedPhoto } from "@/components/ds/TapedPhoto";
+import { photos } from "@/lib/ride/media";
 import { stops, titleId } from "@/lib/ride/stops";
 import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
@@ -26,7 +27,7 @@ export function TheBike() {
       <Columns
         aside={
           <Land turn={-4} className="w-full">
-            <TapedPhoto alt="The black bike" caption="second love." tilt={1.6} ratio="4 / 3" tape="top" width="min(100%, 480px)" />
+            <TapedPhoto src={photos.bike} alt="The black bike" caption="second love." tilt={1.6} ratio="4 / 3" tape="top" width="min(100%, 480px)" />
           </Land>
         }
       >

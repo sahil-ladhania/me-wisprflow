@@ -4,7 +4,8 @@ import { IndexCard, IndexRow, IndexRows } from "@/components/ds/IndexCard";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { TapedPhoto } from "@/components/ds/TapedPhoto";
 import { VoiceNote } from "@/components/ds/VoiceNote";
-import { stops, titleId } from "@/lib/ride/stops";
+import { photos, voice } from "@/lib/ride/media";
+import { stops, titleId, voiceId } from "@/lib/ride/stops";
 import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
 
@@ -26,7 +27,7 @@ export function Pasta() {
         aside={
           <>
             <Land>
-              <TapedPhoto alt="The pasta stall at the college fest" caption="₹20,000 in 4–5 hours." tilt={-1.8} />
+              <TapedPhoto src={photos.pastaStall} alt="The pasta stall at the college fest" caption="₹20,000 in 4–5 hours." tilt={-1.8} />
             </Land>
             <Land order={1} turn={-4} className="lg:self-end">
               <IndexCard kicker="Card 06 · The cafe that almost happened" tilt={1}>
@@ -55,7 +56,7 @@ export function Pasta() {
         <p className="type-body">
           Finance: hated the theory. Marketing: didn’t love the theory, loved the actual work. I specialised in marketing.
         </p>
-        <VoiceNote id="voice-cafe" about="the cafe that almost happened" />
+        <VoiceNote id={voiceId("cafe")} about="the cafe that almost happened" {...voice.cafe} />
       </Columns>
     </Stop>
   );

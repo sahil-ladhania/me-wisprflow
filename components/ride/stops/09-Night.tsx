@@ -1,6 +1,7 @@
 import { NightStop } from "@/components/ds/NightStop";
 import { VoiceNote } from "@/components/ds/VoiceNote";
-import { stops, titleId } from "@/lib/ride/stops";
+import { voice } from "@/lib/ride/media";
+import { stops, titleId, voiceId } from "@/lib/ride/stops";
 import { Stop } from "../Stop";
 
 const stop = stops[9];
@@ -13,7 +14,7 @@ export function Night() {
   return (
     <Stop stop={stop}>
       <NightStop date="June 2025" lineId={titleId(stop)} line="A relationship of about eight years ended. It was the lowest point of my life.">
-        <VoiceNote id="voice-june-2025" about="June 2025" quiet />
+        <VoiceNote id={voiceId("june2025")} about="June 2025" quiet {...voice.june2025} />
         <div className="mt-9 flex max-w-measure flex-col items-center gap-4">
           <p className="type-kicker">What came after</p>
           <p className="type-body">I grew closer to my dad, my parents, my brother and my friends.</p>

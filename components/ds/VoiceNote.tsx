@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { cx } from "@/lib/cx";
 import { formatTime, peaks as makePeaks } from "@/lib/design-system/peaks";
 import { Icon } from "./Icon";
@@ -9,6 +9,12 @@ import styles from "./VoiceNote.module.css";
 
 // Starting one voice note pauses the others.
 const PLAY_EVENT = "ride:voice-play";
+const TOGGLE_EVENT = "ride:voice-toggle";
+
+/** Plays or pauses a voice note from elsewhere on the page (the lane's "Hear this stop"). */
+export function toggleVoiceNote(id: string) {
+  window.dispatchEvent(new CustomEvent(TOGGLE_EVENT, { detail: id }));
+}
 
 type VoiceNoteProps = {
   /** Unique on the page. */
@@ -62,7 +68,7 @@ export function VoiceNote({ id, src, duration, transcript, where, peaks, seed = 
     return () => cancelAnimationFrame(frame);
   }, [playing]);
 
-  const toggle = () => {
+  const toggle = useCallback(() => {
     const audio = audioRef.current;
     if (!audio) return;
     if (audio.paused) {
@@ -71,7 +77,15 @@ export function VoiceNote({ id, src, duration, transcript, where, peaks, seed = 
     } else {
       audio.pause();
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    const onToggle = (event: Event) => {
+      if ((event as CustomEvent<string>).detail === id) toggle();
+    };
+    window.addEventListener(TOGGLE_EVENT, onToggle);
+    return () => window.removeEventListener(TOGGLE_EVENT, onToggle);
+  }, [id, toggle]);
 
   const played = length > 0 ? Math.round((position / length) * bars_.length) : 0;
   const seconds = Math.round(length);
