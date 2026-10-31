@@ -1,0 +1,65 @@
+/* The Ride: page basics. Paper, ink, the focus ring, and reduced motion. */
+
+@layer base {
+  :root {
+    color-scheme: light;
+
+    /* Textures (design-system/assets/Textures). */
+    --texture-paper-grain: url("/textures/paper-grain.svg");
+    --texture-tape: url("/textures/tape-strip.svg");
+    --texture-pen-strike: url("/textures/pen-strike.svg");
+    --texture-pen-circle: url("/textures/pen-circle.svg");
+    --texture-road-dash: url("/textures/road-dash.svg");
+    --texture-ink-bloom: url("/textures/ink-bloom.svg");
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* The page is a journal page: paper, with the grain tiled over it (it is already ~9% ink). */
+  body {
+    background-color: var(--paper);
+    background-image: var(--texture-paper-grain);
+    color: var(--ink);
+    font-family: var(--font-story);
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* A night scope paints its own ground; the grain is for day paper only. */
+  [data-theme="night"] {
+    background-color: var(--paper);
+    background-image: none;
+    color: var(--ink);
+  }
+
+  ::selection {
+    background-color: var(--highlight);
+    color: var(--ink);
+  }
+
+  /* Every control: a paper gap, then a solid 2px ink ring. */
+  :focus-visible {
+    outline: 2px solid transparent;
+    box-shadow: var(--focus-ring);
+  }
+}
+
+/* Reduced motion: nothing moves. Components swap movement for a short fade themselves. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}

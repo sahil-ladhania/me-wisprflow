@@ -1,0 +1,59 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Ride</title>
+<style>
+  html, body { margin:0; height:100%; }
+  body { background:var(--paper); color:var(--ink); font-family:var(--font-story); overflow:hidden; }
+  .cover { position:relative; width:960px; height:288px; overflow:hidden; }
+  .art { position:absolute; top:0; left:480px; width:480px; height:288px; overflow:hidden; }
+  .art svg { display:block; width:480px; height:288px; }
+  .road { fill:var(--ink); }
+  .dash { fill:var(--paper); }
+  .stone { fill:var(--haldi); }
+  .stone-r { rx:var(--radius-stone); }
+  .sign { fill:var(--signboard); rx:var(--radius-soft); }
+  .sign-line { fill:none; stroke:var(--on-signboard); stroke-width:2; rx:var(--radius-hair); }
+  .pen { fill:var(--red-pen); }
+  .words { position:absolute; left:var(--space-6); bottom:var(--space-6); max-width:440px; }
+  .name { margin:0; font-size:96px; line-height:.92; font-weight:500; letter-spacing:-.025em; font-variation-settings:"opsz" 72; color:var(--ink); }
+  .tag { margin:var(--space-3) 0 0 4px; font-size:14px; line-height:20px; color:var(--pencil); }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 480 288" width="480" height="288">
+<!--
+  blocks      ink road 500×96 bled off the right and bottom (the bike's black, the biggest mass) · haldi milestone 96×160 (the years lived) · signboard 196×168 bled off the top and right (what's ahead) · one red-pen dot r=space-3 (the live mic: the accent stays small) — ≈36% of 960×288
+  arrangement a road strip along the bottom with one stone standing on it and the green direction sign hanging ahead, upper right
+  pattern     road dashes, from "the road is drawn, never an asphalt fill" and "Indian highway milestone stones": paper dashes space-5 long, space-1 tall, at a space-7 pitch along the road, cut out of the ink
+  scales      sides in space-2 multiples; dash space-5 × space-1, pitch space-7; stone dome radius-stone; sign radius-soft with a radius-hair inset border
+-->
+<rect class="road" x="0" y="200" width="500" height="96"/>
+<rect class="dash" x="8" y="246" width="24" height="4"/>
+<rect class="dash" x="56" y="246" width="24" height="4"/>
+<rect class="dash" x="104" y="246" width="24" height="4"/>
+<rect class="dash" x="152" y="246" width="24" height="4"/>
+<rect class="dash" x="200" y="246" width="24" height="4"/>
+<rect class="dash" x="248" y="246" width="24" height="4"/>
+<rect class="dash" x="296" y="246" width="24" height="4"/>
+<rect class="dash" x="344" y="246" width="24" height="4"/>
+<rect class="dash" x="392" y="246" width="24" height="4"/>
+<rect class="dash" x="440" y="246" width="24" height="4"/>
+<rect class="stone stone-r" x="64" y="40" width="88" height="160" rx="44"/>
+<rect class="stone" x="64" y="120" width="88" height="80"/>
+<rect class="sign" x="296" y="-16" width="200" height="168" rx="8"/>
+<rect class="sign-line" x="306" y="-6" width="180" height="146" rx="2"/>
+<circle class="pen" cx="212" cy="176" r="12"/>
+</svg>
+</div>
+<div class="words">
+<h1 class="name">The Ride</h1>
+<p class="tag">Ten years, one black bike, every line spoken.</p>
+</div>
+</div>
+</body>
+</html>

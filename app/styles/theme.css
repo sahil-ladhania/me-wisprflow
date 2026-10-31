@@ -1,0 +1,115 @@
+/*
+ * The Ride: Tailwind theme setup.
+ * The token values themselves are generated into tokens.css; this file clears Tailwind's stock
+ * theme so only the design system's values exist, and adds breakpoints, motion and textures.
+ */
+
+@theme {
+  /* No stock palette, fonts, radii, shadows, easings or animations: a stray bg-zinc-100 won't build. */
+  --color-*: initial;
+  --font-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --text-shadow-*: initial;
+  --ease-*: initial;
+  --animate-*: initial;
+
+  --default-font-family: var(--font-story);
+
+  /* The design system switches from phone to tablet sizes at 600px (Tailwind's default sm is 640px). */
+  --breakpoint-sm: 37.5rem;
+}
+
+/* Motion. Names, timings and curves are the ones in design-system/components/bundle.css. */
+@theme static {
+  --animate-live: rd-live 900ms var(--ease-throttle) infinite alternate;
+  --animate-breathe: rd-breathe 2.4s var(--ease-throttle) infinite;
+  --animate-strike: rd-strike 380ms var(--ease-throttle) both;
+  --animate-pen-in: rd-pen-in 240ms 500ms var(--ease-brake) both;
+  --animate-road: rd-road var(--dur-ride) var(--ease-throttle);
+  --animate-idle: rd-idle 84ms steps(2) infinite;
+  --animate-bob: rd-bob var(--dur-ride) var(--ease-throttle);
+  --animate-stone-in: rd-stone-in var(--dur-ride) var(--ease-brake);
+}
+
+/* Live waveform bars (only while sound plays or the mic listens). */
+@keyframes rd-live {
+  from { transform: scaleY(0.25); }
+  to { transform: scaleY(1); }
+}
+
+/* The ignition key's slow breathing ring while the engine is off. */
+@keyframes rd-breathe {
+  0%, 100% { transform: scale(0.94); opacity: 0; }
+  50% { transform: scale(1); opacity: 1; }
+}
+
+/* A red-pen strike drawing left to right. */
+@keyframes rd-strike {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+/* The handwritten fix arriving after its strike. */
+@keyframes rd-pen-in {
+  from { opacity: 0; translate: 0 4px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+/* Road dashes scrolling right to left while the bike rides. */
+@keyframes rd-road {
+  from { background-position-x: 0; }
+  to { background-position-x: -640px; }
+}
+
+/* Engine idling at a stop: a 0.6px jitter. */
+@keyframes rd-idle {
+  to { transform: translateY(-0.6px); }
+}
+
+/* Riding, then braking: the road rhythm and the 3px fork dip at the end. */
+@keyframes rd-bob {
+  0%, 100% { transform: none; }
+  20%, 60% { transform: translateY(-1px); }
+  40%, 80% { transform: translateY(0); }
+  94% { transform: translateY(2px) rotate(0.6deg); }
+}
+
+/* A milestone rolling in from the right and settling beside the front wheel. */
+@keyframes rd-stone-in {
+  from { left: 104%; }
+}
+
+/* Textures from design-system/assets/Textures, served from public/textures. */
+@utility texture-paper-grain {
+  background-image: var(--texture-paper-grain);
+  background-repeat: repeat;
+}
+@utility texture-road-dash {
+  background-image: var(--texture-road-dash);
+  background-repeat: repeat-x;
+  background-position: left center;
+}
+@utility texture-tape {
+  background-image: var(--texture-tape);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+@utility texture-pen-strike {
+  background-image: var(--texture-pen-strike);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+@utility texture-pen-circle {
+  background-image: var(--texture-pen-circle);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+@utility mask-ink-bloom {
+  mask-image: var(--texture-ink-bloom);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}

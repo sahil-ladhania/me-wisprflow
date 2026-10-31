@@ -1,0 +1,196 @@
+{
+ "v": 3,
+ "layout": "files",
+ "createdOnFiles": {
+  "v": 1,
+  "at": "2026-10-31T12:21:06Z"
+ },
+ "title": "The Ride",
+ "namespace": "TheRide",
+ "libraries": [],
+ "sections": {},
+ "groups": [
+  "Marks",
+  "Icons",
+  "Textures",
+  "Placeholders"
+ ],
+ "assetGroups": {
+  "Marks": {
+   "name": "Marks",
+   "tile": "l",
+   "order": [
+    "milestone-mark.svg",
+    "favicon.svg"
+   ],
+   "files": {
+    "milestone-mark.svg": {
+     "name": "milestone-mark.svg",
+     "blob": "ab9b9e79a25b7233526b96ca0637534d",
+     "size": 814,
+     "type": "image/svg+xml"
+    },
+    "favicon.svg": {
+     "name": "favicon.svg",
+     "blob": "3476c3fbfeff895b9a5d8eff5867cc40",
+     "size": 430,
+     "type": "image/svg+xml"
+    }
+   }
+  },
+  "Icons": {
+   "name": "Icons",
+   "tile": "xs",
+   "order": [
+    "mic.svg",
+    "mic-off.svg",
+    "play.svg",
+    "pause.svg",
+    "transcript.svg",
+    "arrow-right.svg",
+    "scroll-down.svg",
+    "link-out.svg",
+    "mute.svg"
+   ],
+   "files": {
+    "mic.svg": {
+     "name": "mic.svg",
+     "blob": "4f468da73019217b439d6509ccc2333e",
+     "size": 292,
+     "type": "image/svg+xml"
+    },
+    "mic-off.svg": {
+     "name": "mic-off.svg",
+     "blob": "55608a90f5237876445907f8dd265409",
+     "size": 335,
+     "type": "image/svg+xml"
+    },
+    "play.svg": {
+     "name": "play.svg",
+     "blob": "ef95eb89356d9e279d5255cf8899ec34",
+     "size": 235,
+     "type": "image/svg+xml"
+    },
+    "pause.svg": {
+     "name": "pause.svg",
+     "blob": "2b68ba6dc5a44866243ba5e3daf9b3c3",
+     "size": 323,
+     "type": "image/svg+xml"
+    },
+    "transcript.svg": {
+     "name": "transcript.svg",
+     "blob": "6e7d40e13869dd0bd879de9513e6bb87",
+     "size": 258,
+     "type": "image/svg+xml"
+    },
+    "arrow-right.svg": {
+     "name": "arrow-right.svg",
+     "blob": "1889adf1c78616e293f06d52999ba940",
+     "size": 223,
+     "type": "image/svg+xml"
+    },
+    "scroll-down.svg": {
+     "name": "scroll-down.svg",
+     "blob": "19a4569a48548e6a97c0a1727ff49e09",
+     "size": 276,
+     "type": "image/svg+xml"
+    },
+    "link-out.svg": {
+     "name": "link-out.svg",
+     "blob": "45cea06fe8c7df51280a8843f3308eea",
+     "size": 288,
+     "type": "image/svg+xml"
+    },
+    "mute.svg": {
+     "name": "mute.svg",
+     "blob": "95efbf8a42d607ecd3582d32094e3ce5",
+     "size": 263,
+     "type": "image/svg+xml"
+    }
+   }
+  },
+  "Textures": {
+   "name": "Textures",
+   "tile": "m",
+   "order": [
+    "paper-grain.svg",
+    "tape-strip.svg",
+    "pen-strike.svg",
+    "pen-circle.svg",
+    "road-dash.svg",
+    "ink-bloom.svg"
+   ],
+   "files": {
+    "paper-grain.svg": {
+     "name": "paper-grain.svg",
+     "blob": "08fa974ffeab4b202bcef7655fa4ab79",
+     "size": 354,
+     "type": "image/svg+xml"
+    },
+    "tape-strip.svg": {
+     "name": "tape-strip.svg",
+     "blob": "37b50bccc49a13d4001067f449e1fe6e",
+     "size": 179,
+     "type": "image/svg+xml"
+    },
+    "pen-strike.svg": {
+     "name": "pen-strike.svg",
+     "blob": "d04f3d00625fa5a01d01b198f7d38867",
+     "size": 232,
+     "type": "image/svg+xml"
+    },
+    "pen-circle.svg": {
+     "name": "pen-circle.svg",
+     "blob": "24a260b8f74d1e8ebe4e6afede688311",
+     "size": 276,
+     "type": "image/svg+xml"
+    },
+    "road-dash.svg": {
+     "name": "road-dash.svg",
+     "blob": "1dd2823ef2ecd9689ab4fa1a30b363f8",
+     "size": 190,
+     "type": "image/svg+xml"
+    },
+    "ink-bloom.svg": {
+     "name": "ink-bloom.svg",
+     "blob": "cd98fde38263bea20fe0cd453dcfad71",
+     "size": 271,
+     "type": "image/svg+xml"
+    }
+   }
+  },
+  "Placeholders": {
+   "name": "Placeholders",
+   "tile": "l",
+   "order": [
+    "bike-silhouette.svg",
+    "photo-slot.svg"
+   ],
+   "files": {
+    "bike-silhouette.svg": {
+     "name": "bike-silhouette.svg",
+     "blob": "7c0745f5df8455d70138fe6922308640",
+     "size": 1254,
+     "type": "image/svg+xml"
+    },
+    "photo-slot.svg": {
+     "name": "photo-slot.svg",
+     "blob": "9d35e22c98c48f384393a50e684efc88",
+     "size": 445,
+     "type": "image/svg+xml"
+    }
+   }
+  }
+ },
+ "blobs": {},
+ "docs": {
+  "readme": "project/README.md",
+  "sections": []
+ },
+ "lastChange": {
+  "by": "Boss",
+  "at": "2026-10-31T12:21:06Z",
+  "via": "Claude (Cowork)",
+  "note": "Created The Ride design system from scratch."
+ }
+}
