@@ -1,25 +1,26 @@
 import { stops, titleId } from "@/lib/ride/stops";
-import { HeroTitle, Ignition } from "../Ignition";
+import { Ignition } from "../Ignition";
 import { RouteCard } from "../RouteCard";
 import { Stop } from "../Stop";
 
 const stop = stops[0];
 
-/** Engine off. The visitor says "let's ride" (or taps) and the ride begins. */
+/** Who he is, in one line, then the invitation: say "let's ride" (or tap) and the ride begins. */
 export function Hero() {
   return (
-    <Stop stop={stop} className="pt-5">
-      <div className="flex flex-wrap justify-between gap-x-6 gap-y-2">
-        <p className="type-kicker">The Ride · 2016 → 2026</p>
-        <p className="type-kicker">For Wispr Flow · India growth</p>
-      </div>
-      {/* Top-aligned, so the ignition key stays in the first screen above the lane. */}
-      <div className="mt-6 grid items-start gap-8 sm:mt-7 lg:grid-cols-[minmax(0,1fr)_minmax(0,400px)] lg:gap-9">
-        <div className="flex min-w-0 flex-col gap-5">
-          <p className="type-kicker">Sahil Ladhania · 25 · Bangalore, from Patna</p>
-          <HeroTitle id={titleId(stop)} />
-          <p className="type-lede max-w-[30rem]">Every portfolio today asked you to scroll. This one wants you to talk.</p>
-          <div className="mt-2">
+    <Stop stop={stop}>
+      {/* Top-aligned, so the ignition key stays in the first screen above the lane. Where the card
+          stacks underneath (below lg), the first screen is all hero and the bike on its road: the
+          card starts just below the screen, never behind the bike. */}
+      <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,400px)] lg:gap-9">
+        <div className="flex min-w-0 flex-col gap-5 max-lg:min-h-[calc(100svh_-_clamp(32px,6vh,72px)_-_var(--spacing-8)_+_8px)]">
+          <p className="font-story text-[22px] leading-tight font-medium text-ink sm:text-[26px]">Sahil Ladhania</p>
+          <h1 id={titleId(stop)} className="type-display text-balance">
+            Obsession beats IQ.
+          </h1>
+          <p className="type-lede max-w-[31rem]">Whatever I love, I go all in. Dance, food, code, people. Next: growing Wispr Flow in India.</p>
+          <div className="mt-3 flex flex-col gap-4 sm:mt-5">
+            <p className="type-body text-ink">Whoever you are, let me take you for a ride.</p>
             <Ignition />
           </div>
         </div>

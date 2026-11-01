@@ -1,17 +1,17 @@
 import { BigStat } from "@/components/ds/BigStat";
-import { Correction } from "@/components/ds/Correction";
+import { Correction, Mark } from "@/components/ds/Correction";
 import { IndexCard, IndexRow, IndexRows } from "@/components/ds/IndexCard";
+import { MarginNote } from "@/components/ds/MarginNote";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { TapedPhoto } from "@/components/ds/TapedPhoto";
-import { VoiceNote } from "@/components/ds/VoiceNote";
-import { photos, voice } from "@/lib/ride/media";
-import { stops, titleId, voiceId } from "@/lib/ride/stops";
+import { photos, videos } from "@/lib/ride/media";
+import { stops, titleId } from "@/lib/ride/stops";
 import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
 
 const stop = stops[6];
 
-/** College: ₹20,000 of pasta and the cafe that almost happened. */
+/** College: BBA by day, a kitchen by night. The pasta stall, the cafe that almost happened, and marketing. */
 export function Pasta() {
   return (
     <Stop stop={stop}>
@@ -19,9 +19,8 @@ export function Pasta() {
         milestone={stop.milestone}
         kicker={stop.kicker}
         titleId={titleId(stop)}
-        title="Management on paper. Pasta in practice."
+        title="BBA by day. Kitchen by night."
         lede="At a college fest, I set up a stall and sold ₹20,000 of pasta in 4–5 hours."
-        voice="voice note"
       />
       <Columns
         aside={
@@ -47,16 +46,33 @@ export function Pasta() {
       >
         <BigStat value="₹20,000" label="of pasta from one fest stall" source="Sold in 4–5 hours." />
         <p className="type-body mt-2">
-          I cooked so much at my PG that the owner gave me a separate room with a proper kitchen. He loved my food and offered to fund a
-          cafe with me.
+          I cooked so much at my PG that the owner gave me a separate room with a proper kitchen. He loved my food and{" "}
+          <Mark>offered to fund a cafe</Mark> with me.
         </p>
-        <p className="type-body">
-          Then I asked Dad. He said, “You’re there to study. You won’t manage the time.” I cancelled. I was gutted.
-        </p>
-        <p className="type-body">
-          Finance: hated the theory. Marketing: didn’t love the theory, loved the actual work. I specialised in marketing.
-        </p>
-        <VoiceNote id={voiceId("cafe")} about="the cafe that almost happened" {...voice.cafe} />
+        <p className="type-body">I asked Dad. He said, “You’re there to study. You won’t manage the time.” I cancelled.</p>
+        <p className="type-body">I said no to my own cafe. Politely. Still the hardest no I’ve said.</p>
+      </Columns>
+
+      <Columns
+        className="mt-9"
+        aside={
+          <Land>
+            <TapedPhoto
+              video
+              src={videos.cooking.src}
+              poster={videos.cooking.poster}
+              alt="Me cooking in the kitchen"
+              tilt={1.6}
+              tape="top"
+            />
+          </Land>
+        }
+      >
+        <p className="type-headline text-balance">Finance: hated the theory. Marketing: didn’t love the theory, loved the work.</p>
+        <p className="type-body">I specialised in marketing.</p>
+        <MarginNote pencil className="mt-2 ml-2">
+          hello, growth.
+        </MarginNote>
       </Columns>
     </Stop>
   );

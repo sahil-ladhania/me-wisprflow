@@ -111,9 +111,8 @@
   /* layout */
   --measure: 34rem;
   --page-max: 1180px;
-  --lane-h: clamp(160px, 26vh, 240px);
-  --lane-h-mobile: 112px;
-  --lane-h-mini: 56px;
+  --lane-h: 210px;
+  --lane-h-mobile: 104px;
   --stop-min: 100svh;
 
   /* timing */

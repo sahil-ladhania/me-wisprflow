@@ -37,6 +37,14 @@
   object-fit: cover;
 }
 
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* A photo not yet chosen: hatched, labelled, never shipped. */
 .slot {
   box-sizing: border-box;

@@ -27,7 +27,16 @@ export function TheBike() {
       <Columns
         aside={
           <Land turn={-4} className="w-full">
-            <TapedPhoto src={photos.bike} alt="The black bike" caption="second love." tilt={1.6} ratio="4 / 3" tape="top" width="min(100%, 480px)" />
+            <TapedPhoto
+              src={photos.bike}
+              alt="The black bike"
+              caption="second love."
+              tilt={1.6}
+              ratio="4 / 3"
+              tape="top"
+              width="min(100%, 480px)"
+              sizes="(max-width: 600px) 90vw, 480px"
+            />
           </Land>
         }
       >

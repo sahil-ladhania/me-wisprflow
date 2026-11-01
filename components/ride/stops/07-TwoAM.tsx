@@ -42,7 +42,7 @@ export function TwoAM() {
                     <div key={row}>{row}</div>
                   ))}
                 </div>
-                <p className="type-scribble mt-4 text-pencil">hard. also, peace.</p>
+                <p className="type-scribble mt-4 text-pencil">hard. also, addictive.</p>
               </IndexCard>
             </Land>
           </>
@@ -57,7 +57,7 @@ export function TwoAM() {
           still told me: start with Python, solve pattern problems.
         </p>
         <p className="type-body">
-          It was hard. <Mark>It gave me peace.</Mark>
+          It was hard. <Mark>Every solved pattern was a dopamine hit.</Mark>
         </p>
       </Columns>
     </Stop>

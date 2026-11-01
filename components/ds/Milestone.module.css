@@ -108,8 +108,10 @@
   .responsive .place {
     display: none;
   }
+}
 
-  /* In the lane on phones the stone is smaller still, and only the year shows. */
+/* In the compact lane (phones, short screens) the stone is smaller still, and only the year shows. */
+@media (max-width: 599px), (max-height: 500px) {
   .lane {
     --w: 40px;
     --h: 58px;

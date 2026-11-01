@@ -1,8 +1,9 @@
-import Link from "next/link";
 import type { CSSProperties } from "react";
-import { Correction } from "@/components/ds/Correction";
+import { Correction, Mark } from "@/components/ds/Correction";
 import { Icon } from "@/components/ds/Icon";
 import { Signboard } from "@/components/ds/Signboard";
+import { Waveform } from "@/components/ds/Waveform";
+import { peaks } from "@/lib/design-system/peaks";
 import { bloopers, bloopersComplete, contact } from "@/lib/ride/media";
 import { stops, titleId } from "@/lib/ride/stops";
 import { Stop } from "../Stop";
@@ -13,9 +14,13 @@ const row = "grid grid-cols-[48px_minmax(0,1fr)] gap-3 border-b border-rule py-3
 
 const link = "font-story text-[19px] text-ink underline decoration-wave-rest decoration-1 underline-offset-4 hover:decoration-ink";
 
+/** A still voice mark under the garage's line: nothing's playing, so it doesn't move. */
+const voiceMark = peaks(56, 9);
+
 /**
- * Road's end: proof it was all dictated, the real bloopers, the contact, and the sign pointing past
- * the end of the road. The last thing on the page is the green sign.
+ * Road's end: proof it was all dictated, the line that sums the site up, the real bloopers, the
+ * contact, and the sign pointing past the end of the road. The last thing on the page is the green
+ * sign, where the bike parks.
  */
 export function Garage() {
   return (
@@ -27,6 +32,14 @@ export function Garage() {
         </h2>
         <p className="type-lede max-w-measure">Mishearings included. They stay in, struck the same way as my mistakes.</p>
       </div>
+
+      {/* The garage's centrepiece. */}
+      <figure data-arrive="" style={{ "--arrive": "150ms" } as CSSProperties} className="mt-9 max-w-[52rem]">
+        <blockquote className="font-story text-[clamp(30px,2.4vw+18px,52px)] leading-[1.1] font-medium tracking-[-0.015em] text-balance">
+          I don’t talk much. But when I speak, I speak well. This whole site is me, speaking.
+        </blockquote>
+        <Waveform peaks={voiceMark} className="mt-6 max-w-[420px]" />
+      </figure>
 
       <div
         data-arrive=""
@@ -53,8 +66,8 @@ export function Garage() {
           </ol>
         </div>
 
-        <div className="flex min-w-0 flex-col gap-5">
-          <p className="type-body">I don’t talk much. But when I speak, I speak well. This whole site is me, speaking.</p>
+        <div className="flex min-w-0 flex-col gap-3">
+          <p className="type-kicker">Say hello</p>
           <ul className="flex flex-col gap-3">
             <li>
               {contact.linkedin ? (
@@ -79,21 +92,16 @@ export function Garage() {
                 </>
               )}
             </li>
-            <li>
-              <Link href="/design-system" className={link}>
-                The design system behind this ride
-              </Link>
-            </li>
           </ul>
         </div>
       </div>
 
       <div data-arrive="land" style={{ "--arrive": "400ms", "--land-turn": "0deg" } as CSSProperties} className="mt-9 flex flex-col items-start gap-5">
-        <p className="type-body max-w-measure">
-          One day I want to open a small, cozy cafe in the mountains and cook for people. Not for money. Just because I love it.
+        <p className="type-headline max-w-[36rem] text-balance">
+          One day: a small boutique cafe in the mountains. Artisanal food, cooked by me, for whoever walks in. Not for money.{" "}
+          <Mark>Just because I love it.</Mark>
         </p>
-        <p className="type-meta text-pencil">Sahil Ladhania · Bangalore, from Patna · 2026</p>
-        <Signboard dest="Mountains" sub="A small café · someday" />
+        <Signboard dest="Mountains" sub="A boutique cafe · someday" />
       </div>
     </Stop>
   );

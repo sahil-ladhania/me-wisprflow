@@ -1,0 +1,107 @@
+/* ExhaustControl: built from the system's tokens for the ride's sound switch. A small chip, quieter
+   than the ignition key: pencil hairline, road-font label, the mode written in hand. */
+
+.root {
+  display: inline-flex;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 44px;
+  padding: 5px var(--space-4) 5px var(--space-3);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--dur-tap) linear;
+}
+
+.button:hover {
+  border-color: var(--ink);
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.pipe {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  transition: color var(--dur-settle) var(--ease-brake);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.label {
+  font-family: var(--font-road);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.mode {
+  color: var(--pencil);
+  font-family: var(--font-hand);
+  font-size: 16px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.name {
+  color: var(--ink);
+}
+
+/* Silent: the pipe goes quiet too. */
+.root[data-mode="silent"] .pipe {
+  color: var(--wave-rest);
+}
+
+/* A wisp of smoke from the pipe's outlet on each change; loud blows a bigger one. */
+.puff {
+  --puff-scale: 1.8;
+  position: absolute;
+  top: 50%;
+  right: -5px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--wave-rest);
+  opacity: 0;
+  pointer-events: none;
+  animation: puff 640ms var(--ease-brake);
+}
+
+.root[data-mode="loud"] .puff {
+  --puff-scale: 2.6;
+  animation-duration: 760ms;
+}
+
+@keyframes puff {
+  from {
+    opacity: 0.75;
+    transform: translate(0, -40%) scale(0.4);
+  }
+  to {
+    opacity: 0;
+    transform: translate(16px, -90%) scale(var(--puff-scale));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .puff {
+    display: none;
+  }
+}

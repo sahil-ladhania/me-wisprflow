@@ -12,8 +12,6 @@ type StopHeaderProps = {
   titleId?: string;
   /** The witty aside that undercuts the title, twenty words or fewer. */
   lede?: ReactNode;
-  /** The voice chip, e.g. "0:18 voice note", when the stop has one. */
-  voice?: string;
   headingLevel?: 2 | 3;
   className?: string;
 };
@@ -22,7 +20,7 @@ type StopHeaderProps = {
  * The opening of every stop except the Night stop: milestone, kicker, claim, aside.
  * On arrival (motion.css) the milestone settles first, then the words appear.
  */
-export function StopHeader({ milestone, kicker, title, titleId, lede, voice, headingLevel = 2, className }: StopHeaderProps) {
+export function StopHeader({ milestone, kicker, title, titleId, lede, headingLevel = 2, className }: StopHeaderProps) {
   const Heading = headingLevel === 2 ? "h2" : "h3";
   return (
     <header className={cx(styles.root, className)}>
@@ -30,10 +28,7 @@ export function StopHeader({ milestone, kicker, title, titleId, lede, voice, hea
         <Milestone {...milestone} responsive />
       </div>
       <div data-arrive="" style={{ "--arrive": "100ms" } as CSSProperties}>
-        <p className={styles.kicker}>
-          <span className="type-kicker">{kicker}</span>
-          {voice ? <span className={styles.voice}>{voice}</span> : null}
-        </p>
+        <p className={cx(styles.kicker, "type-kicker")}>{kicker}</p>
         <Heading id={titleId} className={styles.title}>
           {title}
         </Heading>

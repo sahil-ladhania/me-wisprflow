@@ -1,6 +1,5 @@
 // Speech-shaped waveform peaks (0–1): phrases with pauses. Ported from design-system/components/bundle.js.
-// Deterministic for a given seed, so server and client draw the same bars. Replace with real peaks
-// from the audio file once a voice note is recorded.
+// Deterministic for a given seed, so server and client draw the same bars.
 
 function rng(seed: number) {
   let s = seed >>> 0 || 7;
@@ -24,10 +23,4 @@ export function peaks(count: number, seed = 7): number[] {
     out.push(Math.round(value * 100) / 100);
   }
   return out;
-}
-
-/** Seconds as m:ss. */
-export function formatTime(seconds: number): string {
-  const t = Math.max(0, Math.round(seconds));
-  return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, "0")}`;
 }

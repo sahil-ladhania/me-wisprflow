@@ -1,5 +1,4 @@
 import { BigStat, StatRow } from "@/components/ds/BigStat";
-import { Mark } from "@/components/ds/Correction";
 import { ScannedDocument } from "@/components/ds/ScannedDocument";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { TapedPhoto } from "@/components/ds/TapedPhoto";
@@ -10,7 +9,7 @@ import { Stop } from "../Stop";
 
 const stop = stops[1];
 
-/** 2016, Class 9: the cultural head wins the cooking contest. */
+/** 2016, Class 9: the dance guy wins the cooking contest. */
 export function Stage() {
   return (
     <Stop stop={stop}>
@@ -19,13 +18,13 @@ export function Stage() {
         kicker={stop.kicker}
         titleId={titleId(stop)}
         title="The dance guy entered the cooking contest."
-        lede="About 95% of the contestants were girls. I won first prize. With a very basic dish."
+        lede="I won first prize. With a very basic dish."
       />
       <Columns
         aside={
           <>
             <Land>
-              <TapedPhoto src={photos.dance} alt="Me dancing on the school stage" caption="cultural head. everyone knew me." tilt={-2.5} />
+              <TapedPhoto src={photos.dance} alt="Me dancing on the school stage" caption="5, 6, 7, 8." tilt={-2.5} />
             </Land>
             <Land order={1} turn={-4} className="lg:self-end">
               <ScannedDocument
@@ -40,11 +39,8 @@ export function Stage() {
         }
       >
         <p className="type-body">
-          I was my school’s cultural head. I choreographed our performances and taught dance to seniors, juniors and my own batch.
-          Everyone in school knew me.
-        </p>
-        <p className="type-body">
-          Then teachers and friends asked, “You dance, you cook. What else can you do?” <Mark>That’s when I decided to become a chef.</Mark>
+          I was the guy who led the school’s cultural events. I choreographed our performances and taught dance to seniors, juniors and
+          my own batch. Everyone in school knew me.
         </p>
         <StatRow compact className="mt-3">
           <BigStat value="~95" unit="%" label="of the contestants were girls" />

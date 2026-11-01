@@ -1,19 +1,20 @@
-/* IgnitionControl, ported from design-system/components/bundle.css (.rd-ignition).
-   The tap fallback is its own button here, so a visitor is never trapped behind the mic. */
+/* IgnitionControl, ported from design-system/components/bundle.css (.rd-ignition), then made small:
+   an invitation, not a billboard. The tap fallback is its own button, so a visitor is never trapped
+   behind the mic. */
 
 .root {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-3);
+  gap: var(--space-1);
 }
 
 .key {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-4);
-  min-height: 76px;
-  padding: var(--space-2) var(--space-6) var(--space-2) var(--space-2);
+  gap: var(--space-3);
+  min-height: 48px;
+  padding: 5px var(--space-5) 5px 5px;
   border: 1.5px solid var(--ink);
   border-radius: var(--radius-pill);
   background: var(--card);
@@ -27,6 +28,10 @@
     box-shadow var(--dur-settle) var(--ease-brake);
 }
 
+.key:hover {
+  box-shadow: var(--shadow-contact);
+}
+
 .key:active {
   transform: translateY(1px);
 }
@@ -36,18 +41,21 @@
   flex: none;
   display: grid;
   place-items: center;
-  width: 58px;
-  height: 58px;
+  width: 36px;
+  height: 36px;
   border-radius: var(--radius-pill);
   background: var(--ink);
   color: var(--paper);
+  transition:
+    background-color var(--dur-settle) var(--ease-brake),
+    color var(--dur-settle) var(--ease-brake);
 }
 
-/* The slow breathing ring while the engine is off. */
+/* The slow breathing ring before ignition. */
 .mic::after {
   content: "";
   position: absolute;
-  inset: -7px;
+  inset: -5px;
   border: 1.5px solid var(--wave-rest);
   border-radius: inherit;
   animation: var(--animate-breathe);
@@ -56,15 +64,15 @@
 .text {
   display: flex;
   flex-direction: column;
-  gap: 2px;
 }
 
 .say {
   font-family: var(--font-story);
-  font-size: 26px;
+  font-size: 19px;
   font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
 }
 
 .say q {
@@ -76,27 +84,32 @@
   display: none;
   color: var(--red-pen);
   font-family: var(--font-hand);
-  font-size: 28px;
+  font-size: 21px;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .key .wave {
   display: none;
   flex: none;
-  width: 120px;
-  height: 30px;
+  width: 64px;
+  height: 18px;
 }
 
-.foot {
+/* "or tap to start", or a miss, or the scroll hint once the engine is on. */
+.below {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-1) var(--space-5);
-  margin-left: var(--space-5);
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: var(--space-3);
 }
 
-.status {
-  margin: 0;
+.below:empty {
+  display: none;
+}
+
+.note {
+  margin: var(--space-2) 0 0;
   color: var(--pencil);
   font-family: var(--font-road);
   font-size: 14px;
@@ -104,25 +117,16 @@
   letter-spacing: 0.04em;
 }
 
-.status::before {
-  content: "";
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin-right: var(--space-2);
-  border-radius: 50%;
-  background: var(--wave-rest);
-  vertical-align: 1px;
-}
-
 .tap {
+  display: inline-flex;
+  align-items: center;
   min-height: 44px;
   padding: 0;
   border: 0;
   background: none;
   color: var(--pencil);
   font-family: var(--font-road);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-decoration: underline;
@@ -136,7 +140,13 @@
   color: var(--ink);
 }
 
-/* listening: the only large red-pen fill in the system */
+@media (pointer: fine) {
+  .tap {
+    min-height: 32px;
+  }
+}
+
+/* listening: the only red-pen fill in the system */
 .root[data-state="listening"] .key {
   box-shadow: var(--shadow-lift);
 }
@@ -160,10 +170,6 @@
   display: flex;
 }
 
-.root[data-state="listening"] .status::before {
-  background: var(--red-pen);
-}
-
 /* heard: hold it a moment so the visitor sees they were heard */
 .root[data-state="heard"] .say {
   display: none;
@@ -183,38 +189,14 @@
 .root[data-state="on"] .key {
   background: var(--ink);
   color: var(--paper);
+  cursor: default;
+}
+
+.root[data-state="on"] .key:hover {
+  box-shadow: none;
 }
 
 .root[data-state="on"] .mic {
   background: var(--headlamp);
   color: #17140f;
-}
-
-.root[data-state="on"] .status::before {
-  background: var(--signboard);
-}
-
-@media (max-width: 599px) {
-  .root {
-    align-items: stretch;
-  }
-
-  .key {
-    width: 100%;
-    min-height: 68px;
-    padding-right: var(--space-4);
-  }
-
-  .mic {
-    width: 52px;
-    height: 52px;
-  }
-
-  .say {
-    font-size: 22px;
-  }
-
-  .foot {
-    margin-left: var(--space-2);
-  }
 }

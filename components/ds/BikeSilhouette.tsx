@@ -5,8 +5,8 @@ type BikeSilhouetteProps = SVGProps<SVGSVGElement> & {
   headlamp?: boolean;
 };
 
-// The stand-in bike with rider (design-system/assets/Placeholders/bike-silhouette.svg), facing right,
-// drawn in currentColor. It holds the lane until the 3D model lands and stays as the WebGL-off fallback.
+// The flat bike with rider (design-system/assets/Placeholders/bike-silhouette.svg), facing right, drawn
+// in currentColor. Now only the route map's tiny "you are here" marker; the lane's bike is BikeArt.
 export function BikeSilhouette({ headlamp, ...rest }: BikeSilhouetteProps) {
   return (
     <svg

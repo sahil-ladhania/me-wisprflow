@@ -4,9 +4,8 @@ import { Correction, Mark } from "@/components/ds/Correction";
 import { IndexCard } from "@/components/ds/IndexCard";
 import { ScannedDocument } from "@/components/ds/ScannedDocument";
 import { StopHeader } from "@/components/ds/StopHeader";
-import { VoiceNote } from "@/components/ds/VoiceNote";
-import { scans, voice } from "@/lib/ride/media";
-import { stops, titleId, voiceId } from "@/lib/ride/stops";
+import { scans } from "@/lib/ride/media";
+import { stops, titleId } from "@/lib/ride/stops";
 import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
 
@@ -22,7 +21,7 @@ function LogRow({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
-/** August 2025 →: Zyntohouse, then lulu. The strongest growth proof on the page: the numbers live here. */
+/** August 2025 →: Zyntohouse, then lulu, a matchmaking app. The strongest growth proof on the page: the numbers live here. */
 export function Rebuild() {
   return (
     <Stop stop={stop}>
@@ -31,26 +30,20 @@ export function Rebuild() {
         kicker={stop.kicker}
         titleId={titleId(stop)}
         title="Two months later, I was building again."
-        lede="First an agency. Then a dating app where your voice goes first."
-        voice="voice note"
+        lede="First an agency. Then a matchmaking app where your voice goes first."
       />
 
       <Columns
         aside={
-          <>
-            <Land>
-              <ScannedDocument src={scans.waitlist} label="Scan 02 · The lulu waitlist" alt="Screenshot of the lulu waitlist dashboard" tilt={-1} />
-            </Land>
-            <Land order={1} turn={0} className="w-full">
-              <VoiceNote id={voiceId("lulu")} about="lulu, and why voice" {...voice.lulu} />
-            </Land>
-          </>
+          <Land>
+            <ScannedDocument src={scans.waitlist} label="Scan 04 · The lulu waitlist page" alt="Screenshot of the lulu waitlist page" tilt={-1} />
+          </Land>
         }
       >
         <LogRow label="Aug 2025 · Zyntohouse">
           A two-person tech agency for Indian SMBs and non-tech founders, with my co-founder Harshit.
         </LogRow>
-        <h3 className="type-headline mt-4">lulu: personality first, through voice.</h3>
+        <h3 className="type-headline mt-4">lulu: personality first, matchmaking through voice.</h3>
         <p className="type-body">
           The idea came from the voice notes I kept listening to after the breakup. I could feel every emotion in them. Voice is human
           in a way text isn’t.
@@ -65,7 +58,7 @@ export function Rebuild() {
       <div className="mt-9">
         <StatRow>
           <BigStat value="3,500" unit="+" label="signups on lulu’s waitlist" source="From 0, grown through my own LinkedIn content." />
-          <BigStat value="37" unit="%" label="of them women" pen="on a dating app." />
+          <BigStat value="37" unit="%" label="of them women" pen="on a matchmaking app." />
           <BigStat value="~200" label="users I spoke to myself" source="Plus a working prototype I demoed on calls." />
         </StatRow>
       </div>
@@ -83,7 +76,9 @@ export function Rebuild() {
               <p className="type-kicker">What people did</p>
               <p className="type-headline mt-2">Still swiped on looks.</p>
             </div>
-            <p className="type-scribble mt-4 text-pencil">words are cheap. swipes aren’t.</p>
+            <p className="mt-4 border-t-[1.5px] border-ink pt-4 font-road text-[24px] leading-tight font-bold tracking-[0.02em] uppercase">
+              Words are cheap. Swipes aren’t.
+            </p>
           </IndexCard>
           </Land>
         }
@@ -102,7 +97,9 @@ export function Rebuild() {
       </Columns>
 
       <div className="mt-9">
-        <LogRow label="Now · Custra">A B2B AI creative-intelligence product I’m building with my co-founder Pratik.</LogRow>
+        <LogRow label="On the whiteboard">
+          Custra, a B2B AI creative-intelligence idea I’m exploring with Pratik. Still deciding if it deserves to exist.
+        </LogRow>
       </div>
     </Stop>
   );

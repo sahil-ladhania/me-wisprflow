@@ -1,0 +1,74 @@
+/* Bike: the ride's illustration. The lamp fades in and out; the wheels turn with --wheel-turn;
+   the pillion hops on in a short arc and the bike settles 2px under them. */
+
+.root {
+  display: block;
+  overflow: visible;
+}
+
+.wheel {
+  transform-box: view-box;
+  transform: rotate(var(--wheel-turn, 0deg));
+  will-change: transform;
+}
+
+/* The lit lens, glow and beam: on and off come inline; here they fade (the final park fades it out). */
+.lamp {
+  transition: opacity 700ms var(--ease-brake);
+}
+
+/* By day the beam is a hint; the night lane turns it up. */
+.beam {
+  opacity: 0.4;
+}
+
+.pillion {
+  animation: hop-on 620ms var(--ease-brake) both;
+}
+
+.root[data-pillion] .body,
+.root[data-pillion] .rider {
+  animation: settle 260ms var(--ease-brake) 430ms;
+}
+
+@keyframes hop-on {
+  0% {
+    opacity: 0;
+    transform: translate(-30px, 22px);
+  }
+  55% {
+    opacity: 1;
+    transform: translate(-6px, -8px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The suspension takes the pillion's weight. */
+@keyframes settle {
+  0%,
+  100% {
+    transform: none;
+  }
+  45% {
+    transform: translateY(2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pillion,
+  .root[data-pillion] .body,
+  .root[data-pillion] .rider {
+    animation: none;
+  }
+
+  .lamp {
+    transition: none;
+  }
+
+  .wheel {
+    transform: none;
+  }
+}

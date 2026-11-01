@@ -24,6 +24,10 @@
   width: 70%;
   height: 80%;
   background: radial-gradient(ellipse at 20% 85%, color-mix(in srgb, var(--headlamp) 18%, transparent), transparent 62%);
+  /* Faded out where the box clips it (bottom and left), so the glow never shows a hard edge
+     now the lane is see-through. */
+  mask-image: linear-gradient(to top, transparent 38%, #000 85%), linear-gradient(to right, transparent 15%, #000 45%);
+  mask-composite: intersect;
   pointer-events: none;
 }
 
@@ -57,6 +61,31 @@
   display: grid;
   justify-items: center;
   gap: var(--space-6);
+}
+
+/* The stop's one highlight: no italic, no red pen, just the warm light of the lamp on it. */
+.highlight {
+  position: relative;
+  max-width: 22ch;
+  margin: var(--space-7) auto 0;
+  padding: var(--space-6) var(--space-4);
+  color: var(--headlamp);
+  font-family: var(--font-story);
+  font-size: clamp(28px, 1.8vw + 18px, 40px);
+  font-weight: 400;
+  line-height: 1.26;
+  letter-spacing: -0.005em;
+  font-variation-settings: "opsz" 48;
+  text-wrap: balance;
+}
+
+.highlight::before {
+  content: "";
+  position: absolute;
+  inset: -18% -22%;
+  z-index: -1;
+  background: radial-gradient(ellipse closest-side, color-mix(in srgb, var(--headlamp) 13%, transparent), transparent);
+  pointer-events: none;
 }
 
 @media (max-width: 599px) {

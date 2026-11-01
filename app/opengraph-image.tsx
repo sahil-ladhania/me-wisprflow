@@ -1,10 +1,12 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { BikeArt } from "@/components/ds/BikeArt";
 
 // The link preview on LinkedIn, X, WhatsApp and email: the hero, the road and the first milestone.
+// It keeps "For Wispr Flow · India growth" in the corner, for context the page itself no longer needs.
 
-export const alt = "Engine’s off. Sahil Ladhania’s ride through 2016 to 2026, on a black bike.";
+export const alt = "Sahil Ladhania. Obsession beats IQ. A ride through 2016 to 2026, on a black bike, for Wispr Flow India growth.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -30,78 +32,51 @@ const fonts = [
 
 const ink = "#17140f";
 const pencil = "#5c554a";
-const rule = "#d6ccba";
+const wave = "#867d6e";
 
 export default function OpengraphImage() {
   return new ImageResponse(
     (
       <div style={{ display: "flex", flexDirection: "column", width: "100%", height: "100%", background: "#f3eee4", color: ink }}>
         <div style={{ display: "flex", flexDirection: "column", padding: "56px 72px 0", flex: 1 }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              fontFamily: "Barlow Condensed",
-              fontSize: 22,
-              fontWeight: 600,
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              color: pencil,
-            }}
-          >
-            <span>Sahil Ladhania · The Ride</span>
-            {/* An en dash, not the site's →: Barlow has no arrow, and a borrowed glyph throws the line height off. */}
-            <span>2016–2026 · For Wispr Flow India</span>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+            <span style={{ fontFamily: "Newsreader", fontSize: 38, fontWeight: 500 }}>Sahil Ladhania</span>
+            <span
+              style={{
+                fontFamily: "Barlow Condensed",
+                fontSize: 20,
+                fontWeight: 600,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: pencil,
+              }}
+            >
+              For Wispr Flow · India growth
+            </span>
           </div>
-          <div style={{ display: "flex", marginTop: 52, fontFamily: "Newsreader", fontSize: 132, fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 0.95 }}>
-            Engine’s off.
+          <div style={{ display: "flex", marginTop: 28, fontFamily: "Newsreader", fontSize: 128, fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 0.95 }}>
+            Obsession beats IQ.
           </div>
-          <div style={{ display: "flex", marginTop: 26, maxWidth: 820, fontFamily: "Newsreader", fontSize: 38, fontStyle: "italic", lineHeight: 1.3 }}>
-            Every portfolio today asked you to scroll. This one wants you to talk.
+          <div style={{ display: "flex", marginTop: 24, maxWidth: 940, fontFamily: "Newsreader", fontSize: 36, fontStyle: "italic", lineHeight: 1.3 }}>
+            Whatever I love, I go all in. Dance, food, code, people. Next: growing Wispr Flow in India.
           </div>
         </div>
 
-        {/* The road: two hairlines and a dashed centre line, the bike parked at 22%, the first milestone ahead. */}
-        <div style={{ display: "flex", position: "relative", height: 170 }}>
-          <div style={{ position: "absolute", left: 0, right: 0, bottom: 18, height: 58, borderTop: `1px solid ${rule}`, borderBottom: `1px solid ${rule}` }} />
-          <div style={{ position: "absolute", left: 0, right: 0, bottom: 46, display: "flex", gap: 36 }}>
+        {/* The road: a ground line and the dashed centre line under it, the bike parked at 21% with
+            Sahil on it (lamp off: the engine waits for the visitor), the first milestone ahead. */}
+        <div style={{ display: "flex", position: "relative", height: 226 }}>
+          <div style={{ position: "absolute", left: 0, right: 0, bottom: 34, height: 2, background: wave }} />
+          <div style={{ position: "absolute", left: 0, right: 0, bottom: 20, display: "flex", gap: 36 }}>
             {Array.from({ length: 22 }, (_, i) => (
-              <div key={i} style={{ width: 28, height: 3, background: "#867d6e" }} />
+              <div key={i} style={{ width: 28, height: 2, background: wave }} />
             ))}
           </div>
-          <svg
-            style={{ position: "absolute", left: 250, bottom: 32 }}
-            width="230"
-            height="144"
-            viewBox="0 0 240 150"
-            fill="none"
-            stroke={ink}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="50" cy="114" r="29" strokeWidth="7" />
-            <circle cx="192" cy="114" r="29" strokeWidth="7" />
-            <path d="M16 104a36 36 0 0 1 56-26" strokeWidth="5" />
-            <path d="M166 90a36 36 0 0 1 58 14" strokeWidth="5" />
-            <path d="M192 114 172 52" strokeWidth="6" />
-            <path d="M50 114 104 106" strokeWidth="6" />
-            <path d="M104 90 84 72l76-4-18 26" strokeWidth="5" />
-            <rect x="96" y="86" width="46" height="30" rx="5" fill={ink} strokeWidth="2" />
-            <path d="M104 120 34 128" strokeWidth="5" />
-            <path d="M112 68c6-16 44-18 54-6l-6 10-48 2z" fill={ink} strokeWidth="2" />
-            <path d="M70 70l42-2-2 8-36 2z" fill={ink} strokeWidth="2" />
-            <circle cx="181" cy="55" r="8" fill={ink} strokeWidth="2" />
-            <path d="M164 41l11 6-13 6" strokeWidth="4" />
-            <circle cx="119" cy="16" r="11" fill={ink} stroke="none" />
-            <path d="M114 31 100 64" strokeWidth="16" />
-            <path d="M112 37l28 9 23-2" strokeWidth="7" />
-            <path d="M100 66l30 8-2 30" strokeWidth="10" />
-          </svg>
+          <BikeArt idPrefix="og" width={304} height={190} style={{ position: "absolute", left: 250, bottom: 32 }} />
           <div
             style={{
               position: "absolute",
-              left: 500,
-              bottom: 62,
+              left: 516,
+              bottom: 36,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -120,7 +95,7 @@ export default function OpengraphImage() {
             style={{
               position: "absolute",
               right: 72,
-              bottom: 62,
+              bottom: 52,
               display: "flex",
               alignItems: "center",
               gap: 14,

@@ -1,0 +1,144 @@
+/* RideControls: a small dashboard plate on the road. Card paper so it reads over any stop; the
+   lever and the grip move when worked, by pointer or by arrow key. */
+
+.plate {
+  display: flex;
+  align-items: stretch;
+  padding: 3px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-soft);
+  background: var(--card);
+  box-shadow: var(--shadow-contact);
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.control + .control {
+  border-left: 1px solid var(--rule);
+  border-radius: 0 5px 5px 0;
+}
+
+.control:hover {
+  background: var(--paper);
+}
+
+.drawing {
+  display: block;
+  overflow: visible;
+}
+
+.label {
+  color: var(--pencil);
+  font-family: var(--font-road);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.control:hover .label {
+  color: var(--ink);
+}
+
+.chrome {
+  fill: #c3c6ca;
+  stroke: #7c7f83;
+  stroke-width: 0.8;
+}
+
+.blade {
+  fill: none;
+  stroke: #b9bcc0;
+  stroke-width: 3.6;
+  stroke-linecap: round;
+}
+
+.rubber {
+  fill: #1d1b19;
+}
+
+.ridges {
+  fill: none;
+  stroke: #45413c;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+/* The brake lever pulls in towards the grip. */
+.lever {
+  transform-box: view-box;
+  transform-origin: 6.5px 8.5px;
+  transition: transform 120ms var(--ease-brake);
+}
+
+.control:active .lever,
+.control[data-pressed] .lever {
+  transform: rotate(-11deg);
+}
+
+/* The grip twists: its ridges roll past. */
+.ridges {
+  transition: transform 260ms var(--ease-throttle);
+}
+
+.control:active .ridges,
+.control[data-pressed] .ridges {
+  transform: translateY(-12px);
+}
+
+.exhaust {
+  gap: 1px;
+}
+
+.mode {
+  color: var(--pencil);
+  font-family: var(--font-hand);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.exhaust[data-mode="silent"] svg {
+  color: var(--wave-rest);
+}
+
+/* Phones and short screens (the compact lane): the plate tightens up so it clears the milestone beside the bike. */
+@media (max-width: 599px), (max-height: 500px) {
+  .control {
+    min-width: 44px;
+    padding: 4px 5px;
+  }
+
+  .drawing {
+    width: auto;
+    height: 19px;
+  }
+
+  .label {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lever,
+  .ridges {
+    transition: none;
+  }
+}

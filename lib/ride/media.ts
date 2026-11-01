@@ -3,44 +3,37 @@
 // Put files in public/media/ and write their paths here starting with /media/.
 
 /** Real photos only: warm, unfiltered. JPG or WebP, around 1600px on the long side. */
-export const photos: Record<"dance" | "bike" | "pastaStall", string | undefined> = {
+export const photos: Record<"dance" | "bike" | "trio" | "leCordonBleu" | "pastaStall", string | undefined> = {
   /** Stop 01: me dancing on the school stage. e.g. "/media/photos/dance.jpg" */
   dance: undefined,
   /** Stop 03: the black bike (4:3 works best). */
   bike: undefined,
+  /** Stop 04: the trio, me and my two best friends. */
+  trio: undefined,
+  /** Stop 05: Le Cordon Bleu, Paris (4:3). Use a photo you're free to use, ideally without their logo. */
+  leCordonBleu: undefined,
   /** Stop 06: the pasta stall at the college fest. */
   pastaStall: undefined,
 };
 
-/** Scans of real objects. Crop to the line that matters; blur other people's names and details. */
-export const scans: Record<"certificate" | "waitlist", string | undefined> = {
-  /** Stop 01: the cooking competition's first-prize certificate. */
+/** Short silent loops: MP4 (H.264), 10–20 seconds, under about 4 MB. They play muted while on screen. */
+export const videos: Record<"cooking", { src?: string; poster?: string }> = {
+  /** Stop 06: me cooking in the kitchen. e.g. { src: "/media/video/cooking.mp4", poster: "/media/video/cooking.jpg" } */
+  cooking: {},
+};
+
+/** Scans and screenshots of real things. Crop to the line that matters; blur email addresses and other people's names. */
+export const scans: Record<"certificate" | "coldEmail" | "zomatoReply" | "waitlist" | "tanayReply", string | undefined> = {
+  /** Stop 01 · Scan 01: the cooking competition's first-prize certificate. */
   certificate: undefined,
-  /** Stop 10: the lulu waitlist dashboard. */
+  /** Stop 08 · Scan 02: my cold email to Deepinder Goyal. */
+  coldEmail: undefined,
+  /** Stop 08 · Scan 03: Zomato HR's reply, the engineering interview invite. */
+  zomatoReply: undefined,
+  /** Stop 10 · Scan 04: the lulu waitlist page. */
   waitlist: undefined,
-};
-
-export type VoiceMedia = {
-  /** 10–25 seconds, in your own voice. M4A (AAC) or MP3, mono is fine. e.g. "/media/voice/cafe.m4a" */
-  src?: string;
-  /** Length in seconds, so the time shows before the file loads. */
-  duration?: number;
-  /** What you say, word for word: "Read it instead". */
-  transcript?: string;
-  /** A short handwritten line under the player: "recorded on the bike, 2026". */
-  where?: string;
-};
-
-export type VoiceKey = "cafe" | "june2025" | "lulu";
-
-/** The three voice notes from the brief. Tapping "Hear this stop" in the lane plays the current one. */
-export const voice: Record<VoiceKey, VoiceMedia> = {
-  /** Stop 06: the cafe that almost happened. */
-  cafe: {},
-  /** Stop 09: June 2025. Quiet. */
-  june2025: {},
-  /** Stop 10: lulu, and why voice. */
-  lulu: {},
+  /** Stop 11 · Scan 05: Tanay's reply to my comment. */
+  tanayReply: undefined,
 };
 
 export type ExperimentText = {

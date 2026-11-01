@@ -9,8 +9,8 @@ type StopProps = {
 };
 
 /**
- * One stop on the road: at least a screen tall, its content in the upper part, and enough room
- * at the bottom that nothing sits under the bike lane. The lane finds stops by data-stop.
+ * One stop on the road: at least a screen tall, its content in the upper part. The lane is
+ * see-through, so a stop only leaves a normal gap at its bottom. The lane finds stops by data-stop.
  */
 export function Stop({ stop, className, children }: StopProps) {
   return (
@@ -21,9 +21,11 @@ export function Stop({ stop, className, children }: StopProps) {
       data-smoke={stop.smoke ? "" : undefined}
       aria-labelledby={titleId(stop)}
       className={cx(
-        "relative box-border min-h-(--stop-min) pt-[clamp(56px,7vw,96px)]",
-        // The lane takes its own space after the last stop, so only the stops before it leave room for it.
-        stop.index === lastStop ? "pb-8" : "pb-[calc(var(--lane-h-mobile)+var(--space-7))] sm:pb-[calc(var(--lane-h)+var(--space-10))]",
+        "relative box-border min-h-(--stop-min)",
+        // The hero sits higher, so the key and the exhaust stay clear of the parked bike on short laptop screens.
+        stop.index === 0 ? "pt-[clamp(32px,6vh,72px)]" : "pt-[clamp(56px,7vw,96px)]",
+        // The lane takes its own space after the last stop.
+        stop.index === lastStop ? "pb-8" : "pb-8 sm:pb-9",
         className,
       )}
     >

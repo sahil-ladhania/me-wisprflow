@@ -21,10 +21,16 @@ const clamp01 = (t: number) => Math.min(1, Math.max(0, t));
 /** Pull away slowly, cruise, brake into the next milestone. */
 export const easeThrottle = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
+/** Which stop a document y falls in, from each stop's top (document px). */
+export function stopAt(tops: readonly number[], y: number): number {
+  let index = 0;
+  for (let k = 0; k < tops.length; k++) if (tops[k] <= y) index = k;
+  return index;
+}
+
 /** The position the scroll asks for, from each stop's top (document px) and the reading line. */
 export function targetPosition(tops: readonly number[], line: number): number {
-  let index = 0;
-  for (let k = 0; k < tops.length; k++) if (tops[k] <= line) index = k;
+  const index = stopAt(tops, line);
   if (index >= tops.length - 1) return index;
   const span = tops[index + 1] - tops[index];
   const read = span > 0 ? (line - tops[index]) / span : 0;
@@ -33,8 +39,7 @@ export function targetPosition(tops: readonly number[], line: number): number {
 
 /** Which stop the reading line is in, and how far through it (0–1, not eased). */
 export function readingProgress(tops: readonly number[], line: number): { index: number; read: number } {
-  let index = 0;
-  for (let k = 0; k < tops.length; k++) if (tops[k] <= line) index = k;
+  const index = stopAt(tops, line);
   if (index >= tops.length - 1) return { index, read: 0 };
   const span = tops[index + 1] - tops[index];
   return { index, read: span > 0 ? clamp01((line - tops[index]) / span) : 0 };

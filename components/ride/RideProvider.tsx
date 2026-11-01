@@ -2,11 +2,11 @@
 
 import { createContext, use, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { IgnitionState } from "@/components/ds/IgnitionControl";
-import { playEngineThump, primeAudio } from "@/lib/ride/engine-sound";
+import { riding, rideToNextStop } from "@/lib/ride/drive";
+import { exhausts, primeAudio, setExhaust as fitExhaust, startEngine, type Exhaust } from "@/lib/ride/engine-sound";
 import { matchRide } from "@/lib/ride/match";
-import { stops } from "@/lib/ride/stops";
 
-// The ride's shared state: the engine (started by voice or tap), what the mic heard, and sound.
+// The ride's shared state: the engine (started by voice or tap), what the mic heard, and the exhaust.
 
 /** How the engine was started; the cold read at the Wispr Flow stop reads it. */
 export type StartedBy = "voice" | "close" | "tap" | null;
@@ -16,15 +16,19 @@ type Ride = {
   startedBy: StartedBy;
   heard: string;
   micBlocked: boolean;
+  /** For screen readers, every step: "Listening…", "Hold on tight." Empty before the first try. */
   status: string;
-  muted: boolean;
+  /** The small line under the key, only when there's something to say: a miss, a shy mic, "Close enough." */
+  note: string;
+  exhaust: Exhaust;
   /** True for the moment of ignition: the headlamp flicks on, the bike shudders. */
   igniting: boolean;
   /** The ignition key: listen for "let's ride" (or start directly when the mic is blocked). */
   pressKey: () => void;
   /** "or tap to start". */
   tapStart: () => void;
-  toggleMute: () => void;
+  /** "Change the exhaust": stock → loud → silent → stock. */
+  cycleExhaust: () => void;
 };
 
 const RideContext = createContext<Ride | null>(null);
@@ -50,11 +54,12 @@ type Recognition = {
 };
 type SpeechWindow = Window & { SpeechRecognition?: new () => Recognition; webkitSpeechRecognition?: new () => Recognition };
 
+// Before the first try there's nothing to say: the parked bike and the dark headlamp say it.
 const STATUS = {
-  off: "Engine off.",
+  off: "",
   listening: "Listening…",
   heard: "Heard you.",
-  on: "Engine on. Scroll to ride.",
+  on: "Hold on tight. Scroll to ride.",
   missed: "Didn’t catch that. Tap works too.",
   blocked: "Mic’s shy. A tap works just as well.",
   noMic: "No mic in this browser. A tap works just as well.",
@@ -73,15 +78,23 @@ export function RideProvider({ children }: { children: ReactNode }) {
   const [heard, setHeard] = useState("");
   const [micBlocked, setMicBlocked] = useState(false);
   const [status, setStatus] = useState(STATUS.off);
-  const [muted, setMuted] = useState(false);
+  const [note, setNote] = useState("");
+  const [exhaust, setExhaust] = useState<Exhaust>("stock");
   const [igniting, setIgniting] = useState(false);
 
   const recognition = useRef<Recognition | null>(null);
   const timers = useRef<number[]>([]);
-  const mutedRef = useRef(muted);
+  const exhaustRef = useRef(exhaust);
   useEffect(() => {
-    mutedRef.current = muted;
-  }, [muted]);
+    exhaustRef.current = exhaust;
+    fitExhaust(exhaust);
+  }, [exhaust]);
+
+  /** Says it to screen readers, and on screen too when `shown`. */
+  const say = useCallback((text: string, shown = false) => {
+    setStatus(text);
+    setNote(shown ? text : "");
+  }, []);
 
   const later = useCallback((ms: number, fn: () => void) => {
     timers.current.push(window.setTimeout(fn, ms));
@@ -110,20 +123,22 @@ export function RideProvider({ children }: { children: ReactNode }) {
       setStartedBy(by);
       setHeard(said);
       setEngine("on");
-      setStatus(by === "close" ? `Heard “${said}”. Close enough. Engine on.` : STATUS.on);
+      if (by === "close") say(`Heard “${said}”. Close enough.`, true);
+      else say(STATUS.on);
       setIgniting(true);
       later(400, () => setIgniting(false));
-      if (!mutedRef.current) playEngineThump();
+      startEngine(exhaustRef.current);
 
-      // Pull away to the first stop, unless the visitor has already started scrolling.
+      // Pull away to the first stop, unless the visitor has already started scrolling (or the
+      // throttle that started the engine is already riding there).
       if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         later(PULL_AWAY_MS, () => {
-          if (window.scrollY > 120) return;
-          document.getElementById(stops[1].anchor)?.scrollIntoView({ behavior: "smooth", block: "start" });
+          if (window.scrollY > 120 || riding()) return;
+          rideToNextStop();
         });
       }
     },
-    [clearTimers, later, stopListening],
+    [clearTimers, later, say, stopListening],
   );
 
   const tapStart = useCallback(() => {
@@ -138,7 +153,7 @@ export function RideProvider({ children }: { children: ReactNode }) {
       stopListening();
       clearTimers();
       setEngine("off");
-      setStatus(STATUS.off);
+      say(STATUS.off);
       return;
     }
     if (micBlocked) return ignite("tap");
@@ -147,7 +162,7 @@ export function RideProvider({ children }: { children: ReactNode }) {
     const Recognizer = speechWindow.SpeechRecognition ?? speechWindow.webkitSpeechRecognition;
     if (!Recognizer) {
       setMicBlocked(true);
-      setStatus(STATUS.noMic);
+      say(STATUS.noMic, true);
       return;
     }
 
@@ -161,7 +176,7 @@ export function RideProvider({ children }: { children: ReactNode }) {
       stopListening();
       clearTimers();
       setEngine("off");
-      setStatus(text);
+      say(text, true);
     };
     const armSilence = () => {
       clearTimers();
@@ -190,7 +205,8 @@ export function RideProvider({ children }: { children: ReactNode }) {
       clearTimers();
       setHeard(text);
       setEngine("heard");
-      setStatus(how === "close" ? `Heard “${text}”. Close enough.` : STATUS.heard);
+      if (how === "close") say(`Heard “${text}”. Close enough.`, true);
+      else say(STATUS.heard);
       later(HEARD_MS, () => ignite(how === "exact" ? "voice" : "close", text));
     };
     r.onerror = (event) => {
@@ -204,21 +220,21 @@ export function RideProvider({ children }: { children: ReactNode }) {
       r.start();
     } catch {
       setMicBlocked(true);
-      setStatus(STATUS.blocked);
+      say(STATUS.blocked, true);
       return;
     }
     recognition.current = r;
     setHeard("");
     setEngine("listening");
-    setStatus(STATUS.listening);
+    say(STATUS.listening);
     armSilence();
-  }, [clearTimers, engine, ignite, later, micBlocked, stopListening]);
+  }, [clearTimers, engine, ignite, later, micBlocked, say, stopListening]);
 
-  const toggleMute = useCallback(() => setMuted((m) => !m), []);
+  const cycleExhaust = useCallback(() => setExhaust((e) => exhausts[(exhausts.indexOf(e) + 1) % exhausts.length]), []);
 
   const ride = useMemo<Ride>(
-    () => ({ engine, startedBy, heard, micBlocked, status, muted, igniting, pressKey, tapStart, toggleMute }),
-    [engine, startedBy, heard, micBlocked, status, muted, igniting, pressKey, tapStart, toggleMute],
+    () => ({ engine, startedBy, heard, micBlocked, status, note, exhaust, igniting, pressKey, tapStart, cycleExhaust }),
+    [engine, startedBy, heard, micBlocked, status, note, exhaust, igniting, pressKey, tapStart, cycleExhaust],
   );
 
   return <RideContext value={ride}>{children}</RideContext>;

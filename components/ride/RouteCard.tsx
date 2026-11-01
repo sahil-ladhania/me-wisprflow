@@ -1,25 +1,36 @@
-import { IndexCard } from "@/components/ds/IndexCard";
-import { numberedStops, stops } from "@/lib/ride/stops";
+"use client";
 
-/** The hero's index of the road: every stop, one tap away, for judges who skim. */
+import { IndexCard } from "@/components/ds/IndexCard";
+import { Odometer } from "@/components/ds/Odometer";
+import { RouteMap } from "@/components/ds/RouteMap";
+import { numberedStops, stops } from "@/lib/ride/stops";
+import { useRide } from "./RideProvider";
+
+/** 2016 → 2026. */
+const YEARS = 10;
+
+const route = stops.slice(1).map((stop) => ({
+  href: `#${stop.anchor}`,
+  short: stop.short,
+  name: stop.name,
+  kind: stop.night ? ("night" as const) : stop.milestone.kind,
+}));
+
+/** The hero's map of the road: the odometer, then every stop, one tap away, for judges who skim. */
 export function RouteCard() {
+  const { engine } = useRide();
   return (
-    <nav aria-label="The route">
-      <IndexCard kicker={`Route card · ${numberedStops} stops`} tilt={1}>
-        <ol className="mt-4 border-t border-rule">
-          {stops.slice(1).map((stop) => (
-            <li key={stop.anchor} className="border-b border-rule">
-              <a
-                href={`#${stop.anchor}`}
-                className="flex min-h-11 items-baseline gap-4 py-2 text-ink no-underline hover:text-red-pen pointer-fine:min-h-0 pointer-fine:py-[7px]"
-              >
-                <span className="type-meta w-14 shrink-0 text-pencil">{stop.short}</span>{" "}
-                <span className="font-story text-[17px] leading-snug">{stop.name}</span>
-              </a>
-            </li>
-          ))}
-        </ol>
-        <p className="type-scribble mt-4 text-pencil">shaped by dance, cooking and code.</p>
+    // The lane looks for this: on phones the bike steps aside while the card passes behind the road.
+    <nav aria-label="The route" data-route-card="">
+      <IndexCard kicker={`Distance covered · ${YEARS} years, ${numberedStops} stops`} tilt={1}>
+        <Odometer
+          lit={engine === "on"}
+          readings={[
+            { value: YEARS, unit: "years" },
+            { value: numberedStops, unit: "stops" },
+          ]}
+        />
+        <RouteMap here="you are here" stops={route} />
       </IndexCard>
     </nav>
   );

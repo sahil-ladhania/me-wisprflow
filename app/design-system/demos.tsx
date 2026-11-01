@@ -2,9 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { BikeLane, type LaneState } from "@/components/ds/BikeLane";
+import { ExhaustControl } from "@/components/ds/ExhaustControl";
 import { IgnitionControl, type IgnitionState } from "@/components/ds/IgnitionControl";
 import { InkReveal } from "@/components/ds/InkReveal";
+import { RideControls } from "@/components/ds/RideControls";
 import { durations } from "@/lib/design-system/tokens";
+import { exhausts, type Exhaust } from "@/lib/ride/engine-sound";
 
 // Interactive specimens for /design-system. The real page drives these from speech and scroll.
 
@@ -12,10 +15,10 @@ const demoButton =
   "type-kicker inline-flex min-h-11 items-center gap-2 rounded-pill border border-ink bg-card px-4 text-ink hover:bg-paper";
 
 const ignitionStatus: Record<IgnitionState, string> = {
-  off: "Engine off.",
+  off: "",
   listening: "Listening…",
   heard: "Heard you.",
-  on: "Engine on. Scroll to ride.",
+  on: "Hold on tight. Scroll to ride.",
 };
 
 /** Fakes the recogniser: off → listening → heard → on. */
@@ -39,10 +42,12 @@ export function IgnitionDemo() {
     <div className="flex flex-col gap-5">
       <IgnitionControl
         state={state}
-        status={blocked && state === "off" ? "Mic’s shy. A tap works just as well." : ignitionStatus[state]}
+        status={ignitionStatus[state]}
+        note={blocked && state === "off" ? "Mic’s shy. A tap works just as well." : ""}
         micBlocked={blocked}
         onKey={onKey}
         onTap={() => setState("on")}
+        after={<span className="type-kicker inline-flex min-h-11 items-center text-ink">Scroll to ride</span>}
       />
       <label className="type-meta flex min-h-11 items-center gap-3 text-pencil">
         <input type="checkbox" className="size-5 accent-ink" checked={blocked} onChange={(e) => setBlocked(e.target.checked)} />
@@ -80,26 +85,60 @@ export function LaneDemo() {
 
   return (
     <div className="flex flex-col gap-4">
-      <BikeLane
-        state={state}
-        stone={stones[index]}
-        stoneKey={index}
-        count={{ label: `Stop ${String(index + 1).padStart(2, "0")} / ${String(stones.length).padStart(2, "0")}`, current: index + 1, total: stones.length }}
-        headlamp={state !== "parked"}
-        night={night}
-        className="shadow-contact"
-      />
+      {/* The lane is see-through; at June 2025 the stop behind it is night. */}
+      <div data-theme={night ? "night" : undefined}>
+        <BikeLane
+          state={state}
+          stone={stones[index]}
+          stoneKey={index}
+          count={{ label: `Stop ${String(index + 1).padStart(2, "0")} / ${String(stones.length).padStart(2, "0")}`, current: index + 1, total: stones.length }}
+          headlamp={state !== "parked"}
+          pillion={state !== "parked"}
+          night={night}
+        />
+      </div>
       <div className="flex flex-wrap items-center gap-4">
         <button type="button" className={demoButton} onClick={rideOn}>
           Ride on →
         </button>
         <button type="button" className={demoButton} onClick={() => setState("parked")}>
-          Engine off
+          Park
         </button>
         <span className="type-meta text-pencil">
           {state} · {night ? "the lane turns night at June 2025" : "day"}
         </span>
       </div>
+    </div>
+  );
+}
+
+/** Cycles the exhaust the way the hero does. Silent here: the specimen never makes a sound. */
+export function ExhaustDemo() {
+  const [mode, setMode] = useState<Exhaust>("stock");
+  return <ExhaustControl mode={mode} onChange={() => setMode((m) => exhausts[(exhausts.indexOf(m) + 1) % exhausts.length])} />;
+}
+
+/** The handlebar controls, working but going nowhere: the lever pulls, the grip twists, the exhaust cycles. */
+export function RideControlsDemo() {
+  const [mode, setMode] = useState<Exhaust>("stock");
+  const [pressed, setPressed] = useState<"throttle" | "brake" | null>(null);
+  const timer = useRef<number>(0);
+  useEffect(() => () => clearTimeout(timer.current), []);
+  const press = (kind: "throttle" | "brake") => {
+    setPressed(kind);
+    clearTimeout(timer.current);
+    timer.current = window.setTimeout(() => setPressed(null), 320);
+  };
+  return (
+    <div className="flex flex-wrap items-center gap-6">
+      <RideControls
+        onThrottle={() => press("throttle")}
+        onBrake={() => press("brake")}
+        exhaust={mode}
+        onExhaust={() => setMode((m) => exhausts[(exhausts.indexOf(m) + 1) % exhausts.length])}
+        pressed={pressed}
+      />
+      <span className="type-meta text-pencil">→ throttle · ← brake on the real page</span>
     </div>
   );
 }

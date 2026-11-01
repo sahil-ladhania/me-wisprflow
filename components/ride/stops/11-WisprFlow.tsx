@@ -1,10 +1,10 @@
-import { BigStat, StatRow } from "@/components/ds/BigStat";
 import { Mark } from "@/components/ds/Correction";
 import { ExperimentCard } from "@/components/ds/ExperimentCard";
-import { IndexCard } from "@/components/ds/IndexCard";
+import { MarginNote } from "@/components/ds/MarginNote";
+import { ScannedDocument } from "@/components/ds/ScannedDocument";
 import { Signboard } from "@/components/ds/Signboard";
 import { StopHeader } from "@/components/ds/StopHeader";
-import { experiments } from "@/lib/ride/media";
+import { experiments, scans } from "@/lib/ride/media";
 import { stops, titleId } from "@/lib/ride/stops";
 import { ColdRead } from "../ColdRead";
 import { Columns, Land } from "../Columns";
@@ -20,7 +20,7 @@ const shortVersion = [
   "I thrive where product, growth and engineering meet.",
 ];
 
-/** Next: Wispr Flow India. Why, the cold emails, the cold read, three experiments. */
+/** Next: Wispr Flow India. Why, Tanay's reply (and Dad, and the bike), the cold read, three experiments. */
 export function WisprFlow() {
   return (
     <Stop stop={stop}>
@@ -40,11 +40,11 @@ export function WisprFlow() {
       <Columns
         aside={
           <>
-            <Land>
-              <IndexCard kicker="Tanay, replying to my comment" tilt={0.8}>
-                <blockquote className="type-headline mt-3 italic">“That’s a good goal to have, dude.”</blockquote>
-                <p className="type-scribble mt-3 text-pencil">still working on it.</p>
-              </IndexCard>
+            <Land className="flex flex-col items-start gap-3">
+              <ScannedDocument src={scans.tanayReply} label="Scan 05 · Tanay’s reply to my comment" alt="Screenshot of Tanay’s reply to my comment" tilt={0.8} />
+              <MarginNote pencil tilt={-3} className="ml-4">
+                still working on it.
+              </MarginNote>
             </Land>
             <Land order={1} turn={0} className="w-full max-w-[440px] border-t-[1.5px] border-ink pt-4">
               <p className="type-kicker">The short version</p>
@@ -59,15 +59,15 @@ export function WisprFlow() {
           </>
         }
       >
-        <p className="type-body">I’ve cold-emailed Tanay, Wispr’s co-founder, three or four times. No reply. Hence, this website.</p>
-        <StatRow compact>
-          <BigStat value="3–4" label="cold emails to Tanay" />
-          <BigStat value="0" label="replies" />
-          <BigStat value="1" label="website built instead" />
-        </StatRow>
-        <p className="type-body mt-2">
-          I once watched a video where Tanay’s father talked about him as a curious child. I want my father to talk about me like that
-          one day. I said so in the comments.
+        <p className="type-body">
+          I once watched a video where Tanay’s dad talked about him as a curious kid. I commented that I want my dad to talk about me like
+          that one day.
+        </p>
+        <p className="type-body">Tanay replied:</p>
+        <blockquote className="type-headline italic">“That’s a good goal to have, dude.”</blockquote>
+        {/* Back to Stop 03: the deal was 90%, he got around 80, and Dad bought the bike anyway. */}
+        <p className="mt-5 border-t-[1.5px] border-ink pt-5 font-story text-[clamp(26px,1.2vw+20px,34px)] leading-[1.18] font-medium tracking-[-0.01em] text-balance">
+          My dad bought me a bike I hadn’t earned. This whole ride is me earning it.
         </p>
       </Columns>
 

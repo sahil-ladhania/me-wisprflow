@@ -10,10 +10,15 @@ type NightStopProps = {
   lineId?: string;
   /** The line is the stop's heading on the page; use "p" when it isn't. */
   lineAs?: "h2" | "p";
-  /** Optionally a quiet VoiceNote, then anything that comes after the silence. */
+  /** What came after the silence. */
   children?: ReactNode;
   className?: string;
 };
+
+/** The Night stop's one highlight: the line the headlamp finds. Warm, larger, in a soft pool of lamp light. */
+export function NightHighlight({ children, className }: { children: ReactNode; className?: string }) {
+  return <p className={cx(styles.highlight, className)}>{children}</p>;
+}
 
 /** The June 2025 stop: the only one in the night theme. Every token switches underneath it. */
 export function NightStop({ date, line, lineId, lineAs: Line = "h2", children, className }: NightStopProps) {

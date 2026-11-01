@@ -1,5 +1,5 @@
 import { Correction } from "@/components/ds/Correction";
-import { IndexCard } from "@/components/ds/IndexCard";
+import { ScannedDocument, ScanLine, ScanRow, ScanRule } from "@/components/ds/ScannedDocument";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { stops, titleId } from "@/lib/ride/stops";
 import { Columns, Land } from "../Columns";
@@ -7,7 +7,19 @@ import { Stop } from "../Stop";
 
 const stop = stops[2];
 
-const reasons = ["Parents said so", "Marks decided", "Everyone else did"];
+/** A form's tick box, inked in by hand when it's ticked. */
+function Box({ ticked, children }: { ticked?: boolean; children: string }) {
+  return (
+    <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
+      <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" focusable="false" className="shrink-0">
+        <rect x="1.5" y="1.5" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.2" />
+        {ticked ? <path d="M3.5 8.5l3 3.5 7-10" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /> : null}
+      </svg>
+      {children}
+      {ticked ? <span className="sr-only"> (ticked)</span> : null}
+    </span>
+  );
+}
 
 /** After Class 10: science, for the wrong reason. Light, no judgement about her. */
 export function WrongReason() {
@@ -27,20 +39,29 @@ export function WrongReason() {
       <Columns
         aside={
           <Land>
-          <IndexCard kicker="Card 02 · How my class picked" tilt={-1.2}>
-            <ul className="mt-4 border-t border-rule">
-              {reasons.map((reason) => (
-                <li key={reason} className="border-b border-rule py-3 font-story text-[19px] leading-snug">
-                  {reason}
-                </li>
-              ))}
-              <li className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-rule py-3 font-story text-[19px] leading-snug">
-                <span>Wanted to become something</span>
-                <span className="type-kicker">Very few</span>
-              </li>
-            </ul>
-            <p className="type-scribble mt-4 text-pencil">me: none of the above.</p>
-          </IndexCard>
+            {/* Not a scan: the real form is long gone, so this one says it's recreated. */}
+            <ScannedDocument
+              label="Card 02 · The form, as I filled it (recreated)"
+              alt="A recreated Class 11 admission form"
+              note="had never seen an IIT paper"
+              tilt={-1.2}
+            >
+              <p className="type-kicker text-ink">Class XI · Admission form</p>
+              <ScanRule />
+              <div className="flex flex-col gap-2">
+                <ScanRow label="Name">Sahil Ladhania</ScanRow>
+                <ScanRow label="Stream">
+                  <span className="flex flex-wrap gap-x-4 gap-y-1">
+                    <Box ticked>Science</Box>
+                    <Box>Commerce</Box>
+                    <Box>Arts</Box>
+                  </span>
+                </ScanRow>
+                <ScanRow label="Reason told to parents">“IIT”</ScanRow>
+              </div>
+              <ScanRule />
+              <ScanLine width="46%" />
+            </ScannedDocument>
           </Land>
         }
       >

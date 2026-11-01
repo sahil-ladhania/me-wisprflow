@@ -1,6 +1,7 @@
 import Image, { type StaticImageData } from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 import { cx } from "@/lib/cx";
+import { LoopVideo } from "./LoopVideo";
 import styles from "./TapedPhoto.module.css";
 
 export type TapePosition = "tl" | "tr" | "top" | "br";
@@ -11,8 +12,12 @@ export function Tape({ position }: { position: TapePosition }) {
 }
 
 type TapedPhotoProps = {
-  /** The real photo. Leave it out and the print shows a labelled placeholder. */
+  /** The real photo (or, for a video print, the clip). Leave it out and the print shows a labelled placeholder. */
   src?: string | StaticImageData;
+  /** A video print: a short silent loop that plays while it's on screen. */
+  video?: boolean;
+  /** For a video print: a still from the clip, shown before it plays. */
+  poster?: string;
   /** Real alt text for the photo (or what the placeholder stands in for). */
   alt: string;
   /** A lowercase observation, handwritten: "only boy in the kitchen. won anyway." */
@@ -29,8 +34,8 @@ type TapedPhotoProps = {
   className?: string;
 };
 
-/** A real photo, printed with a paper border and taped to the journal page at a slight angle. */
-export function TapedPhoto({ src, alt, caption, tilt = -2, ratio, tape = "corners", width, sizes = "(max-width: 600px) 90vw, 320px", className }: TapedPhotoProps) {
+/** A real photo (or a short silent clip), printed with a paper border and taped to the journal page at a slight angle. */
+export function TapedPhoto({ src, video, poster, alt, caption, tilt = -2, ratio, tape = "corners", width, sizes = "(max-width: 600px) 90vw, 320px", className }: TapedPhotoProps) {
   const style = { "--tilt": `${tilt}deg`, ...(ratio ? { "--ratio": ratio } : {}), ...(width ? { width } : {}) } as CSSProperties;
   return (
     <figure className={cx(styles.root, className)} style={style}>
@@ -43,13 +48,17 @@ export function TapedPhoto({ src, alt, caption, tilt = -2, ratio, tape = "corner
         </>
       )}
       <div className={styles.print}>
-        {src ? (
+        {src && video && typeof src === "string" ? (
+          <div className={styles.frame}>
+            <LoopVideo src={src} poster={poster} label={alt} className={styles.video} />
+          </div>
+        ) : src ? (
           <div className={styles.frame}>
             <Image src={src} alt={alt} fill sizes={sizes} className={styles.img} />
           </div>
         ) : (
-          <div className={styles.slot} role="img" aria-label={`Photo placeholder: ${alt}`}>
-            <span className={styles.slotLabel}>Photo · placeholder</span>
+          <div className={styles.slot} role="img" aria-label={`${video ? "Video" : "Photo"} placeholder: ${alt}`}>
+            <span className={styles.slotLabel}>{video ? "Video" : "Photo"} · placeholder</span>
             <span className={styles.slotNote}>{alt}</span>
           </div>
         )}

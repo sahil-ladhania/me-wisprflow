@@ -1,0 +1,130 @@
+/* RouteMap: built from the system's tokens for the hero's route card. A hand-inked road winds down
+   a 48px gutter; each stop is a tiny milestone stone on it, its name beside it. */
+
+.map {
+  --gutter: 48px;
+  --row: 44px;
+  margin-top: var(--space-4);
+}
+
+/* Touch rows stay 44px tall; with a mouse they tighten up. */
+@media (pointer: fine) {
+  .map {
+    --row: 31px;
+  }
+}
+
+.start,
+.stop {
+  position: relative;
+  min-height: var(--row);
+}
+
+.road {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--gutter);
+  height: 100%;
+  overflow: visible;
+  fill: none;
+  stroke: var(--wave-rest);
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+}
+
+.start {
+  display: flex;
+  align-items: center;
+  padding-left: var(--gutter);
+}
+
+.bike {
+  position: absolute;
+  top: 50%;
+  left: var(--x);
+  width: 30px;
+  margin: -9px 0 0 -15px;
+  color: var(--ink);
+}
+
+.bike > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.here {
+  padding-left: var(--space-3);
+  color: var(--pencil);
+  font-family: var(--font-hand);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.route {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  display: grid;
+  grid-template-columns: 3.4rem minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--row);
+  padding: 2px 0 2px var(--gutter);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.stone {
+  position: absolute;
+  top: 50%;
+  left: var(--x);
+  z-index: 1;
+  box-sizing: border-box;
+  width: 12px;
+  height: 16px;
+  margin: -8px 0 0 -6px;
+  border: 1.25px solid var(--ink);
+  border-radius: 6px 6px 1.5px 1.5px;
+  background: linear-gradient(var(--cap, var(--haldi)) 0 44%, var(--card) 44%);
+  transition: transform var(--dur-tap) var(--ease-brake);
+}
+
+.stone[data-kind="now"] {
+  --cap: var(--ink);
+}
+
+.stone[data-kind="next"] {
+  --cap: var(--signboard);
+}
+
+.stone[data-kind="night"] {
+  background: var(--ink);
+}
+
+.short {
+  color: var(--pencil);
+  font-family: var(--font-road);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
+}
+
+.name {
+  font-family: var(--font-story);
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+.link:hover .name {
+  color: var(--red-pen);
+}
+
+.link:hover .stone {
+  transform: translateY(-2px);
+}

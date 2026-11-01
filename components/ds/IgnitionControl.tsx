@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useMemo } from "react";
+import { useId, useMemo, type ReactNode } from "react";
 import { cx } from "@/lib/cx";
 import { peaks } from "@/lib/design-system/peaks";
 import { Icon } from "./Icon";
@@ -11,8 +11,10 @@ export type IgnitionState = "off" | "listening" | "heard" | "on";
 
 type IgnitionControlProps = {
   state: IgnitionState;
-  /** Polite live status: "Engine off.", "Listening…", "Engine on. Scroll to ride." */
+  /** Polite live status for screen readers: "Listening…", "Hold on tight. Scroll to ride." Empty before the first try. */
   status: string;
+  /** The small line under the key, only when there's something to say: "Didn’t catch that. Tap works too." */
+  note?: string;
   /** What the recogniser heard, shown in red pen in the heard state. */
   heard?: string;
   /** Mic permission denied: the key starts the engine directly. */
@@ -21,18 +23,21 @@ type IgnitionControlProps = {
   onKey: () => void;
   /** "or tap to start": skips voice entirely. */
   onTap: () => void;
+  /** What sits under the key once the engine is on: the scroll hint. */
+  after?: ReactNode;
   className?: string;
 };
 
 /**
- * The hero's engine start. Presentational: the speech recogniser lives with the ride and sets
- * `state`. One per page, in the first viewport, under the display line.
+ * The hero's engine start: a small key, "or tap to start" under it. Presentational: the speech
+ * recogniser lives with the ride and sets `state`. One per page, in the first viewport. Before the
+ * first try it says nothing about the engine: the parked bike and the dark headlamp do.
  */
-export function IgnitionControl({ state, status, heard, micBlocked, onKey, onTap, className }: IgnitionControlProps) {
+export function IgnitionControl({ state, status, note, heard, micBlocked, onKey, onTap, after, className }: IgnitionControlProps) {
   const statusId = useId();
-  const livePeaks = useMemo(() => peaks(22, 11), []);
+  const livePeaks = useMemo(() => peaks(14, 11), []);
   let say;
-  if (state === "on") say = <>Engine on</>;
+  if (state === "on") say = <>Hold on tight.</>;
   else if (state === "listening") say = <>Listening…</>;
   else if (micBlocked) say = <>Mic’s shy? Tap to start.</>;
   else
@@ -46,7 +51,7 @@ export function IgnitionControl({ state, status, heard, micBlocked, onKey, onTap
     <div className={cx(styles.root, className)} data-state={state}>
       <button type="button" className={styles.key} onClick={onKey} aria-pressed={state === "on"} aria-describedby={statusId}>
         <span className={styles.mic}>
-          <Icon name={micBlocked ? "mic-off" : "mic"} size={26} />
+          <Icon name={micBlocked && state !== "on" ? "mic-off" : "mic"} size={20} />
         </span>
         <span className={styles.text}>
           <span className={styles.say}>{say}</span>
@@ -54,15 +59,21 @@ export function IgnitionControl({ state, status, heard, micBlocked, onKey, onTap
         </span>
         <Waveform peaks={livePeaks} live className={styles.wave} />
       </button>
-      <div className={styles.foot}>
-        <p id={statusId} className={styles.status} aria-live="polite">
-          {status}
-        </p>
+      <p id={statusId} className="sr-only" aria-live="polite">
+        {status}
+      </p>
+      <div className={styles.below}>
+        {note ? (
+          <p className={styles.note} aria-hidden="true">
+            {note}
+          </p>
+        ) : null}
         {state === "off" && !micBlocked ? (
           <button type="button" className={styles.tap} onClick={onTap}>
             or tap to start
           </button>
         ) : null}
+        {state === "on" ? after : null}
       </div>
     </div>
   );

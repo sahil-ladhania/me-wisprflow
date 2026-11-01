@@ -1,49 +1,58 @@
 import { Correction, Mark } from "@/components/ds/Correction";
-import { IndexCard } from "@/components/ds/IndexCard";
 import { StopHeader } from "@/components/ds/StopHeader";
+import { TapedPhoto } from "@/components/ds/TapedPhoto";
+import { photos } from "@/lib/ride/media";
 import { stops, titleId } from "@/lib/ride/stops";
 import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
 
 const stop = stops[5];
 
-const price = "mt-3 font-road text-[clamp(40px,2vw+26px,56px)] font-bold leading-[0.95] tabular-nums";
-
-/** The amount, with "lakh" set smaller, like a stat's unit. */
-function Lakh({ range }: { range: string }) {
+/** The price, with "lakh" set smaller, like a stat's unit. */
+function Lakh({ amount }: { amount: string }) {
   return (
     <>
-      {range}
-      {/* A real space, set small, so it reads and copies as "₹20–25 lakh". */}
+      {amount}
+      {/* A real space, set small, so it reads and copies as "~₹80 lakh". */}
       <small className="text-[0.5em] font-semibold">{" lakh"}</small>
     </>
   );
 }
 
-/** After Class 12: the terrace talk, and the first real sacrifice. */
+/** After Class 12: the terrace talk. Paris was the dream; he chose his family instead. Never sad about it. */
 export function Terrace() {
   return (
     <Stop stop={stop}>
-      <StopHeader milestone={stop.milestone} kicker={stop.kicker} titleId={titleId(stop)} title="The terrace talk. My first real sacrifice." />
+      <StopHeader
+        milestone={stop.milestone}
+        kicker={stop.kicker}
+        titleId={titleId(stop)}
+        title="The terrace talk."
+        lede="The dream was Paris. The choice was love."
+      />
       <Columns
         aside={
-          <>
-            <Land>
-              <IndexCard kicker="Culinary school" tilt={-1}>
-                <p className={price}>
-                  <Correction inline was={<Lakh range="₹20–25" />} />
+          <Land className="w-full">
+            {/* The school, with its price tag taped over the corner: struck, and the truth written under it. */}
+            <div className="relative w-full max-w-[420px] pb-20">
+              <TapedPhoto
+                src={photos.leCordonBleu}
+                alt="Le Cordon Bleu, Paris"
+                tilt={-1.6}
+                ratio="4 / 3"
+                tape="top"
+                width="100%"
+                sizes="(max-width: 600px) 90vw, 420px"
+              />
+              <div className="absolute right-0 bottom-0 rotate-[3deg] bg-card px-4 py-3 shadow-lift sm:-right-5">
+                <p className="type-kicker">Le Cordon Bleu · Paris</p>
+                <p className="mt-1 font-road text-[40px] leading-none font-bold tabular-nums">
+                  <Correction was={<Lakh amount="~₹80" />} />
                 </p>
-              </IndexCard>
-            </Land>
-            <Land order={1} turn={-4} className="lg:self-end">
-              <IndexCard kicker="Management degree" tilt={0.8}>
-                <p className={price}>
-                  <Lakh range="₹10–12" />
-                </p>
-                <p className="type-pen mt-2 -rotate-2">the one I chose</p>
-              </IndexCard>
-            </Land>
-          </>
+                <p className="type-pen mt-1 -rotate-2">chose love instead</p>
+              </div>
+            </div>
+          </Land>
         }
       >
         <dl className="flex flex-col gap-3 border-y border-rule py-5">
@@ -61,11 +70,11 @@ export function Terrace() {
           <Mark>“If you really want it, go. I’ll manage it.</Mark> If you’re confused, don’t.”
         </p>
         <p className="type-body">
-          I wanted it. But we’re a middle-class family, I’m the elder son, and my younger brother’s education was next. I didn’t want
-          to be a burden.
+          Le Cordon Bleu, Paris: ~₹80 lakh. Dad’s answer: “I’ll manage it.” My answer: “Let’s not.”
         </p>
+        <p className="type-body">He’d never have said no. So I did. I’m the elder son, and my brother had a turn coming.</p>
         <p className="type-body">
-          <strong className="font-semibold">I chose management at Christ University.</strong>
+          <strong className="font-semibold">I took the scenic route instead: Christ University.</strong>
         </p>
       </Columns>
     </Stop>

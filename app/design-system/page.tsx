@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { BigStat, StatRow } from "@/components/ds/BigStat";
+import { Bike } from "@/components/ds/Bike";
 import { Correction, CorrectionText, Mark } from "@/components/ds/Correction";
 import { DrawObserver } from "@/components/ds/DrawObserver";
 import { ExperimentCard } from "@/components/ds/ExperimentCard";
@@ -16,10 +17,11 @@ import { ScannedDocument, ScanLine, ScanProof, ScanRule } from "@/components/ds/
 import { Signboard } from "@/components/ds/Signboard";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { TapedPhoto } from "@/components/ds/TapedPhoto";
-import { VoiceNote } from "@/components/ds/VoiceNote";
 import { Waveform } from "@/components/ds/Waveform";
 import { peaks } from "@/lib/design-system/peaks";
-import { IgnitionDemo, InkDemo, LaneDemo } from "./demos";
+import { Odometer } from "@/components/ds/Odometer";
+import { RouteMap } from "@/components/ds/RouteMap";
+import { ExhaustDemo, IgnitionDemo, InkDemo, LaneDemo, RideControlsDemo } from "./demos";
 import { marks, placeholders, textures } from "@/lib/design-system/assets";
 import {
   colors,
@@ -63,7 +65,7 @@ const sampleOverrides: Partial<Record<TypeStyleName, string>> = {
   headline: "Three growth experiments for Wispr Flow India",
   lede: "I got around 80. He bought it anyway.",
   kicker: "Stop 03 · Class 10 results · The deal",
-  meta: "0:00 · voice note placeholder",
+  meta: "Stop 03 / 11",
   scribble: "still have it.",
 };
 
@@ -83,7 +85,7 @@ const shadowClass = {
 
 const motionDemos: { name: string; className: string; note: string }[] = [
   { name: "animate-live", className: "animate-live", note: "Live waveform, while sound plays or the mic listens" },
-  { name: "animate-breathe", className: "animate-breathe", note: "Ignition key, engine off" },
+  { name: "animate-breathe", className: "animate-breathe", note: "Ignition key, before ignition" },
   { name: "animate-idle", className: "animate-idle", note: "Bike idling at a stop" },
   { name: "animate-bob", className: "animate-bob", note: "Riding, then the fork dip on braking" },
 ];
@@ -221,7 +223,7 @@ export default function DesignSystemPage() {
             </p>
             <p className="flex flex-wrap items-baseline gap-5">
               <span className="type-stat">₹20,000</span>
-              <span className="type-lede">₹20–25 lakh, ₹10–12 lakh</span>
+              <span className="type-lede">~₹80 lakh, chose love instead</span>
             </p>
           </li>
         </ul>
@@ -481,7 +483,7 @@ export default function DesignSystemPage() {
         id="components"
         kicker="09 · Components"
         title="What the ride is built from"
-        note="Every component the stops use, live. Missing photos, scans, voice notes and experiments show as labelled placeholders on their own."
+        note="Every component the stops use, live. Missing photos, scans and experiments show as labelled placeholders on their own."
       >
         <DrawObserver />
 
@@ -492,7 +494,7 @@ export default function DesignSystemPage() {
             <Milestone cap="NOW" year="2026" place="BLR" kind="now" />
             <Milestone cap="WISPR FLOW" year="NEXT" place="INDIA" kind="next" />
             <Milestone cap="AUG" year="2025" size="sm" />
-            <Milestone cap="MOUNTAINS" year="CAFÉ" size="sm" kind="next" />
+            <Milestone cap="MOUNTAINS" year="CAFE" size="sm" kind="next" />
           </div>
         </Specimen>
 
@@ -502,14 +504,13 @@ export default function DesignSystemPage() {
             kicker="Stop 01 · 2016 · Class 9"
             title="The dance guy entered the cooking contest."
             lede="About 95% of the contestants were girls. I won first prize. With a very basic dish."
-            voice="voice note · placeholder"
             headingLevel={3}
           />
         </Specimen>
 
         <Specimen name="TapedPhoto" note="Real photos only, taped and tilted. Without a photo it prints a labelled placeholder.">
           <div className="flex flex-wrap items-start gap-8 px-5 pt-4">
-            <TapedPhoto alt="Me dancing on the school stage" caption="cultural head. everyone knew me." tilt={-2.5} />
+            <TapedPhoto alt="Me dancing on the school stage" caption="5, 6, 7, 8." tilt={-2.5} />
             <TapedPhoto alt="The black bike" caption="second love." tilt={1.8} ratio="4 / 3" tape="top" width="min(100%, 360px)" />
           </div>
         </Specimen>
@@ -542,7 +543,7 @@ export default function DesignSystemPage() {
 
         <Specimen name="MarginNote" note="A handwritten aside with an arrow, beside the thing it points at. Ink or pencil, never red.">
           <div className="flex flex-wrap items-start gap-8 pt-5">
-            <MarginNote>37% women. on a dating app.</MarginNote>
+            <MarginNote>37% women. on a matchmaking app.</MarginNote>
             <MarginNote pencil flip tilt={2}>
               my PG owner offered to fund it
             </MarginNote>
@@ -552,7 +553,7 @@ export default function DesignSystemPage() {
         <Specimen name="BigStat · StatRow" note="The number does the bragging; the label stays plain. Up to three in a row, two columns on phones.">
           <StatRow>
             <BigStat value="3,500" unit="+" label="on lulu’s waitlist" source="grown through my own LinkedIn content" />
-            <BigStat value="37" unit="%" label="women" pen="on a dating app." />
+            <BigStat value="37" unit="%" label="women" pen="on a matchmaking app." />
             <BigStat value="~200" label="users I spoke to myself" />
           </StatRow>
         </Specimen>
@@ -560,7 +561,7 @@ export default function DesignSystemPage() {
         <Specimen name="Signboard" note="Green, only for what lies ahead. Arrow up is the next stop; arrow right is beyond the road.">
           <div className="flex flex-wrap gap-6">
             <Signboard dest="Wispr Flow" sub="India · Growth" km="NEXT" arrow="up" />
-            <Signboard dest="Mountains" sub="A small café · someday" />
+            <Signboard dest="Mountains" sub="A boutique cafe · someday" />
           </div>
         </Specimen>
 
@@ -583,24 +584,51 @@ export default function DesignSystemPage() {
           </div>
         </Specimen>
 
-        <Specimen name="Waveform" note="The system's real icon: wherever voice exists. Still when parked; red and moving while the mic listens.">
-          <div className="flex flex-col gap-5">
-            <Waveform peaks={peaks(44, 5)} played={18} className="max-w-[360px]" />
-            <Waveform peaks={peaks(22, 11)} live className="max-w-[160px]" />
-          </div>
-        </Specimen>
-
-        <Specimen name="VoiceNote" note="10–25 seconds, never autoplays, always with a transcript. One plays at a time. Without a recording it shows as a placeholder.">
-          <div className="flex flex-col gap-7">
-            <VoiceNote id="specimen-cafe" about="the cafe that almost happened" />
-            <div data-theme="night" className="bg-paper p-6">
-              <VoiceNote id="specimen-night" about="June 2025" quiet />
-            </div>
-          </div>
+        <Specimen name="Waveform" note="The mic's live bars inside the ignition key: red and moving while it listens for “let’s ride”.">
+          <Waveform peaks={peaks(22, 11)} live className="max-w-[160px]" />
         </Specimen>
 
         <Specimen name="IgnitionControl" note="Say “let’s ride”, or tap. The speech recogniser arrives with the ride; this demo fakes its timing.">
           <IgnitionDemo />
+        </Specimen>
+
+        <Specimen name="ExhaustControl" note="The ride’s sound switch: stock, loud, silent. Each change puffs the pipe, except into silence.">
+          <ExhaustDemo />
+        </Specimen>
+
+        <Specimen name="Odometer" note="The hero’s route card. Unpowered before ignition; lit after, when every drum turns over once.">
+          <div className="flex flex-wrap gap-6">
+            <Odometer readings={[{ value: 10, unit: "years" }, { value: 11, unit: "stops" }]} />
+            <Odometer lit readings={[{ value: 10, unit: "years" }, { value: 11, unit: "stops" }]} />
+          </div>
+        </Specimen>
+
+        <Specimen name="RouteMap" note="The route as a winding road, a stone per stop, the bike parked at the start. Every stop is a link.">
+          <div className="max-w-[400px]">
+            <RouteMap
+              here="you are here"
+              stops={[
+                { href: "#map-2016", short: "2016", name: "The stage and the kitchen" },
+                { href: "#map-june-2025", short: "JUN 25", name: "June 2025", kind: "night" },
+                { href: "#map-next", short: "NEXT", name: "Wispr Flow India", kind: "next" },
+                { href: "#map-end", short: "END", name: "The garage", kind: "now" },
+              ]}
+            />
+          </div>
+        </Specimen>
+
+        <Specimen name="Bike" note="The ride’s bike, side on: Sahil alone and the lamp dark before ignition; lamp on and the visitor on the pillion after. No logo anywhere.">
+          <div className="grid gap-6 sm:grid-cols-3">
+            <Bike className="w-full" />
+            <Bike className="w-full" headlamp pillion />
+            <div data-theme="night" className="bg-paper p-3">
+              <Bike className="w-full" headlamp pillion />
+            </div>
+          </div>
+        </Specimen>
+
+        <Specimen name="RideControls" note="The right end of a handlebar: brake lever, twist grip, and the exhaust. Throttle rides to the next stop; brake stops a ride, or rolls back one stop.">
+          <RideControlsDemo />
         </Specimen>
 
         <Specimen name="BikeLane" note="Pinned to the bottom of the screen on the real page. The bike never moves sideways; the road and the stones do.">
@@ -612,9 +640,7 @@ export default function DesignSystemPage() {
         </Specimen>
 
         <Specimen name="NightStop" note="June 2025 only. One straight line, the headlamp as the only light. No wit, no red pen, no stats.">
-          <NightStop date="June 2025" line="June 2025 was the lowest point of my life." lineAs="p">
-            <VoiceNote id="specimen-night-stop" about="June 2025" quiet />
-          </NightStop>
+          <NightStop date="June 2025" line="June 2025 was the lowest point of my life." lineAs="p" />
         </Specimen>
       </Section>
 

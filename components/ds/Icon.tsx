@@ -14,16 +14,16 @@ const icons = {
   "mic-off": (
     <path d="M15 10V6a3 3 0 0 0-5.7-1.3M9 9v2a3 3 0 0 0 4.6 2.5M5.5 11a6.5 6.5 0 0 0 10.6 5M18.5 11c0 .7-.1 1.4-.3 2M12 17.5V21M8.5 21h7M3.5 3.5l17 17" />
   ),
-  /** Voice notes. Filled, so it reads at 22px inside a 48px disc. */
+  /** Play. Filled, so it reads at 22px inside a 48px disc. (Unused on the ride since the voice notes went.) */
   play: <path d="M8.5 5.8v12.4L18.5 12z" fill="currentColor" />,
-  /** Voice notes. Filled, like play. */
+  /** Pause. Filled, like play. */
   pause: (
     <>
       <rect x="7" y="5.5" width="3.6" height="13" rx="1" fill="currentColor" />
       <rect x="13.4" y="5.5" width="3.6" height="13" rx="1" fill="currentColor" />
     </>
   ),
-  /** "Read it instead" where a text label won't fit. */
+  /** A transcript, where a text label won't fit. */
   transcript: (
     <>
       <path d="M5 6.5h14M5 11h14M5 15.5h9" />
@@ -41,7 +41,15 @@ const icons = {
   ),
   /** External links in the garage. */
   "link-out": <path d="M14 4.5h5.5V10M19.5 4.5 11 13M17 14v4.5a1 1 0 0 1-1 1H5.5a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1H10" />,
-  /** The engine-sound mute chip. */
+  /** "Change the exhaust": the header pipe dropping into a long peashooter silencer, side on. */
+  exhaust: (
+    <>
+      <path d="M2.5 8.5h2.2c1.7 0 2.6.9 3.3 3" />
+      <rect x="7" y="11" width="12.5" height="5" rx="2.5" />
+      <path d="M19.5 13.5h2" />
+    </>
+  ),
+  /** Sound off. (The ride's sound switch is now the exhaust.) */
   mute: (
     <>
       <path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" />

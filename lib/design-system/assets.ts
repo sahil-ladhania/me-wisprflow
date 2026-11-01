@@ -22,7 +22,7 @@ export const textures = {
 } as const;
 
 export const placeholders = {
-  /** Stand-in bike with rider, facing right, until the 3D model lands; stays as the WebGL-off fallback. */
+  /** The flat bike with rider, facing right: the route map's "you are here" marker. */
   bikeSilhouette: { src: "/placeholders/bike-silhouette.svg", width: 240, height: 150 },
   /** Hatched 4:5 slot for a photo not yet chosen. Development only: never ship it. */
   photoSlot: { src: "/placeholders/photo-slot.svg", width: 400, height: 500 },

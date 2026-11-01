@@ -1,36 +1,27 @@
 /* BikeLane, ported from design-system/components/bundle.css (.rd-lane). The ride drives it:
-   state classes for idle/riding, --road-x (px) for scroll-scrubbed road dashes. */
+   state classes for idle/riding, --road-x (px) for scroll-scrubbed road dashes.
+   See-through: no ground of its own, just a thin road the bike stands on over whatever is behind it. */
 
 .lane {
   --anchor: 22%;
+  --bike-w: min(46%, 300px);
+  /* The road under the ground line the wheels stand on. */
+  --ground: 20px;
   position: relative;
   height: var(--lane-h);
-  min-height: 160px;
   overflow: hidden;
-  background: var(--paper);
+  background: transparent;
   color: var(--ink);
 }
 
-/* Text scrolling down dissolves before it reaches the bike. */
-.lane::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 3;
-  height: 24px;
-  background: linear-gradient(var(--paper), transparent);
-}
-
+/* The ground line, with the centre dashes running below it. */
 .road {
   position: absolute;
   right: 0;
-  bottom: 14px;
+  bottom: 0;
   left: 0;
-  height: 58px;
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
+  height: var(--ground);
+  border-top: 1.5px solid var(--wave-rest);
 }
 
 .dash {
@@ -38,10 +29,10 @@
   top: 50%;
   right: 0;
   left: 0;
-  height: 3px;
+  height: 2px;
   margin-top: -1px;
   background: repeating-linear-gradient(90deg, var(--wave-rest) 0 28px, transparent 28px 64px);
-  background-size: 64px 3px;
+  background-size: 64px 2px;
   background-position-x: var(--road-x, 0px);
 }
 
@@ -51,12 +42,12 @@
 
 .bike {
   position: absolute;
-  bottom: 30px;
+  /* The tyres sit about 4px above the bottom of the drawing: this stands them on the ground line. */
+  bottom: calc(var(--ground) - 4px);
   left: var(--anchor);
   z-index: 2;
-  width: min(42%, 260px);
-  aspect-ratio: 240 / 150;
-  color: var(--ink);
+  width: var(--bike-w);
+  aspect-ratio: 320 / 200;
 }
 
 .bike > svg {
@@ -65,15 +56,31 @@
   height: 100%;
 }
 
-/* Contact shadow under the bike. */
+/* A soft haze in the page's own colour behind the bike only: words scrolling under it fade into
+   the page instead of fighting the spokes. Strongest at the bike's middle, nothing at its edges. */
+.bike::before {
+  content: "";
+  position: absolute;
+  inset: -16% -12% -4% -10%;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse 50% 50% at 50% 54%,
+    color-mix(in srgb, var(--paper) 80%, transparent) 0%,
+    color-mix(in srgb, var(--paper) 58%, transparent) 48%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Contact shadow where the tyres meet the road. */
 .bike::after {
   content: "";
   position: absolute;
   right: 10%;
-  bottom: -2px;
+  bottom: 0;
   left: 12%;
   z-index: -1;
-  height: 10px;
+  height: 8px;
   border-radius: 50%;
   background: color-mix(in srgb, var(--ink) 22%, transparent);
   filter: blur(5px);
@@ -87,10 +94,11 @@
   animation: var(--animate-bob);
 }
 
+/* The milestone stands on the ground line, just ahead of the front wheel (the drawing ends at 86%). */
 .stone {
   position: absolute;
-  bottom: 62px;
-  left: calc(var(--anchor) + min(42%, 260px) + 8px);
+  bottom: var(--ground);
+  left: calc(var(--anchor) + var(--bike-w) * 0.86);
   z-index: 1;
   transition:
     left var(--dur-ride) var(--ease-brake),
@@ -101,14 +109,37 @@
   animation: var(--animate-stone-in);
 }
 
-.count {
+/* At the right, on the road: the stop counter, then the controls. */
+.cockpit {
   position: absolute;
-  top: 18px;
   right: var(--space-5);
+  bottom: calc(var(--ground) + var(--space-2));
   z-index: 4;
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-4);
+  transition:
+    opacity var(--dur-settle) var(--ease-brake),
+    visibility 0s;
+}
+
+/* The lane lets taps through to the page; the controls take them. */
+.controls {
+  pointer-events: auto;
+}
+
+/* The counter is a small plate of its own, card paper like the controls, so it reads over any stop. */
+.count {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  height: 56px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-soft);
+  background: var(--card);
+  box-shadow: var(--shadow-contact);
 }
 
 .ticks {
@@ -155,75 +186,47 @@
   animation: var(--animate-flick);
 }
 
-/* A night lane: road dashes fade to 20%; only the headlamp is lit. The bike stays Enfield black
-   (never the night theme's light ink) with a thin warm rim, so it doesn't disappear into the dark. */
+/* A night lane: road dashes fade to 20%; the headlamp's beam is the only light. The bike keeps a
+   thin warm rim, so it doesn't disappear into the dark. */
 .night .dash {
   opacity: 0.2;
 }
 
-.night .bike {
-  color: #17140f;
-  filter: drop-shadow(0 0 1px color-mix(in srgb, var(--headlamp) 70%, transparent))
-    drop-shadow(0 -1px 0 color-mix(in srgb, var(--headlamp) 35%, transparent));
+/* The warm edge light: a tight rim on every outline of the drawing (not the haze), and a faint glow beyond it. */
+.night .bike > svg {
+  filter: drop-shadow(0 0 1px color-mix(in srgb, var(--headlamp) 85%, transparent))
+    drop-shadow(0 0 5px color-mix(in srgb, var(--headlamp) 28%, transparent));
 }
 
-/* The headlamp's soft cone, the only light on the Night stop. */
-.night.lit .bike::before {
-  content: "";
-  position: absolute;
-  top: 16%;
-  left: 76%;
-  width: 180%;
-  height: 60%;
-  background: linear-gradient(90deg, color-mix(in srgb, var(--headlamp) 18%, transparent), transparent 85%);
-  clip-path: polygon(0 44%, 100% 0, 100% 100%, 0 56%);
-  pointer-events: none;
+.night [data-beam] {
+  opacity: 0.85;
 }
 
-@media (max-width: 599px) {
+/* Phones, and any short screen (a phone held sideways): the compact lane. */
+@media (max-width: 599px), (max-height: 500px) {
   .lane {
     --anchor: calc(var(--space-4) + 4%);
+    --bike-w: 136px;
+    --ground: 16px;
     height: calc(var(--lane-h-mobile) + env(safe-area-inset-bottom));
-    min-height: 112px;
   }
 
-  .road {
-    bottom: 10px;
-    height: 40px;
-  }
-
-  /* 136px rather than the spec's 160px, so the rider's head clears the lane's 24px top fade. */
   .bike {
-    bottom: 22px;
-    width: 136px;
+    bottom: calc(var(--ground) - 2px);
   }
 
-  .stone {
-    bottom: 44px;
-    left: calc(var(--anchor) + 146px);
-  }
-
-  .count {
-    top: 10px;
+  .cockpit {
     right: var(--space-4);
   }
 
-  /* No room for twelve ticks beside the bike; the counter label carries the progress. */
-  .ticks {
+  /* No room for the counter beside the bike and its stone: the milestone and the stop's own
+     heading say where the ride is. */
+  .count {
     display: none;
   }
 
-  /* Reading a long stop: the lane shrinks to lane-h-mini, the bike and stone step aside,
-     and the road and the counter remain. It grows back on the way to the next stop. */
-  .lane {
-    transition: height var(--dur-settle) var(--ease-brake);
-  }
-
-  .mini {
-    height: calc(var(--lane-h-mini) + env(safe-area-inset-bottom));
-    min-height: 0;
-  }
-
+  /* Reading a long stop: the bike and stone step aside so nothing sits on the words; the road and
+     the controls remain. They ride back in on the way to the next stop. */
   .bike,
   .stone {
     transition: opacity var(--dur-settle) var(--ease-brake);
@@ -233,10 +236,27 @@
   .mini .stone {
     opacity: 0;
   }
+}
 
-  .mini .road {
-    bottom: 4px;
-    height: 24px;
+/* Wherever the hero's route card stacks under the hero (below 1024px), everything but the road steps
+   aside while the card passes behind it, controls included. */
+@media (max-width: 1023px) {
+  .bike,
+  .stone {
+    transition: opacity var(--dur-settle) var(--ease-brake);
+  }
+
+  .clear .bike,
+  .clear .stone {
+    opacity: 0;
+  }
+
+  .clear .cockpit {
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      opacity var(--dur-settle) var(--ease-brake),
+      visibility 0s var(--dur-settle);
   }
 }
 

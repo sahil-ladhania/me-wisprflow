@@ -72,7 +72,7 @@ export const colors = {
   "signboard": {
     "day": "#1d5a44",
     "night": "#2c6e55",
-    "usage": "Indian highway direction-sign green. Only for what is ahead: the next-year milestone cap, the Wispr Flow sign, the mountain-café sign at the road's end."
+    "usage": "Indian highway direction-sign green. Only for what is ahead: the next-year milestone cap, the Wispr Flow sign, the mountain-cafe sign at the road's end."
   },
   "on-signboard": {
     "day": "#f7f3ea",
@@ -301,9 +301,8 @@ export const shadows = {
 export const layout = {
   "measure": "34rem",
   "page-max": "1180px",
-  "lane-h": "clamp(160px, 26vh, 240px)",
-  "lane-h-mobile": "112px",
-  "lane-h-mini": "56px",
+  "lane-h": "210px",
+  "lane-h-mobile": "104px",
   "stop-min": "100svh"
 } as const;
 
