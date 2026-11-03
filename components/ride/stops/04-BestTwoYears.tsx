@@ -29,7 +29,8 @@ export function BestTwoYears() {
         <p className="type-body">I kept dancing and performing. IIT prep? Never started. Never wanted to.</p>
         <StatRow compact className="mt-3">
           <BigStat value="8" unit="+" label="years and counting" />
-          <BigStat value="3" label="friends, zero replacements" />
+          {/* Each of us is sure the other two are the idiots. (And yes, a nod to the film.) */}
+          <BigStat value="3" label="idiots, according to each other" />
         </StatRow>
       </Columns>
     </Stop>
