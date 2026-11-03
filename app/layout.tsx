@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: siteTitle,
-    template: "%s · The Ride",
+    template: "%s · Ride with Sahil Ladhania",
   },
   description: siteDescription,
   openGraph: {
     type: "website",
-    siteName: "The Ride",
+    siteName: "Ride with Sahil Ladhania",
     title: siteTitle,
     description: siteDescription,
     url: "/",
