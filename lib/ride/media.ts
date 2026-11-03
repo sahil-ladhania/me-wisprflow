@@ -11,7 +11,7 @@ import zyntohouse from "@/assets/media/scans/zyntohouse.jpg";
 // Scans: put files in assets/media/scans/ and import them, so each one's shape comes with it.
 
 /** Real photos only: warm, unfiltered. JPG or WebP, around 1600px on the long side. */
-export const photos: Record<"dance" | "bike" | "trio" | "leCordonBleu" | "pastaStall", string | undefined> = {
+export const photos: Record<"dance" | "bike" | "trio" | "leCordonBleu" | "pastaStall" | "restaurant", string | undefined> = {
   /** Stop 01: me dancing on the school stage. e.g. "/media/photos/dance.jpg" */
   dance: undefined,
   /** Stop 03: the black bike (4:3 works best). */
@@ -22,6 +22,8 @@ export const photos: Record<"dance" | "bike" | "trio" | "leCordonBleu" | "pastaS
   leCordonBleu: "/media/photos/le-cordon-bleu.jpg",
   /** Stop 06: the pasta stall at the college fest. */
   pastaStall: undefined,
+  /** Road's end: the restaurant I imagine (16:9). An image I made; the bike's badges are painted out. */
+  restaurant: "/media/photos/restaurant.jpg",
 };
 
 /** Short loops: MP4 (H.264), 10–25 seconds, around 5 MB at most. They play muted while on screen; a clip with `sound` gets a switch. */
@@ -52,9 +54,3 @@ export const contact: { linkedin?: string; email?: string; website?: string } = 
   email: "sahilladhania5@gmail.com",
   website: "https://www.sahilladhania.com/",
 };
-
-/** Real Wispr Flow mishearings from building this site, verbatim: what it typed, then what was said. */
-export const bloopers: { heard: string; said: string }[] = [{ heard: "rolling field", said: "Royal Enfield" }];
-
-/** Set to true once the list above has every blooper you want to show. */
-export const bloopersComplete = false;
