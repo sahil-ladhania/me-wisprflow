@@ -10,7 +10,7 @@ import { ColdRead } from "../ColdRead";
 import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
 
-const stop = stops[11];
+const stop = stops[12];
 
 const shortVersion = [
   "0 → 3,500+ signups, from my own LinkedIn content.",
@@ -64,7 +64,7 @@ export function WisprFlow() {
           that one day.
         </p>
         <p className="type-body">Tanay replied:</p>
-        <blockquote className="type-headline italic">“That’s a good goal to have, dude.”</blockquote>
+        <blockquote className="type-headline italic">“That’s an amazing goal to have, keep grinding and you’ll get there!”</blockquote>
         {/* Back to Stop 03: the deal was 90%, he got around 80, and Dad bought the bike anyway. */}
         <p className="mt-5 border-t-[1.5px] border-ink pt-5 font-story text-[clamp(26px,1.2vw+20px,34px)] leading-[1.18] font-medium tracking-[-0.01em] text-balance">
           My dad bought me a bike I hadn’t earned. This whole ride is me earning it.

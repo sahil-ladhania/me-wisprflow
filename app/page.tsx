@@ -13,8 +13,9 @@ import { TwoAM } from "@/components/ride/stops/07-TwoAM";
 import { NotAverage } from "@/components/ride/stops/08-NotAverage";
 import { Night } from "@/components/ride/stops/09-Night";
 import { Rebuild } from "@/components/ride/stops/10-Rebuild";
-import { WisprFlow } from "@/components/ride/stops/11-WisprFlow";
-import { Garage } from "@/components/ride/stops/12-Garage";
+import { Zomato } from "@/components/ride/stops/11-Zomato";
+import { WisprFlow } from "@/components/ride/stops/12-WisprFlow";
+import { Garage } from "@/components/ride/stops/13-Garage";
 
 /** The ride: 2016 → 2026 on one black bike, one stop per screen, the lane pinned underneath. */
 export default function Home() {
@@ -32,6 +33,7 @@ export default function Home() {
         <NotAverage />
         <Night />
         <Rebuild />
+        <Zomato />
         <WisprFlow />
         <Garage />
         {/* Last in the flow, so position: sticky keeps it at the bottom of the screen all the way down. */}

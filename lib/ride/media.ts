@@ -1,6 +1,13 @@
+import type { StaticImageData } from "next/image";
+import coldEmail from "@/assets/media/scans/cold-email.jpg";
+import tanayReply from "@/assets/media/scans/tanay-reply.jpg";
+import waitlist from "@/assets/media/scans/waitlist.jpg";
+import zomatoReply from "@/assets/media/scans/zomato-reply.jpg";
+
 // Everything the page still needs from Sahil, in one place. Fill a field in and its labelled
 // placeholder on the page is replaced by the real thing; leave it empty and the placeholder stays.
-// Put files in public/media/ and write their paths here starting with /media/.
+// Photos and videos: put files in public/media/ and write their paths here starting with /media/.
+// Scans: put files in assets/media/scans/ and import them, so each one's shape comes with it.
 
 /** Real photos only: warm, unfiltered. JPG or WebP, around 1600px on the long side. */
 export const photos: Record<"dance" | "bike" | "trio" | "leCordonBleu" | "pastaStall", string | undefined> = {
@@ -23,17 +30,17 @@ export const videos: Record<"cooking", { src?: string; poster?: string }> = {
 };
 
 /** Scans and screenshots of real things. Crop to the line that matters; blur email addresses and other people's names. */
-export const scans: Record<"certificate" | "coldEmail" | "zomatoReply" | "waitlist" | "tanayReply", string | undefined> = {
+export const scans: Record<"certificate" | "coldEmail" | "zomatoReply" | "waitlist" | "tanayReply", StaticImageData | undefined> = {
   /** Stop 01 · Scan 01: the cooking competition's first-prize certificate. */
   certificate: undefined,
-  /** Stop 08 · Scan 02: my cold email to Deepinder Goyal. */
-  coldEmail: undefined,
-  /** Stop 08 · Scan 03: Zomato HR's reply, the engineering interview invite. */
-  zomatoReply: undefined,
-  /** Stop 10 · Scan 04: the lulu waitlist page. */
-  waitlist: undefined,
-  /** Stop 11 · Scan 05: Tanay's reply to my comment. */
-  tanayReply: undefined,
+  /** Stop 11 · Scan 03: my cold email to Deepinder Goyal (Jul 5, 2026), cropped below the search bar with his address. */
+  coldEmail,
+  /** Stop 11 · Scan 04: Zomato HR's reply (Jul 28, 2026), the engineering interview invite. The sender's name is blurred. */
+  zomatoReply,
+  /** Stop 10 · Scan 02: the lulu waitlist page. */
+  waitlist,
+  /** Stop 12 · Scan 05: Tanay's reply to my comment, on his YouTube video. */
+  tanayReply,
 };
 
 export type ExperimentText = {
@@ -48,7 +55,7 @@ export type ExperimentText = {
   kill?: string;
 };
 
-/** Stop 11: three growth experiments for Wispr Flow India, written by Sahil. */
+/** Stop 12: three growth experiments for Wispr Flow India, written by Sahil. */
 export const experiments: [ExperimentText, ExperimentText, ExperimentText] = [{}, {}, {}];
 
 /** The garage's links. */

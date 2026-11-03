@@ -128,9 +128,10 @@
 - He wants the best, and knows you have to become the person who deserves it. He is ready to.
 - So he decided to start his own thing.
 
-## 14. The Zomato cold email
+## 14. The Zomato cold email (July 2026)
+- When: July 2026, after the rebuild, so on the page it's Stop 11, between the rebuild and Wispr Flow. The email went out on Jul 5 and HR replied on Jul 28 (Gmail screenshots in assets/media/scans/).
 - He cold-emailed Deepinder Goyal (Zomato's founder): he's a curious child too, he doesn't have an engineering background, he taught himself, and he wants to work with the team.
-- A few days later Zomato HR wrote back: he'd been selected to interview for the engineering team. They said he could pick the role.
+- On Jul 28 Zomato HR wrote back: he'd been shortlisted to interview for the engineering team. They asked which role he preferred.
 - He didn't take the interview. He was busy running his firm, then fell sick, and it got rescheduled. Not arrogance.
 
 ## 15. The lowest point (June 2025)
@@ -179,7 +180,7 @@
 - Has cold-emailed Tanay (Wispr Flow's co-founder) 3–4 times. No reply.
 - He watched a video where Tanay's father talks about Tanay being a very curious child.
 - Sahil wants that feeling: his father speaking about him that way when he builds something good.
-- He commented on that video. Tanay replied: "That's a good goal to have, dude."
+- He commented on that video. Tanay replied: "That's an amazing goal to have, keep grinding and you'll get there!" (exact words, from the screenshot in assets/media/scans/tanay-reply.jpg)
 - He'd join in any role, even as a generalist. He believes in the mission.
 - He's mission-driven. Without a mission or goal he gets frustrated and anxious.
 - He doesn't care how many hours it takes.
@@ -202,5 +203,4 @@
 ## To confirm before using on the page
 - The brother at Zomato: own brother or cousin?
 - Bike: which year he got it, and which model?
-- Year of the Zomato cold email and interview invite?
 - Does the ADHD mention go on the public page, or stay private context?

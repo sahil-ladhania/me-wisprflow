@@ -8,7 +8,7 @@ import { bloopers, bloopersComplete, contact } from "@/lib/ride/media";
 import { stops, titleId } from "@/lib/ride/stops";
 import { Stop } from "../Stop";
 
-const stop = stops[12];
+const stop = stops[13];
 
 const row = "grid grid-cols-[48px_minmax(0,1fr)] gap-3 border-b border-rule py-3";
 

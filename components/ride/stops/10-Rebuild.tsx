@@ -36,7 +36,7 @@ export function Rebuild() {
       <Columns
         aside={
           <Land>
-            <ScannedDocument src={scans.waitlist} label="Scan 04 · The lulu waitlist page" alt="Screenshot of the lulu waitlist page" tilt={-1} />
+            <ScannedDocument src={scans.waitlist} label="Scan 02 · The lulu waitlist page" alt="Screenshot of the lulu waitlist page" tilt={-1} />
           </Land>
         }
       >

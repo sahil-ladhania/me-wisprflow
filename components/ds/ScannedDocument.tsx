@@ -17,20 +17,25 @@ type ScannedDocumentProps = {
   note?: string;
   /** Degrees, 1.5 at most. */
   tilt?: number;
-  /** CSS aspect ratio for the image or placeholder, default 4 / 3. */
+  /** CSS aspect ratio for the image or placeholder. Default: an imported scan's own shape, else 4 / 3. */
   ratio?: string;
   className?: string;
 };
 
-/** A scan of a real object placed on the page as proof, with at most one red-pen mark. */
+/**
+ * A scan of a real object placed on the page as proof, with at most one red-pen mark. At 440px a
+ * screenshot's small print is hard to read, so the scan opens full size in a new tab.
+ */
 export function ScannedDocument({ label, date, src, alt, children, note, tilt = 1, ratio, className }: ScannedDocumentProps) {
-  const style = { "--tilt": `${Math.max(-1.5, Math.min(1.5, tilt))}deg`, ...(ratio ? { "--ratio": ratio } : {}) } as CSSProperties;
+  const shape = ratio ?? (src && typeof src !== "string" ? `${src.width} / ${src.height}` : undefined);
+  const style = { "--tilt": `${Math.max(-1.5, Math.min(1.5, tilt))}deg`, ...(shape ? { "--ratio": shape } : {}) } as CSSProperties;
   let sheet: ReactNode;
   if (src) {
     sheet = (
-      <div className={styles.frame}>
+      <a href={typeof src === "string" ? src : src.src} target="_blank" rel="noopener" className={styles.frame}>
         <Image src={src} alt={alt} fill sizes="(max-width: 600px) 90vw, 440px" className={styles.img} />
-      </div>
+        <span className="sr-only"> (opens full size in a new tab)</span>
+      </a>
     );
   } else if (children) {
     sheet = children;
@@ -51,6 +56,11 @@ export function ScannedDocument({ label, date, src, alt, children, note, tilt = 
       <figcaption className={styles.label}>
         <span className="type-kicker">{label}</span>
         {date ? <span className="type-meta text-pencil">{date}</span> : null}
+        {src && !date ? (
+          <span className="type-meta text-pencil" aria-hidden="true">
+            Tap to read
+          </span>
+        ) : null}
       </figcaption>
     </figure>
   );

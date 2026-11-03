@@ -31,8 +31,9 @@ export const stops: readonly RideStop[] = [
   { index: 8, anchor: "not-average", name: "Not average", short: "2024", kicker: "Stop 08 · After college · Not average", milestone: { cap: "AFTER BBA", year: "2024" } },
   { index: 9, anchor: "june-2025", name: "June 2025", short: "JUN 25", kicker: "Stop 09 · June 2025", milestone: { cap: "JUNE", year: "2025" }, night: true, smoke: true },
   { index: 10, anchor: "the-rebuild", name: "The rebuild", short: "AUG 25", kicker: "Stop 10 · August 2025 → · The rebuild", milestone: { cap: "AUG", year: "2025" }, smoke: true },
-  { index: 11, anchor: "wispr-flow", name: "Wispr Flow India", short: "NEXT", kicker: "Stop 11 · Next · Wispr Flow India", milestone: { cap: "WISPR FLOW", year: "NEXT", kind: "next" } },
-  { index: 12, anchor: "garage", name: "The garage", short: "END", kicker: "Road’s end · The garage", milestone: { cap: "GARAGE", year: "2026", kind: "now" } },
+  { index: 11, anchor: "zomato", name: "Zomato wrote back", short: "JUL 26", kicker: "Stop 11 · July 2026 · Zomato wrote back", milestone: { cap: "ZOMATO", year: "2026" } },
+  { index: 12, anchor: "wispr-flow", name: "Wispr Flow India", short: "NEXT", kicker: "Stop 12 · Next · Wispr Flow India", milestone: { cap: "WISPR FLOW", year: "NEXT", kind: "next" } },
+  { index: 13, anchor: "garage", name: "The garage", short: "END", kicker: "Road’s end · The garage", milestone: { cap: "GARAGE", year: "2026", kind: "now" } },
 ];
 
 export const lastStop = stops.length - 1;
