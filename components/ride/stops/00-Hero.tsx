@@ -30,8 +30,8 @@ export function Hero() {
             Flow in India.
           </p>
           <div className="mt-3 flex flex-col gap-4 sm:mt-5">
-            {/* Ignition puts the visitor on the pillion seat, in the haldi helmet. */}
-            <p className="type-body text-ink">Mind riding pillion? It’s a short one.</p>
+            {/* Ignition puts the visitor on the back seat, in the haldi helmet. */}
+            <p className="type-body text-ink">Mind hopping on the back? It’s a short ride.</p>
             <Ignition />
           </div>
         </div>
