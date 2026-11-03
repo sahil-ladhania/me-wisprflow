@@ -12,7 +12,9 @@ const stop = stops[13];
 
 const row = "grid grid-cols-[48px_minmax(0,1fr)] gap-3 border-b border-rule py-3";
 
-const link = "font-story text-[19px] text-ink underline decoration-wave-rest decoration-1 underline-offset-4 hover:decoration-ink";
+// min-h-11: each one is a 44px tap target on phones.
+const link =
+  "inline-flex min-h-11 items-center gap-2 font-story text-[19px] text-ink underline decoration-wave-rest decoration-1 underline-offset-4 hover:decoration-ink";
 
 /** A still voice mark under the garage's line: nothing's playing, so it doesn't move. */
 const voiceMark = peaks(56, 9);
@@ -68,10 +70,10 @@ export function Garage() {
 
         <div className="flex min-w-0 flex-col gap-3">
           <p className="type-kicker">Say hello</p>
-          <ul className="flex flex-col gap-3">
+          <ul className="flex flex-col gap-1">
             <li>
               {contact.linkedin ? (
-                <a href={contact.linkedin} className={`${link} inline-flex items-center gap-2`} target="_blank" rel="noreferrer">
+                <a href={contact.linkedin} className={link} target="_blank" rel="noreferrer">
                   LinkedIn
                   <Icon name="link-out" size={18} />
                 </a>
@@ -89,6 +91,18 @@ export function Garage() {
               ) : (
                 <>
                   <span className="font-story text-[19px] text-ink">Email</span> <span className="type-meta text-pencil">[placeholder: address]</span>
+                </>
+              )}
+            </li>
+            <li>
+              {contact.website ? (
+                <a href={contact.website} className={link} target="_blank" rel="noreferrer">
+                  {new URL(contact.website).hostname.replace(/^www\./, "")}
+                  <Icon name="link-out" size={18} />
+                </a>
+              ) : (
+                <>
+                  <span className="font-story text-[19px] text-ink">Website</span> <span className="type-meta text-pencil">[placeholder: address]</span>
                 </>
               )}
             </li>

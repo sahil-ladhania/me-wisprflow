@@ -37,7 +37,7 @@ export function Terrace() {
             <div className="relative w-full max-w-[420px] pb-20">
               <TapedPhoto
                 src={photos.leCordonBleu}
-                alt="Le Cordon Bleu, Paris"
+                alt="Le Cordon Bleu Paris, the school’s campus, from its website"
                 tilt={-1.6}
                 ratio="4 / 3"
                 tape="top"

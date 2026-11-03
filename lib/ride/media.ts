@@ -17,8 +17,8 @@ export const photos: Record<"dance" | "bike" | "trio" | "leCordonBleu" | "pastaS
   bike: undefined,
   /** Stop 04: the trio, me and my two best friends. */
   trio: undefined,
-  /** Stop 05: Le Cordon Bleu, Paris (4:3). Use a photo you're free to use, ideally without their logo. */
-  leCordonBleu: undefined,
+  /** Stop 05: Le Cordon Bleu, Paris (4:3). From the school's website, cropped below their logo bar. */
+  leCordonBleu: "/media/photos/le-cordon-bleu.jpg",
   /** Stop 06: the pasta stall at the college fest. */
   pastaStall: undefined,
 };
@@ -59,7 +59,11 @@ export type ExperimentText = {
 export const experiments: [ExperimentText, ExperimentText, ExperimentText] = [{}, {}, {}];
 
 /** The garage's links. */
-export const contact: { linkedin?: string; email?: string } = {};
+export const contact: { linkedin?: string; email?: string; website?: string } = {
+  linkedin: "https://www.linkedin.com/in/sahil-ladhania/",
+  email: "sahilladhania5@gmail.com",
+  website: "https://www.sahilladhania.com/",
+};
 
 /** Real Wispr Flow mishearings from building this site, verbatim: what it typed, then what was said. */
 export const bloopers: { heard: string; said: string }[] = [{ heard: "rolling field", said: "Royal Enfield" }];
