@@ -509,14 +509,14 @@ export default function DesignSystemPage() {
 
         <Specimen name="TapedPhoto" note="Real photos only, taped and tilted. Without a photo it prints a labelled placeholder.">
           <div className="flex flex-wrap items-start gap-8 px-5 pt-4">
-            <TapedPhoto alt="Me dancing on the school stage" caption="5, 6, 7, 8." tilt={-2.5} />
-            <TapedPhoto alt="The black bike" caption="second love." tilt={1.8} ratio="4 / 3" tape="top" width="min(100%, 360px)" />
+            <TapedPhoto src="/media/photos/le-cordon-bleu.jpg" alt="Le Cordon Bleu Paris, from its website" caption="chose love instead." tilt={-2.5} ratio="4 / 3" width="min(100%, 320px)" sizes="320px" />
+            <TapedPhoto alt="A photo still to come" caption="placeholder." tilt={1.8} ratio="4 / 3" tape="top" width="min(100%, 360px)" />
           </div>
         </Specimen>
 
         <Specimen name="ScannedDocument" note="A scan of a real object as proof, tilted 1.5° at most, one red-pen mark.">
           <div className="flex flex-wrap items-start gap-8">
-            <ScannedDocument label="Scan 01 · Cooking competition certificate" alt="The first-prize certificate" note="still have it." tilt={-1} />
+            <ScannedDocument label="Scan · placeholder" alt="A scan still to come" note="proof, soon." tilt={-1} />
             <ScannedDocument label="Scan · how a recreated scan reads" alt="" tilt={1}>
               <ScanLine width="60%" />
               <ScanRule />

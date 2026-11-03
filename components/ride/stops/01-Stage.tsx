@@ -1,9 +1,8 @@
 import { BigStat, StatRow } from "@/components/ds/BigStat";
 import { Mark } from "@/components/ds/Correction";
-import { ScannedDocument } from "@/components/ds/ScannedDocument";
+import { IndexCard, IndexRow, IndexRows } from "@/components/ds/IndexCard";
+import { MarginNote } from "@/components/ds/MarginNote";
 import { StopHeader } from "@/components/ds/StopHeader";
-import { TapedPhoto } from "@/components/ds/TapedPhoto";
-import { photos, scans } from "@/lib/ride/media";
 import { stops, titleId } from "@/lib/ride/stops";
 import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
@@ -23,20 +22,20 @@ export function Stage() {
       />
       <Columns
         aside={
-          <>
-            <Land>
-              <TapedPhoto src={photos.dance} alt="Me dancing on the school stage" caption="5, 6, 7, 8." tilt={-2.5} />
-            </Land>
-            <Land order={1} turn={-4} className="lg:self-end">
-              <ScannedDocument
-                src={scans.certificate}
-                label="Scan 01 · Cooking competition certificate"
-                alt="The first-prize certificate"
-                note={"I knew I could cook.\nThis made it official."}
-                tilt={1.2}
-              />
-            </Land>
-          </>
+          <Land className="flex w-full flex-col items-start gap-4">
+            {/* Facts only, from his own account: no photo of that day yet. */}
+            <IndexCard kicker="Card 01 · Class 9 me, in four lines" tilt={-1}>
+              <IndexRows>
+                <IndexRow label="Known for">Dance. I choreographed our school’s performances.</IndexRow>
+                <IndexRow label="Secret skill">Cooking.</IndexRow>
+                <IndexRow label="Winning dish">Very basic. Still won.</IndexRow>
+                <IndexRow label="First person I told">Mom.</IndexRow>
+              </IndexRows>
+            </IndexCard>
+            <MarginNote tilt={-2} className="ml-4">
+              I knew I could cook. That day made it official.
+            </MarginNote>
+          </Land>
         }
       >
         <p className="type-body">

@@ -1,8 +1,6 @@
 import { BigStat, StatRow } from "@/components/ds/BigStat";
 import { Mark } from "@/components/ds/Correction";
 import { StopHeader } from "@/components/ds/StopHeader";
-import { TapedPhoto } from "@/components/ds/TapedPhoto";
-import { photos } from "@/lib/ride/media";
 import { stops, titleId } from "@/lib/ride/stops";
 import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
@@ -27,20 +25,8 @@ export function TheBike() {
       <Columns
         aside={
           <>
-            <Land turn={-4} className="w-full">
-              <TapedPhoto
-                src={photos.bike}
-                alt="The black bike"
-                caption="second love."
-                tilt={1.6}
-                ratio="4 / 3"
-                tape="top"
-                width="min(100%, 480px)"
-                sizes="(max-width: 600px) 90vw, 480px"
-              />
-            </Land>
             {/* Pirsig's line on a slip of paper, in the site's own type: one short line, the car half in our words. */}
-            <Land order={1} turn={3} className="w-11/12 max-w-[380px] self-end">
+            <Land turn={3} className="w-full max-w-[400px]">
               <figure className="-rotate-1 bg-card px-5 py-4 shadow-lift">
                 <p className="type-kicker">Pirsig said it better</p>
                 <p className="mt-3 font-story text-[15px] leading-snug text-pencil italic">
@@ -60,7 +46,7 @@ export function TheBike() {
           <BigStat value="~80" unit="%" label="What I got" />
         </StatRow>
         <p className="type-body mt-3">
-          A black Royal Enfield. I still ride it. Work is busy. The world is busy. On the bike, the engine gets loud and my head goes
+          A black Royal Enfield, my second love. I still ride it. Work is busy. The world is busy. On the bike, the engine gets loud and my head goes
           quiet.
         </p>
         <p className="type-lede">The dream: the best roads in the world, not just India’s. On my own bike.</p>

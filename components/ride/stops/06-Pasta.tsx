@@ -4,7 +4,7 @@ import { IndexCard, IndexRow, IndexRows } from "@/components/ds/IndexCard";
 import { MarginNote } from "@/components/ds/MarginNote";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { TapedPhoto } from "@/components/ds/TapedPhoto";
-import { photos, videos } from "@/lib/ride/media";
+import { videos } from "@/lib/ride/media";
 import { stops, titleId } from "@/lib/ride/stops";
 import { Columns, Land } from "../Columns";
 import { Stop } from "../Stop";
@@ -25,10 +25,7 @@ export function Pasta() {
       <Columns
         aside={
           <>
-            <Land>
-              <TapedPhoto src={photos.pastaStall} alt="The pasta stall at the college fest" caption="people loved it." tilt={-1.8} />
-            </Land>
-            <Land order={1} turn={-4} className="lg:self-end">
+            <Land turn={-4}>
               <IndexCard kicker="Card 06 · The cafe that almost happened" tilt={1}>
                 <IndexRows>
                   <IndexRow label="Backer">My PG owner</IndexRow>

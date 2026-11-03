@@ -42,7 +42,7 @@ export function Rebuild() {
           <Land className="w-full max-w-[320px]">
             <ScannedDocument
               src={scans.zyntohouse}
-              label="Scan 02 · The Zyntohouse homepage"
+              label="Scan 01 · The Zyntohouse homepage"
               alt="Screenshot of the Zyntohouse homepage: “We build the tech your business runs on.”"
               tilt={1}
             />
@@ -58,7 +58,7 @@ export function Rebuild() {
         className="mt-9"
         aside={
           <Land className="w-full">
-            <ScannedDocument src={scans.waitlist} label="Scan 03 · The lulu waitlist page" alt="Screenshot of the lulu waitlist page" tilt={-1} />
+            <ScannedDocument src={scans.waitlist} label="Scan 02 · The lulu waitlist page" alt="Screenshot of the lulu waitlist page" tilt={-1} />
           </Land>
         }
       >

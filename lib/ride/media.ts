@@ -11,17 +11,9 @@ import zyntohouse from "@/assets/media/scans/zyntohouse.jpg";
 // Scans: put files in assets/media/scans/ and import them, so each one's shape comes with it.
 
 /** Real photos only: warm, unfiltered. JPG or WebP, around 1600px on the long side. */
-export const photos: Record<"dance" | "bike" | "trio" | "leCordonBleu" | "pastaStall" | "restaurant", string | undefined> = {
-  /** Stop 01: me dancing on the school stage. e.g. "/media/photos/dance.jpg" */
-  dance: undefined,
-  /** Stop 03: the black bike (4:3 works best). */
-  bike: undefined,
-  /** Stop 04: the trio, me and my two best friends. */
-  trio: undefined,
+export const photos: Record<"leCordonBleu" | "restaurant", string | undefined> = {
   /** Stop 05: Le Cordon Bleu, Paris (4:3). From the school's website, cropped below their logo bar. */
   leCordonBleu: "/media/photos/le-cordon-bleu.jpg",
-  /** Stop 06: the pasta stall at the college fest. */
-  pastaStall: undefined,
   /** Road's end: the restaurant I imagine (16:9). An image I made; the bike's badges are painted out. */
   restaurant: "/media/photos/restaurant.jpg",
 };
@@ -33,18 +25,16 @@ export const videos: Record<"cooking", { src?: string; poster?: string; sound?: 
 };
 
 /** Scans and screenshots of real things. Crop to the line that matters; blur email addresses and other people's names. */
-export const scans: Record<"certificate" | "zyntohouse" | "waitlist" | "coldEmail" | "zomatoReply" | "tanayReply", StaticImageData | undefined> = {
-  /** Stop 01 · Scan 01: the cooking competition's first-prize certificate. */
-  certificate: undefined,
-  /** Stop 10 · Scan 02: the Zyntohouse homepage, cropped clear of the browser's own buttons. */
+export const scans: Record<"zyntohouse" | "waitlist" | "coldEmail" | "zomatoReply" | "tanayReply", StaticImageData | undefined> = {
+  /** Stop 10 · Scan 01: the Zyntohouse homepage, cropped clear of the browser's own buttons. */
   zyntohouse,
-  /** Stop 10 · Scan 03: the lulu waitlist page. */
+  /** Stop 10 · Scan 02: the lulu waitlist page. */
   waitlist,
-  /** Stop 11 · Scan 04: my cold email to Deepinder Goyal (Jul 5, 2026), cropped below the search bar with his address. */
+  /** Stop 11 · Scan 03: my cold email to Deepinder Goyal (Jul 5, 2026), cropped below the search bar with his address. */
   coldEmail,
-  /** Stop 11 · Scan 05: Zomato HR's reply (Jul 28, 2026), the engineering interview invite. The sender's name is blurred. */
+  /** Stop 11 · Scan 04: Zomato HR's reply (Jul 28, 2026), the engineering interview invite. The sender's name is blurred. */
   zomatoReply,
-  /** Stop 12 · Scan 06: Tanay's reply to my comment, on his YouTube video. */
+  /** Stop 12 · Scan 05: Tanay's reply to my comment, on his YouTube video. */
   tanayReply,
 };
 
