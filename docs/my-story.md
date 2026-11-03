@@ -132,9 +132,11 @@
 
 ## 14. The Zomato cold email (July 2026)
 - When: July 2026, after the rebuild, so on the page it's Stop 11, between the rebuild and Wispr Flow. The email went out on Jul 5 and HR replied on Jul 28 (Gmail screenshots in assets/media/scans/).
+- It was spontaneous: one random midnight he thought "why not?" and sent it. He didn't expect anything; he was shooting for the stars, whoever cared.
 - He cold-emailed Deepinder Goyal (Zomato's founder): he's a curious child too, he doesn't have an engineering background, he taught himself, and he wants to work with the team.
 - On Jul 28 Zomato HR wrote back: he'd been shortlisted to interview for the engineering team. They asked which role he preferred.
-- He didn't take the interview. He was busy running his firm, then fell sick, and it got rescheduled. Not arrogance.
+- It was a big confidence boost: a dream come true. He was proud of it then and still is.
+- He didn’t take the interview. He was busy running his firm (Zyntohouse), then fell sick, and it got rescheduled. Not arrogance.
 
 ## 15. The lowest point (June 2025)
 - In June 2025 his relationship of about 8 years ended. She was the person he'd been with since Class 9.
