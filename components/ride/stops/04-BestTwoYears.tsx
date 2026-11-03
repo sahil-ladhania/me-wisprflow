@@ -8,7 +8,7 @@ import { Stop } from "../Stop";
 
 const stop = stops[4];
 
-/** Class 11–12: the best two years, the trio, zero IIT prep. */
+/** Class 11–12: the best two years of his life, at full throttle. The trio, zero IIT prep. */
 export function BestTwoYears() {
   return (
     <Stop stop={stop}>
@@ -16,8 +16,8 @@ export function BestTwoYears() {
         milestone={stop.milestone}
         kicker={stop.kicker}
         titleId={titleId(stop)}
-        title="The best two years. Zero IIT prep."
-        lede="I met my two best friends in 2018. We’ve been a trio ever since."
+        title="Two years at full throttle. Zero IIT prep."
+        lede="In 2018 I met my ride-or-die. Add one more, and we’ve been a trio ever since."
       />
       <Columns
         aside={
@@ -26,10 +26,10 @@ export function BestTwoYears() {
           </Land>
         }
       >
-        <p className="type-body">I kept dancing and performing. I never prepared for IIT, because I never wanted it.</p>
+        <p className="type-body">I kept dancing and performing. IIT prep? Never started. Never wanted to.</p>
         <StatRow compact className="mt-3">
-          <BigStat value="8" unit="+" label="years, same two friends" />
-          <BigStat value="3" label="the trio" />
+          <BigStat value="8" unit="+" label="years and counting" />
+          <BigStat value="3" label="friends, zero replacements" />
         </StatRow>
       </Columns>
     </Stop>
