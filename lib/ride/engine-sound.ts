@@ -46,6 +46,8 @@ let graph: Graph | null = null;
 let exhaust: Exhaust = "stock";
 let running = false;
 let quiet = false;
+/** Another sound on the page has the floor (the cooking clip, unmuted). */
+let ducked = false;
 /** 0 at a stop, 1 at full cruise: the ride sets it from the bike's speed. */
 let revs = 0;
 let rpm = IDLE_RPM;
@@ -73,7 +75,7 @@ function build(ctx: AudioContext): Graph {
 /** How loud the engine should be right now. */
 function level(): number {
   if (exhaust === "silent" || !running) return 0;
-  return VOICE[exhaust].level * (quiet ? 0.5 : 1);
+  return VOICE[exhaust].level * (quiet ? 0.5 : 1) * (ducked ? 0.15 : 1);
 }
 
 /** One firing: a low saw thump with a little exhaust breath in it. */
@@ -241,6 +243,13 @@ export function setQuiet(value: boolean) {
   if (value === quiet) return;
   quiet = value;
   settleLevel(0.6);
+}
+
+/** A clip with its sound on is playing: the engine all but drops out until it stops. */
+export function duckEngine(value: boolean) {
+  if (value === ducked) return;
+  ducked = value;
+  settleLevel(0.4);
 }
 
 /** The final park: the key turns with a click, the engine dies down in a few last thumps, silence. */

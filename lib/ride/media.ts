@@ -23,10 +23,10 @@ export const photos: Record<"dance" | "bike" | "trio" | "leCordonBleu" | "pastaS
   pastaStall: undefined,
 };
 
-/** Short silent loops: MP4 (H.264), 10–20 seconds, under about 4 MB. They play muted while on screen. */
-export const videos: Record<"cooking", { src?: string; poster?: string }> = {
-  /** Stop 06: me cooking in the kitchen. e.g. { src: "/media/video/cooking.mp4", poster: "/media/video/cooking.jpg" } */
-  cooking: {},
+/** Short loops: MP4 (H.264), 10–25 seconds, around 5 MB at most. They play muted while on screen; a clip with `sound` gets a switch. */
+export const videos: Record<"cooking", { src?: string; poster?: string; sound?: boolean }> = {
+  /** Stop 06: me cooking in the kitchen, 25 seconds, with its sound (off until the visitor turns it on). */
+  cooking: { src: "/media/video/cooking.mp4", poster: "/media/video/cooking.jpg", sound: true },
 };
 
 /** Scans and screenshots of real things. Crop to the line that matters; blur email addresses and other people's names. */

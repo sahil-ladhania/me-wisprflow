@@ -1,0 +1,37 @@
+/* LoopVideo's sound switch: a small dark pill in the print's top corner, clear of the native
+   controls (reduced motion) along the bottom. Off until the visitor asks. */
+
+.sound {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 13px 0 10px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--ink) 72%, transparent);
+  color: var(--paper);
+  font-family: var(--font-road);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 160ms linear;
+}
+
+/* A 44px tap target around the smaller pill. */
+.sound::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+}
+
+.sound:hover,
+.sound[aria-pressed="true"] {
+  background: var(--ink);
+}

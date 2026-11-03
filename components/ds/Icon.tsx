@@ -49,7 +49,14 @@ const icons = {
       <path d="M19.5 13.5h2" />
     </>
   ),
-  /** Sound off. (The ride's sound switch is now the exhaust.) */
+  /** Sound on: a clip's sound switch, pressed. */
+  sound: (
+    <>
+      <path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" />
+      <path d="M15.5 9.2a4 4 0 0 1 0 5.6M18 6.7a7.5 7.5 0 0 1 0 10.6" />
+    </>
+  ),
+  /** Sound off: a clip's sound switch, unpressed. (The ride's own sound switch is the exhaust.) */
   mute: (
     <>
       <path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" />

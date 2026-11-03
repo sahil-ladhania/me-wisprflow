@@ -18,6 +18,8 @@ type TapedPhotoProps = {
   video?: boolean;
   /** For a video print: a still from the clip, shown before it plays. */
   poster?: string;
+  /** For a video print with sound worth hearing: muted until the visitor turns it on. */
+  sound?: boolean;
   /** Real alt text for the photo (or what the placeholder stands in for). */
   alt: string;
   /** A lowercase observation, handwritten: "only boy in the kitchen. won anyway." */
@@ -35,7 +37,7 @@ type TapedPhotoProps = {
 };
 
 /** A real photo (or a short silent clip), printed with a paper border and taped to the journal page at a slight angle. */
-export function TapedPhoto({ src, video, poster, alt, caption, tilt = -2, ratio, tape = "corners", width, sizes = "(max-width: 600px) 90vw, 320px", className }: TapedPhotoProps) {
+export function TapedPhoto({ src, video, poster, sound, alt, caption, tilt = -2, ratio, tape = "corners", width, sizes = "(max-width: 600px) 90vw, 320px", className }: TapedPhotoProps) {
   const style = { "--tilt": `${tilt}deg`, ...(ratio ? { "--ratio": ratio } : {}), ...(width ? { width } : {}) } as CSSProperties;
   return (
     <figure className={cx(styles.root, className)} style={style}>
@@ -50,7 +52,7 @@ export function TapedPhoto({ src, video, poster, alt, caption, tilt = -2, ratio,
       <div className={styles.print}>
         {src && video && typeof src === "string" ? (
           <div className={styles.frame}>
-            <LoopVideo src={src} poster={poster} label={alt} className={styles.video} />
+            <LoopVideo src={src} poster={poster} label={alt} sound={sound} className={styles.video} />
           </div>
         ) : src ? (
           <div className={styles.frame}>

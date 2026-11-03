@@ -56,12 +56,14 @@ export function Pasta() {
       <Columns
         className="mt-9"
         aside={
-          <Land>
+          // Full column width: a playing clip has no width of its own, so the print would collapse.
+          <Land className="w-full">
             <TapedPhoto
               video
               src={videos.cooking.src}
               poster={videos.cooking.poster}
-              alt="Me cooking in the kitchen"
+              sound={videos.cooking.sound}
+              alt="Me cooking in the kitchen: a pan flaring on the stove"
               tilt={1.6}
               tape="top"
             />
