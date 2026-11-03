@@ -23,12 +23,12 @@ export function Zomato() {
         aside={
           <>
             <Land>
-              <ScannedDocument src={scans.coldEmail} label="Scan 03 · My cold email to Deepinder Goyal" alt="Screenshot of my cold email to Deepinder Goyal, Zomato’s founder" tilt={-0.8} />
+              <ScannedDocument src={scans.coldEmail} label="Scan 04 · My cold email to Deepinder Goyal" alt="Screenshot of my cold email to Deepinder Goyal, Zomato’s founder" tilt={-0.8} />
             </Land>
             <Land order={1} turn={-4} className="lg:self-end">
               <ScannedDocument
                 src={scans.zomatoReply}
-                label="Scan 04 · Zomato HR’s reply: an engineering interview invite"
+                label="Scan 05 · Zomato HR’s reply: an engineering interview invite"
                 alt="Screenshot of Zomato HR’s reply inviting me to an engineering interview"
                 tilt={1}
               />

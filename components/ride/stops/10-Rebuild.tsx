@@ -21,7 +21,10 @@ function LogRow({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
-/** August 2025 →: Zyntohouse, then lulu, a matchmaking app. The strongest growth proof on the page: the numbers live here. */
+/**
+ * August 2025 →: Zyntohouse first (small, still running), then lulu, a six-month experiment (Apr–Sep 2026).
+ * The strongest growth proof on the page: the numbers live here.
+ */
 export function Rebuild() {
   return (
     <Stop stop={stop}>
@@ -30,24 +33,40 @@ export function Rebuild() {
         kicker={stop.kicker}
         titleId={titleId(stop)}
         title="Two months later, I was building again."
-        lede="First an agency. Then a matchmaking app where your voice goes first."
+        lede="First an agency, still running. Then a six-month experiment: a matchmaking app where your voice goes first."
       />
 
+      {/* Zyntohouse: kept small, and still running. */}
       <Columns
         aside={
-          <Land>
-            <ScannedDocument src={scans.waitlist} label="Scan 02 · The lulu waitlist page" alt="Screenshot of the lulu waitlist page" tilt={-1} />
+          <Land className="w-full max-w-[320px]">
+            <ScannedDocument
+              src={scans.zyntohouse}
+              label="Scan 02 · The Zyntohouse homepage"
+              alt="Screenshot of the Zyntohouse homepage: “We build the tech your business runs on.”"
+              tilt={1}
+            />
           </Land>
         }
       >
-        <LogRow label="Aug 2025 · Zyntohouse">
-          A two-person tech agency for Indian SMBs and non-tech founders, with my co-founder Harshit.
+        <LogRow label="Aug 2025 → now · Zyntohouse">
+          A two-person tech agency for Indian SMBs and non-tech founders, with my co-founder Harshit. Still running.
         </LogRow>
-        <h3 className="type-headline mt-4">lulu: personality first, matchmaking through voice.</h3>
-        <p className="type-body">
-          The idea came from the voice notes I kept listening to after the breakup. I could feel every emotion in them. Voice is human
-          in a way text isn’t.
-        </p>
+      </Columns>
+
+      <Columns
+        className="mt-9"
+        aside={
+          <Land className="w-full">
+            <ScannedDocument src={scans.waitlist} label="Scan 03 · The lulu waitlist page" alt="Screenshot of the lulu waitlist page" tilt={-1} />
+          </Land>
+        }
+      >
+        <div>
+          <p className="type-kicker">Apr–Sep 2026 · An experiment</p>
+          <h3 className="type-headline mt-2">lulu: personality first, matchmaking through voice.</h3>
+        </div>
+        <p className="type-body">The idea came from voice notes. I could feel every emotion in them. Voice is human in a way text isn’t.</p>
         <p className="type-body">I installed every dating app, Hinge, Tinder and more, to study what they trigger.</p>
         <p className="type-body">
           My thesis: people swipe on looks and only read prompts after liking the photo. But someone less conventionally attractive can
@@ -88,6 +107,7 @@ export function Rebuild() {
         <p className="type-lede">
           <Mark>Knowing when to stop is a growth skill too.</Mark>
         </p>
+        <p className="type-body">What lulu taught me about me: I’m happiest where product, growth and engineering meet.</p>
         <p className="flex flex-wrap items-baseline gap-x-3">
           <span className="type-kicker text-ink">lulu status</span>
           <span className="type-body">

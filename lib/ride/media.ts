@@ -3,6 +3,7 @@ import coldEmail from "@/assets/media/scans/cold-email.jpg";
 import tanayReply from "@/assets/media/scans/tanay-reply.jpg";
 import waitlist from "@/assets/media/scans/waitlist.jpg";
 import zomatoReply from "@/assets/media/scans/zomato-reply.jpg";
+import zyntohouse from "@/assets/media/scans/zyntohouse.jpg";
 
 // Everything the page still needs from Sahil, in one place. Fill a field in and its labelled
 // placeholder on the page is replaced by the real thing; leave it empty and the placeholder stays.
@@ -30,16 +31,18 @@ export const videos: Record<"cooking", { src?: string; poster?: string; sound?: 
 };
 
 /** Scans and screenshots of real things. Crop to the line that matters; blur email addresses and other people's names. */
-export const scans: Record<"certificate" | "coldEmail" | "zomatoReply" | "waitlist" | "tanayReply", StaticImageData | undefined> = {
+export const scans: Record<"certificate" | "zyntohouse" | "waitlist" | "coldEmail" | "zomatoReply" | "tanayReply", StaticImageData | undefined> = {
   /** Stop 01 · Scan 01: the cooking competition's first-prize certificate. */
   certificate: undefined,
-  /** Stop 11 · Scan 03: my cold email to Deepinder Goyal (Jul 5, 2026), cropped below the search bar with his address. */
-  coldEmail,
-  /** Stop 11 · Scan 04: Zomato HR's reply (Jul 28, 2026), the engineering interview invite. The sender's name is blurred. */
-  zomatoReply,
-  /** Stop 10 · Scan 02: the lulu waitlist page. */
+  /** Stop 10 · Scan 02: the Zyntohouse homepage, cropped clear of the browser's own buttons. */
+  zyntohouse,
+  /** Stop 10 · Scan 03: the lulu waitlist page. */
   waitlist,
-  /** Stop 12 · Scan 05: Tanay's reply to my comment, on his YouTube video. */
+  /** Stop 11 · Scan 04: my cold email to Deepinder Goyal (Jul 5, 2026), cropped below the search bar with his address. */
+  coldEmail,
+  /** Stop 11 · Scan 05: Zomato HR's reply (Jul 28, 2026), the engineering interview invite. The sender's name is blurred. */
+  zomatoReply,
+  /** Stop 12 · Scan 06: Tanay's reply to my comment, on his YouTube video. */
   tanayReply,
 };
 

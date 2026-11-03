@@ -41,7 +41,7 @@ export function WisprFlow() {
         aside={
           <>
             <Land className="flex flex-col items-start gap-3">
-              <ScannedDocument src={scans.tanayReply} label="Scan 05 · Tanay’s reply to my comment" alt="Screenshot of Tanay’s reply to my comment" tilt={0.8} />
+              <ScannedDocument src={scans.tanayReply} label="Scan 06 · Tanay’s reply to my comment" alt="Screenshot of Tanay’s reply to my comment" tilt={0.8} />
               <MarginNote pencil tilt={-3} className="ml-4">
                 still working on it.
               </MarginNote>

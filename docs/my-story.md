@@ -157,6 +157,7 @@
 ## 16. Zyntohouse
 - A two-person tech agency for Indian SMBs and non-tech founders, co-founded with Harshit.
 - Running for about 1.5 years.
+- Started August 2025, still running. On the page it's kept small.
 
 ## 17. lulu: the voice-first dating app
 - Origin: after the breakup he had her voice notes. He listened to them for hours.
@@ -173,6 +174,7 @@
 - Built a working prototype and demoed it on calls.
 - After about 6 months the signals weren't truly positive. People said "nice idea, very unique", but he felt they weren't being honest. Users say they want personality-first, but they still swipe on looks.
 - He also didn't want the app to attract people for the wrong reason, like "I don't look good, so this app is for me".
+- He worked on lulu from April to September 2026: a six-month experiment.
 - He paused lulu in September 2026.
 - What he learned about himself: he loves product and growth. He thrives at the intersection of product, growth and engineering.
 
