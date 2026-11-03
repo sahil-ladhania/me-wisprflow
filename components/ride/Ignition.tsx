@@ -1,12 +1,14 @@
 "use client";
 
-import { ExhaustControl } from "@/components/ds/ExhaustControl";
 import { Icon } from "@/components/ds/Icon";
 import { IgnitionControl } from "@/components/ds/IgnitionControl";
 import { stops } from "@/lib/ride/stops";
 import { useRide } from "./RideProvider";
 
-/** The ignition key wired to the ride, the one scroll hint after ignition, and the exhaust. */
+/**
+ * The ignition key wired to the ride, and the one scroll hint after ignition. The exhaust switch
+ * rides on the handlebar controls, which join once the engine is on.
+ */
 export function Ignition() {
   const ride = useRide();
   return (
@@ -29,7 +31,6 @@ export function Ignition() {
           </a>
         }
       />
-      <ExhaustControl mode={ride.exhaust} onChange={ride.cycleExhaust} />
     </div>
   );
 }

@@ -22,7 +22,7 @@ export function Stop({ stop, className, children }: StopProps) {
       aria-labelledby={titleId(stop)}
       className={cx(
         "relative box-border min-h-(--stop-min)",
-        // The hero sits higher, so the key and the exhaust stay clear of the parked bike on short laptop screens.
+        // The hero sits higher, so the ignition key stays clear of the parked bike on short laptop screens.
         stop.index === 0 ? "pt-[clamp(32px,6vh,72px)]" : "pt-[clamp(56px,7vw,96px)]",
         // The lane takes its own space after the last stop.
         stop.index === lastStop ? "pb-8" : "pb-8 sm:pb-9",

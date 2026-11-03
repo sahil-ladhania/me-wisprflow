@@ -6,7 +6,7 @@ import { BikeArt } from "@/components/ds/BikeArt";
 // The link preview on LinkedIn, X, WhatsApp and email: the hero, the road and the first milestone.
 // It keeps "For Wispr Flow · India growth" in the corner, for context the page itself no longer needs.
 
-export const alt = "Sahil Ladhania. Obsession beats IQ. A ride through 2016 to 2026, on a black bike, for Wispr Flow India growth.";
+export const alt = "Sahil Ladhania. I believe obsession beats raw IQ. A ride through 2016 to 2026, on a black bike, for Wispr Flow India growth.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -33,6 +33,7 @@ const fonts = [
 const ink = "#17140f";
 const pencil = "#5c554a";
 const wave = "#867d6e";
+const haldi = "rgba(226, 165, 50, 0.38)";
 
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -54,11 +55,22 @@ export default function OpengraphImage() {
               For Wispr Flow · India growth
             </span>
           </div>
-          <div style={{ display: "flex", marginTop: 28, fontFamily: "Newsreader", fontSize: 128, fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 0.95 }}>
-            Obsession beats IQ.
+          {/* The hero's claim on one line, "I believe" small above it and the haldi highlighter on "Obsession". */}
+          <div style={{ display: "flex", marginTop: 18, fontFamily: "Newsreader", fontSize: 30, fontStyle: "italic", lineHeight: 1.2 }}>I believe</div>
+          <div style={{ display: "flex", marginTop: 6, fontFamily: "Newsreader", fontSize: 100, fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 0.95 }}>
+            <span
+              style={{
+                margin: "0 -12px",
+                padding: "0 12px",
+                backgroundImage: `linear-gradient(transparent 52%, ${haldi} 52%, ${haldi} 90%, transparent 90%)`,
+              }}
+            >
+              Obsession
+            </span>
+            <span style={{ marginLeft: 24 }}>beats raw IQ.</span>
           </div>
-          <div style={{ display: "flex", marginTop: 24, maxWidth: 940, fontFamily: "Newsreader", fontSize: 36, fontStyle: "italic", lineHeight: 1.3 }}>
-            Whatever I love, I go all in. Dance, food, code, people. Next: growing Wispr Flow in India.
+          <div style={{ display: "flex", marginTop: 22, maxWidth: 1000, fontFamily: "Newsreader", fontSize: 32, fontStyle: "italic", lineHeight: 1.3 }}>
+            My personality is a recipe: food, dance, tech and product. The secret ingredient? People. Next on the menu: growing Wispr Flow in India.
           </div>
         </div>
 
