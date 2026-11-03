@@ -56,6 +56,8 @@
 - He scored around 80%. No bike. He was very upset.
 - Then one day his father bought him a Royal Enfield anyway.
 - He still has it. He calls it his "second love".
+- Riding gives him mental peace. Life and work are busy; a ride is his relief. It's a huge part of his life.
+- His dream: ride the best roads in the world, not only in India, on his own bike.
 
 ## 7. Class 11–12: the best two years
 - Called them the best two years of his life.
