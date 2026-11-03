@@ -5,7 +5,7 @@ import styles from "./NightStop.module.css";
 type NightStopProps = {
   /** "June 2025". */
   date: string;
-  /** One straight sentence. No wit, no italic, no red pen. About his pain and growth only. */
+  /** One plain line, lightly told. No italic, no red pen. About his pain and growth only. */
   line: ReactNode;
   lineId?: string;
   /** The line is the stop's heading on the page; use "p" when it isn't. */

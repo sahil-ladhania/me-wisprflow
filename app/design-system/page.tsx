@@ -639,7 +639,7 @@ export default function DesignSystemPage() {
           <InkDemo />
         </Specimen>
 
-        <Specimen name="NightStop" note="June 2025 only. One straight line, the headlamp as the only light. No wit, no red pen, no stats.">
+        <Specimen name="NightStop" note="June 2025 only. One plain line, the headlamp as the only light. No red pen, no stats.">
           <NightStop date="June 2025" line="June 2025 was the lowest point of my life." lineAs="p" />
         </Specimen>
       </Section>
