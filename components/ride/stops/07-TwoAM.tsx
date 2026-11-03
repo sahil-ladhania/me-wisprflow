@@ -9,7 +9,7 @@ const stop = stops[7];
 
 const pattern = ["*", "* *", "* * *", "* * * *"];
 
-/** 2021: a 2am Zomato order, and a reason to code. */
+/** 2021: a 2am Zomato order, a new dream (engineer at Zomato), and a reason to code. Stop 11 pays it off. */
 export function TwoAM() {
   return (
     <Stop stop={stop}>
@@ -18,7 +18,7 @@ export function TwoAM() {
         kicker={stop.kicker}
         titleId={titleId(stop)}
         title="2am, a Zomato order, and a reason to code."
-        lede="You open an app and food comes to your door. Someone built that feeling for thousands of people. I wanted to build that."
+        lede="You open an app and food comes to your door. Someone built that feeling for thousands of people. New dream: build it at Zomato, as an engineer."
       />
       <Columns
         aside={
@@ -27,11 +27,11 @@ export function TwoAM() {
             <dl className="border-t-[1.5px] border-ink">
               <div className="border-b border-rule py-4">
                 <dt className="type-kicker">Zomato hires from</dt>
-                <dd className="type-headline mt-2">Top engineering colleges</dd>
+                <dd className="type-headline mt-2 text-balance">Top engineering colleges</dd>
               </div>
               <div className="border-b border-rule py-4">
                 <dt className="type-kicker">Me, in 2021</dt>
-                <dd className="type-headline mt-2">A BBA student teaching myself Python</dd>
+                <dd className="type-headline mt-2 text-balance">A BBA student, learning Python on my own</dd>
               </div>
             </dl>
             </Land>
@@ -53,8 +53,8 @@ export function TwoAM() {
           that?”
         </p>
         <p className="type-body">
-          My school best friend was doing engineering and had come to hate coding. When I said I wanted to learn, he was shocked. He
-          still told me: start with Python, solve pattern problems.
+          My school best friend was doing engineering and had come to hate coding. When I said I wanted to learn, he said, “Bro, what
+          are you even saying?” He still told me: start with Python, solve pattern problems.
         </p>
         <p className="type-body">
           It was hard. <Mark>Every solved pattern was a dopamine hit.</Mark>
