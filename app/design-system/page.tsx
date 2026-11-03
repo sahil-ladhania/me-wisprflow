@@ -6,7 +6,6 @@ import { BigStat, StatRow } from "@/components/ds/BigStat";
 import { Bike } from "@/components/ds/Bike";
 import { Correction, CorrectionText, Mark } from "@/components/ds/Correction";
 import { DrawObserver } from "@/components/ds/DrawObserver";
-import { ExperimentCard } from "@/components/ds/ExperimentCard";
 import { Icon, iconNames } from "@/components/ds/Icon";
 import { IndexCard, IndexRow, IndexRows } from "@/components/ds/IndexCard";
 import { MarginNote } from "@/components/ds/MarginNote";
@@ -62,7 +61,7 @@ const typeClass: Record<TypeStyleName, string> = {
 
 // Samples come from tokens.json, except where one would state something that isn't true (yet).
 const sampleOverrides: Partial<Record<TypeStyleName, string>> = {
-  headline: "Three growth experiments for Wispr Flow India",
+  headline: "lulu: personality first, matchmaking through voice.",
   lede: "I got around 80. He bought it anyway.",
   kicker: "Stop 03 · Class 10 results · The deal",
   meta: "Stop 03 / 11",
@@ -483,7 +482,7 @@ export default function DesignSystemPage() {
         id="components"
         kicker="09 · Components"
         title="What the ride is built from"
-        note="Every component the stops use, live. Missing photos, scans and experiments show as labelled placeholders on their own."
+        note="Every component the stops use, live. Missing photos and scans show as labelled placeholders on their own."
       >
         <DrawObserver />
 
@@ -576,12 +575,6 @@ export default function DesignSystemPage() {
               </IndexRow>
             </IndexRows>
           </IndexCard>
-        </Specimen>
-
-        <Specimen name="ExperimentCard" note="Three of them at the Wispr Flow stop. Each needs a metric and a kill condition; until Sahil writes them, they say so.">
-          <div className="flex flex-col gap-7 pt-4">
-            <ExperimentCard id="EXP 01" />
-          </div>
         </Specimen>
 
         <Specimen name="Waveform" note="The mic's live bars inside the ignition key: red and moving while it listens for “let’s ride”.">

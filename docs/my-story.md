@@ -182,6 +182,7 @@
 
 ## 18. Wispr Flow
 - Uses Wispr Flow daily and barely types anymore.
+- He dictated most of this site's story with Wispr Flow.
 - After Zomato, Wispr Flow is the second product that gave him that same feeling of satisfaction.
 - Has cold-emailed Tanay (Wispr Flow's co-founder) 3–4 times. No reply.
 - He watched a video where Tanay's father talks about Tanay being a very curious child.

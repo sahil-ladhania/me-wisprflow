@@ -46,21 +46,6 @@ export const scans: Record<"certificate" | "zyntohouse" | "waitlist" | "coldEmai
   tanayReply,
 };
 
-export type ExperimentText = {
-  /** Timing and cost: "Day 1–5 · ₹ small". */
-  when?: string;
-  /** The bet, in one line. */
-  title?: string;
-  /** Rooted in Indian users' behaviour. */
-  insight?: string;
-  move?: string;
-  measure?: string;
-  kill?: string;
-};
-
-/** Stop 12: three growth experiments for Wispr Flow India, written by Sahil. */
-export const experiments: [ExperimentText, ExperimentText, ExperimentText] = [{}, {}, {}];
-
 /** The garage's links. */
 export const contact: { linkedin?: string; email?: string; website?: string } = {
   linkedin: "https://www.linkedin.com/in/sahil-ladhania/",

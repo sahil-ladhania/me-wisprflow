@@ -3,18 +3,26 @@
 import { useState } from "react";
 import { useRide, type StartedBy } from "./RideProvider";
 
-// A playful read of the judge: they're the user now. The fourth line knows how they started the engine.
+// A cold read of the judge, done the way horoscopes do it: three lines that fit almost anyone (the
+// Barnum effect), then one that really is about them, from how they started the engine.
 
-const fourthLine = (by: StartedBy, heard: string): string => {
-  if (by === "voice") return "You said “let’s ride” out loud. Possibly at your desk. Noted.";
-  if (by === "close") return `You said “let’s ride” out loud, and it heard “${heard}”. Noted.`;
-  if (by === "tap") return "You tapped instead of talking. Open office, or a shy mic. Noted.";
-  return "You never started the engine. You pushed the bike all the way here. Respect.";
-};
+const lines = [
+  "You have more tabs open than you meant to.",
+  "You’re skeptical of this page, and a little curious anyway.",
+  "At least once this week you thought, “there has to be a faster way to type this.”",
+];
 
 const replies = {
-  close: "Reading people is half of growth. The other half is numbers. You’ve seen those.",
-  off: "Then you’re the rare judge who reads every word. Hi.",
+  spot: "Of course. Those three fit almost everyone. It’s called the Barnum effect, and it’s half of marketing.",
+  off: "Then you’re rare. Those three fit almost everyone. It’s called the Barnum effect.",
+};
+
+/** The one line that really is about them. */
+const realLine = (by: StartedBy, heard: string): string => {
+  if (by === "voice") return "you said “let’s ride” out loud.";
+  if (by === "close") return `you said “let’s ride” out loud, and the mic heard “${heard}”.`;
+  if (by === "tap") return "you tapped instead of talking.";
+  return "you never started the engine. You pushed the bike all the way here.";
 };
 
 const answerButton =
@@ -23,12 +31,6 @@ const answerButton =
 export function ColdRead() {
   const { startedBy, heard } = useRide();
   const [answer, setAnswer] = useState<keyof typeof replies | null>(null);
-  const lines = [
-    "You’ve opened more portfolios today than you’d admit.",
-    "You decided on most of them in the first three seconds. Fair.",
-    "You’re skimming this list, not reading it. Good. I wrote it to be skimmed.",
-    fourthLine(startedBy, heard),
-  ];
 
   return (
     <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-9">
@@ -48,16 +50,24 @@ export function ColdRead() {
         </ol>
         <div className="mt-5 flex flex-wrap items-center gap-3">
           <p className="type-kicker mr-1">Am I close?</p>
-          <button type="button" className={answerButton} aria-pressed={answer === "close"} onClick={() => setAnswer("close")}>
-            Too close
+          <button type="button" className={answerButton} aria-pressed={answer === "spot"} onClick={() => setAnswer("spot")}>
+            Spot on
           </button>
           <button type="button" className={answerButton} aria-pressed={answer === "off"} onClick={() => setAnswer("off")}>
             Way off
           </button>
         </div>
-        <p className="type-lede mt-4 min-h-[1.38em]" aria-live="polite">
-          {answer ? replies[answer] : null}
-        </p>
+        <div className="mt-4 min-h-[1.38em]" aria-live="polite">
+          {answer ? (
+            <>
+              <p className="type-lede">{replies[answer]}</p>
+              <p className="type-body mt-3">
+                Here’s one that’s actually about you: <strong className="font-semibold">{realLine(startedBy, heard)}</strong> Generic copy
+                feels personal. Data actually is.
+              </p>
+            </>
+          ) : null}
+        </div>
       </div>
     </div>
   );
