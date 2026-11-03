@@ -32,7 +32,7 @@ export function WrongReason() {
         title="I chose science for the wrong reason."
         lede={
           <>
-            I chose science because <Correction inline was="I wanted to crack IIT" is="my girlfriend did" />.
+            Because <Correction inline was="I wanted to crack IIT" is="my girlfriend did" />.
           </>
         }
       />
@@ -58,6 +58,11 @@ export function WrongReason() {
                   </span>
                 </ScanRow>
                 <ScanRow label="Reason told to parents">“IIT”</ScanRow>
+                {/* The form never knew. The lede tells it anyway. */}
+                <ScanRow label="Real reason">
+                  <span aria-hidden="true" className="inline-block h-[1.05em] w-28 translate-y-[0.18em] bg-ink" />
+                  <span className="sr-only">redacted</span>
+                </ScanRow>
               </div>
               <ScanRule />
               <ScanLine width="46%" />
@@ -65,12 +70,17 @@ export function WrongReason() {
           </Land>
         }
       >
+        <p className="type-body">Plan A: open a restaurant. Plan B: become a dancer. There was no Plan C.</p>
         <p className="type-body">
           Science, commerce or arts. Most of my class picked for their parents, their marks or the herd. Very few picked to become
           something.
         </p>
-        <p className="type-body">I told my parents I wanted to crack IIT. I had never even seen an IIT paper.</p>
+        <p className="type-body">
+          I told my parents “IIT” so they wouldn’t ask questions. The real reason took me a while to admit, even to myself.
+        </p>
         <p className="type-body">They never forced anything on me. That’s the funny part. And a little embarrassing.</p>
+        <p className="type-body">My rule, even then: if I like something, I do it. If I don’t, I don’t.</p>
+        <p className="type-headline">IIT was a don’t.</p>
       </Columns>
     </Stop>
   );
