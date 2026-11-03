@@ -13,7 +13,7 @@ type ScannedDocumentProps = {
   alt: string;
   /** Recreated rows instead of an image, for legibility on phones. */
   children?: ReactNode;
-  /** One short red-pen note, six words or fewer. */
+  /** One short red-pen note, ten words or fewer. A "\n" starts its second line. */
   note?: string;
   /** Degrees, 1.5 at most. */
   tilt?: number;

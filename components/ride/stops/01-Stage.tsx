@@ -1,4 +1,5 @@
 import { BigStat, StatRow } from "@/components/ds/BigStat";
+import { Mark } from "@/components/ds/Correction";
 import { ScannedDocument } from "@/components/ds/ScannedDocument";
 import { StopHeader } from "@/components/ds/StopHeader";
 import { TapedPhoto } from "@/components/ds/TapedPhoto";
@@ -31,7 +32,7 @@ export function Stage() {
                 src={scans.certificate}
                 label="Scan 01 · Cooking competition certificate"
                 alt="The first-prize certificate"
-                note="still have it."
+                note={"I knew I could cook.\nThis made it official."}
                 tilt={1.2}
               />
             </Land>
@@ -39,14 +40,18 @@ export function Stage() {
         }
       >
         <p className="type-body">
-          I was the guy who led the school’s cultural events. I choreographed our performances and taught dance to seniors, juniors and
-          my own batch. Everyone in school knew me.
+          I was the guy who <Mark>led the school’s cultural events</Mark>. I choreographed our performances and taught dance to{" "}
+          <strong className="font-semibold">seniors</strong>, juniors and my own batch. Most of the school knew me as the dance&nbsp;guy.
         </p>
+        {/* First overall, not first among the few boys. */}
         <StatRow compact className="mt-3">
           <BigStat value="~95" unit="%" label="of the contestants were girls" />
-          <BigStat value="2–3" label="boys entered" />
-          <BigStat value="1st" label="prize, with a very basic dish" />
+          <BigStat value="2–3" label="boys, me included" />
+          <BigStat value="1st" label="out of everyone, not just the boys" />
         </StatRow>
+        <p className="type-body">
+          Friends and teachers kept asking: “Sahil, you dance, you cook. What else can you do?”
+        </p>
       </Columns>
     </Stop>
   );
