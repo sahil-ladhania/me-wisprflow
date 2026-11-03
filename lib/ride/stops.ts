@@ -26,7 +26,7 @@ export const stops: readonly RideStop[] = [
   { index: 3, anchor: "the-bike", name: "The bike", short: "BIKE", kicker: "Stop 03 · Class 10 results · The deal", milestone: { cap: "THE BIKE", year: "80%" } },
   { index: 4, anchor: "2018", name: "Full throttle", short: "2018", kicker: "Stop 04 · 2018 · Class 11–12", milestone: { cap: "CLASS 11", year: "2018" } },
   { index: 5, anchor: "the-terrace", name: "The terrace talk", short: "CL 12", kicker: "Stop 05 · After Class 12 · Our terrace", milestone: { cap: "TERRACE", year: "CL 12" } },
-  { index: 6, anchor: "college", name: "BBA by day, kitchen by night", short: "BBA", kicker: "Stop 06 · Christ University · 2021–24", milestone: { cap: "CHRIST", year: "2021" } },
+  { index: 6, anchor: "college", name: "The hardest no", short: "BBA", kicker: "Stop 06 · Christ University · 2021–24", milestone: { cap: "CHRIST", year: "2021" } },
   { index: 7, anchor: "2am", name: "2am, Zomato and code", short: "2021", kicker: "Stop 07 · 2021 · 2:00 am", milestone: { cap: "2 AM", year: "2021" } },
   { index: 8, anchor: "not-average", name: "Not average", short: "2024", kicker: "Stop 08 · After college · Not average", milestone: { cap: "AFTER BBA", year: "2024" } },
   { index: 9, anchor: "june-2025", name: "June 2025", short: "JUN 25", kicker: "Stop 09 · June 2025", milestone: { cap: "JUNE", year: "2025" }, night: true, smoke: true },

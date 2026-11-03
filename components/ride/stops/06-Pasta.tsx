@@ -1,4 +1,4 @@
-import { BigStat } from "@/components/ds/BigStat";
+import { BigStat, StatRow } from "@/components/ds/BigStat";
 import { Correction, Mark } from "@/components/ds/Correction";
 import { IndexCard, IndexRow, IndexRows } from "@/components/ds/IndexCard";
 import { MarginNote } from "@/components/ds/MarginNote";
@@ -11,7 +11,7 @@ import { Stop } from "../Stop";
 
 const stop = stops[6];
 
-/** College: BBA by day, a kitchen by night. The pasta stall, the cafe that almost happened, and marketing. */
+/** College: BBA by day, a kitchen by night. The pasta stall, the cafe he said no to (his hardest no), and marketing. */
 export function Pasta() {
   return (
     <Stop stop={stop}>
@@ -19,14 +19,14 @@ export function Pasta() {
         milestone={stop.milestone}
         kicker={stop.kicker}
         titleId={titleId(stop)}
-        title="BBA by day. Kitchen by night."
-        lede="At a college fest, I set up a stall and sold ₹20,000 of pasta in 4–5 hours."
+        title="Someone offered to fund my dream. I said no."
+        lede="BBA by day. Kitchen by night."
       />
       <Columns
         aside={
           <>
             <Land>
-              <TapedPhoto src={photos.pastaStall} alt="The pasta stall at the college fest" caption="₹20,000 in 4–5 hours." tilt={-1.8} />
+              <TapedPhoto src={photos.pastaStall} alt="The pasta stall at the college fest" caption="people loved it." tilt={-1.8} />
             </Land>
             <Land order={1} turn={-4} className="lg:self-end">
               <IndexCard kicker="Card 06 · The cafe that almost happened" tilt={1}>
@@ -44,13 +44,21 @@ export function Pasta() {
           </>
         }
       >
-        <BigStat value="₹20,000" label="of pasta from one fest stall" source="Sold in 4–5 hours." />
+        {/* Supporting now, not the headline: compact, so the hardest no clears the parked bike on a laptop. */}
+        <StatRow compact>
+          <BigStat value="₹20,000" label="of pasta from one fest stall, in 4–5 hours" />
+        </StatRow>
         <p className="type-body mt-2">
-          I cooked so much at my PG that the owner gave me a separate room with a proper kitchen. He loved my food and{" "}
-          <Mark>offered to fund a cafe</Mark> with me.
+          I cooked so much at my PG that the owner gave me a separate room with a proper kitchen. He loved my food and offered to fund
+          a cafe with me.
         </p>
-        <p className="type-body">I asked Dad. He said, “You’re there to study. You won’t manage the time.” I cancelled.</p>
-        <p className="type-body">I said no to my own cafe. Politely. Still the hardest no I’ve said.</p>
+        <p className="type-body">
+          I asked Dad. He said, “You’re there to study. You won’t manage the time.” I was upset and confused. I cancelled anyway, and
+          apologised to the owner.
+        </p>
+        <p className="type-lede">
+          <Mark>Still the hardest no I’ve ever said.</Mark>
+        </p>
       </Columns>
 
       <Columns
